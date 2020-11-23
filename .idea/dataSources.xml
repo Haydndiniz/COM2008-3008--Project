@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="MariaDB - @stusql.dcs.shef.ac.uk" uuid="3ce50c8d-5ed0-4b2d-99a1-11f33acd2491">
-      <driver-ref>mariadb</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mariadb://stusql.dcs.shef.ac.uk:3306</jdbc-url>
-    </data-source>
-    <data-source source="LOCAL" name="@localhost" uuid="d30e6715-c4b7-4bb7-98d4-96ea62431bff">
+    <data-source source="LOCAL" name="Sheff team037" uuid="b80dc356-79e0-4807-bf45-64319d074282">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306</jdbc-url>
+      <jdbc-url>jdbc:mysql://stusql.dcs.shef.ac.uk:3306</jdbc-url>
     </data-source>
   </component>
 </project>
