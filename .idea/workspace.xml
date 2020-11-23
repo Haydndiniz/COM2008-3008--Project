@@ -19,14 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c9fe5b6b-8c40-4624-9d20-5c2d54015260" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/COM2008-3008--Project.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-    </list>
+    <list default="true" id="c9fe5b6b-8c40-4624-9d20-5c2d54015260" name="Default Changelist" comment="updated file structure" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -67,8 +60,23 @@
       <workItem from="1604945073305" duration="140000" />
       <workItem from="1604953560922" duration="1146000" />
       <workItem from="1606132437553" duration="10000" />
-      <workItem from="1606135067611" duration="375000" />
+      <workItem from="1606135067611" duration="712000" />
     </task>
+    <task id="LOCAL-00001" summary="updated file structure">
+      <created>1606135677092</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1606135677092</updated>
+    </task>
+    <task id="LOCAL-00002" summary="updated file structure">
+      <created>1606135717163</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1606135717163</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -83,6 +91,10 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="updated file structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated file structure" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="445" y="292" key="#Notifications" timestamp="1604954950419">
       <screen x="0" y="23" width="1440" height="877" />
@@ -92,14 +104,19 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="208" y="43" key="#Project_Structure/0.23.1440.877@0.23.1440.877" timestamp="1604945214163" />
-    <state x="320" y="127" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1604955356014">
-      <screen x="0" y="23" width="1440" height="877" />
+    <state x="320" y="107" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606137698238">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
+    <state x="320" y="107" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1606137698238" />
     <state x="320" y="127" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.877@0.23.1440.877" timestamp="1604955356014" />
     <state x="221" y="63" key="SettingsEditor" timestamp="1604955224661">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="221" y="63" key="SettingsEditor/0.23.1440.877@0.23.1440.877" timestamp="1604955224661" />
+    <state x="320" y="177" key="Vcs.Push.Dialog.v2" timestamp="1606135727414">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="320" y="177" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1606135727414" />
     <state x="518" y="368" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606135644550">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
