@@ -23,7 +23,7 @@ public class DBController {
     public void openConnection() {
 
         try (Connection con = DriverManager.getConnection(DB_URL, username, password)) {
-            System.out.print("Connection was created.");
+            System.out.print("Connection was created");
         }
         catch (Exception ex) {
             //display error message and leave the application
