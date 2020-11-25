@@ -19,7 +19,7 @@ public class DBController {
         this.password = password;
     }
 
-    public ResultSet performQuery(String query) throws SQLException {
+    public ResultSet performQuery(String query) {
 
         ResultSet result = null;
         stmt = null;
@@ -27,8 +27,8 @@ public class DBController {
         try (Connection con = DriverManager.getConnection(DB_URL, username, password)) {
             System.out.print("Connection was created\n");
 
-            try {
-                stmt = con.createStatement();
+            try (Statement stmt = con.createStatement()){
+
                 result = stmt.executeQuery(query);
 
                 while (result.next()) {
@@ -57,15 +57,11 @@ public class DBController {
             System.exit(0);
         }
 
-        finally {
-            if (stmt != null) stmt.close();
-        }
-
         return result;
 
     }
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
 
         DBController con = new DBController("team037","ee143bc0");
 

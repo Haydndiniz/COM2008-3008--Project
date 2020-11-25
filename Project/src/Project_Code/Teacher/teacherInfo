@@ -1,0 +1,11 @@
+all teacher tasks under this package
+Students should be able to:
+- Manage student grades
+    - Add initial grades
+    - Update grades (for resits)
+    - Calculate weighted mean grade (for particular student)
+    - Determine student progression (I.e. register for next level, repeat level, graduate, fail)
+    - Calculate degree result (degree class at the end of course)
+- View student status
+    - Showing grades for each period/level of study
+    - Showing outcome for each level and eventually for whole degree
