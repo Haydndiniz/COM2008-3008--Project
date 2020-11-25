@@ -21,13 +21,14 @@ public class DBController {
 
 
     public void openConnection() {
-        connection = null;
-        try{
-            connection = DriverManager.getConnection(DB_URL,username, password);
+
+        try (Connection con = DriverManager.getConnection(DB_URL, username, password)) {
+            System.out.print("Connection was created.");
         }
-        catch (SQLException ex) {
+        catch (Exception ex) {
             //display error message and leave the application
-            JOptionPane.showMessageDialog(null,"There was an error when processing the data.",
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "There was an error when processing the data.",
                     "ERROR", JOptionPane.ERROR_MESSAGE, null);
             System.exit(0);
         }
