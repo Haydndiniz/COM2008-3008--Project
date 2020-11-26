@@ -1,0 +1,8 @@
+all registrar tasks under this package
+Registrars should be able to:
+- Manage students
+    - Add/Remove/View Students
+    - Manage student modules
+        - Add/Remove optional modules
+        - Check Student modules (and validate sum of credits - 120 for UG 180 for PG)
+        - Check Student registration

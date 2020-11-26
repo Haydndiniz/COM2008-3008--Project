@@ -37,14 +37,14 @@ public class Main extends JFrame implements ActionListener {
         mnFile.add(mntmExit);
         mntmExit.addActionListener(this);
 
-//        JPanel loginPane = new Login(this, mntmLogout);
+        JPanel loginPane = new LoginController(this, mntmLogout);
 
         //jframe settings
         setTitle("University Information System");
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
-//        setContentPane(loginPane);
+        setContentPane(loginPane);
         setLocationRelativeTo(null);
 
     }

@@ -1,0 +1,11 @@
+All Admin tasks under this package
+Admins should be able to:
+- Manage users
+    - Add/Remove/View user accounts
+    - Grant permissions to user accounts
+- Manage departments
+    - Add/Remove/View departments
+- Manage degree courses
+    - Add/Remove/View degree courses
+- Manage modules
+    - Add/Remove/View degree modules

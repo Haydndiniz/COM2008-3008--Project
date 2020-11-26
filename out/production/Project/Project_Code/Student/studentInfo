@@ -1,0 +1,5 @@
+all student tasks under this package
+Students should be able to:
+- Display their own status
+    - Showing grades for each period/level of study
+    - Showing outcome for each level and eventually for whole degree
