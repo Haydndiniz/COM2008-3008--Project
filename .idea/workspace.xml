@@ -21,15 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c9fe5b6b-8c40-4624-9d20-5c2d54015260" name="Default Changelist" comment="updated file structure">
       <change afterPath="$PROJECT_DIR$/Project/src/Project_Code/Admin/AdminFrame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Project/src/Project_Code/Admin/AdminMain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Project/src/Project_Code/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/DBController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/DBController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project/Project_Code/DBController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project/Project_Code/DBController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project/Project_Code/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project/Project_Code/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project/Project_Code/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project/Project_Code/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/Admin/adminInfo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/Admin/adminInfo.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project/Project_Code/Admin/adminInfo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project/Project_Code/Admin/adminInfo.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,13 +61,15 @@
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="324" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="jdk.selected.JAVA_MODULE" value="1.8" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="shared-indexes" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="project.propGUI" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -105,6 +101,7 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Project_Code.Main" />
       <module name="Project" />
+      <option name="ENABLE_SWING_INSPECTOR" value="true" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="Project_Code.*" />
@@ -254,7 +251,8 @@
     <MESSAGE value="updated file structure" />
     <MESSAGE value="Added JDBC and start files" />
     <MESSAGE value="Converted openConnection function to try-catch block." />
-    <option name="LAST_COMMIT_MESSAGE" value="Converted openConnection function to try-catch block." />
+    <MESSAGE value="Added login frame and template admin structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added login frame and template admin structure" />
   </component>
   <component name="WindowStateProjectService">
     <state x="445" y="293" key="#Notifications" timestamp="1606146438003">
@@ -281,30 +279,42 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="593" y="254" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1440.900@0.0.1440.900" timestamp="1606138088437" />
-    <state width="747" height="144" key="GridCell.Tab.0.bottom" timestamp="1606423583986">
+    <state x="571" y="206" key="CreateSnapShotAction.MyDialog" timestamp="1606436760181">
       <screen x="0" y="25" width="1536" height="935" />
+    </state>
+    <state x="571" y="206" key="CreateSnapShotAction.MyDialog/0.25.1536.935@0.25.1536.935" timestamp="1606436760181" />
+    <state width="747" height="144" key="GridCell.Tab.0.bottom" timestamp="1606512347157">
+      <screen x="0" y="25" width="1792" height="1095" />
     </state>
     <state width="2518" height="261" key="GridCell.Tab.0.bottom/0.0.2560.1440/-2560.0.2560.1440@0.0.2560.1440" timestamp="1606338681435" />
     <state width="699" height="189" key="GridCell.Tab.0.bottom/0.25.1440.875@0.25.1440.875" timestamp="1606148231324" />
-    <state width="747" height="144" key="GridCell.Tab.0.bottom/0.25.1536.935@0.25.1536.935" timestamp="1606423583986" />
-    <state width="747" height="144" key="GridCell.Tab.0.center" timestamp="1606423583985">
-      <screen x="0" y="25" width="1536" height="935" />
+    <state width="747" height="144" key="GridCell.Tab.0.bottom/0.25.1536.935@0.0.1536.960" timestamp="1606423790374" />
+    <state width="747" height="144" key="GridCell.Tab.0.bottom/0.25.1536.935@0.25.1536.935" timestamp="1606436743287" />
+    <state width="747" height="144" key="GridCell.Tab.0.bottom/0.25.1792.1095@0.25.1792.1095" timestamp="1606512347157" />
+    <state width="747" height="144" key="GridCell.Tab.0.center" timestamp="1606512347157">
+      <screen x="0" y="25" width="1792" height="1095" />
     </state>
     <state width="2518" height="261" key="GridCell.Tab.0.center/0.0.2560.1440/-2560.0.2560.1440@0.0.2560.1440" timestamp="1606338681433" />
     <state width="699" height="189" key="GridCell.Tab.0.center/0.25.1440.875@0.25.1440.875" timestamp="1606148231323" />
-    <state width="747" height="144" key="GridCell.Tab.0.center/0.25.1536.935@0.25.1536.935" timestamp="1606423583985" />
-    <state width="747" height="144" key="GridCell.Tab.0.left" timestamp="1606423583985">
-      <screen x="0" y="25" width="1536" height="935" />
+    <state width="747" height="144" key="GridCell.Tab.0.center/0.25.1536.935@0.0.1536.960" timestamp="1606423790372" />
+    <state width="747" height="144" key="GridCell.Tab.0.center/0.25.1536.935@0.25.1536.935" timestamp="1606436743286" />
+    <state width="747" height="144" key="GridCell.Tab.0.center/0.25.1792.1095@0.25.1792.1095" timestamp="1606512347157" />
+    <state width="747" height="144" key="GridCell.Tab.0.left" timestamp="1606512347157">
+      <screen x="0" y="25" width="1792" height="1095" />
     </state>
+    <state width="747" height="144" key="GridCell.Tab.0.left/0.0.1536.960@0.0.1536.960" timestamp="1606423790368" />
     <state width="2518" height="261" key="GridCell.Tab.0.left/0.0.2560.1440/-2560.0.2560.1440@0.0.2560.1440" timestamp="1606338681432" />
     <state width="699" height="189" key="GridCell.Tab.0.left/0.25.1440.875@0.25.1440.875" timestamp="1606148231323" />
-    <state width="747" height="144" key="GridCell.Tab.0.left/0.25.1536.935@0.25.1536.935" timestamp="1606423583985" />
-    <state width="747" height="144" key="GridCell.Tab.0.right" timestamp="1606423583985">
-      <screen x="0" y="25" width="1536" height="935" />
+    <state width="747" height="144" key="GridCell.Tab.0.left/0.25.1536.935@0.25.1536.935" timestamp="1606436743286" />
+    <state width="747" height="144" key="GridCell.Tab.0.left/0.25.1792.1095@0.25.1792.1095" timestamp="1606512347157" />
+    <state width="747" height="144" key="GridCell.Tab.0.right" timestamp="1606512347157">
+      <screen x="0" y="25" width="1792" height="1095" />
     </state>
     <state width="2518" height="261" key="GridCell.Tab.0.right/0.0.2560.1440/-2560.0.2560.1440@0.0.2560.1440" timestamp="1606338681434" />
     <state width="699" height="189" key="GridCell.Tab.0.right/0.25.1440.875@0.25.1440.875" timestamp="1606148231323" />
-    <state width="747" height="144" key="GridCell.Tab.0.right/0.25.1536.935@0.25.1536.935" timestamp="1606423583985" />
+    <state width="747" height="144" key="GridCell.Tab.0.right/0.25.1536.935@0.0.1536.960" timestamp="1606423790374" />
+    <state width="747" height="144" key="GridCell.Tab.0.right/0.25.1536.935@0.25.1536.935" timestamp="1606436743287" />
+    <state width="747" height="144" key="GridCell.Tab.0.right/0.25.1792.1095@0.25.1792.1095" timestamp="1606512347157" />
     <state width="2518" height="520" key="GridCell.Tab.1.bottom" timestamp="1606338641177">
       <screen x="0" y="0" width="2560" height="1440" />
     </state>
@@ -325,25 +335,27 @@
       <screen x="0" y="25" width="1440" height="875" />
     </state>
     <state width="229" height="457" key="HiddenNamespacesPopup/0.25.1440.875@0.25.1440.875" timestamp="1606146403053" />
-    <state x="221" y="57" key="SettingsEditor" timestamp="1606147618189">
-      <screen x="0" y="25" width="1440" height="875" />
+    <state x="236" y="59" key="SettingsEditor" timestamp="1606436281206">
+      <screen x="0" y="25" width="1536" height="935" />
     </state>
     <state x="221" y="41" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1606137812869" />
     <state x="221" y="63" key="SettingsEditor/0.23.1440.877@0.23.1440.877" timestamp="1604955224661" />
     <state x="221" y="57" key="SettingsEditor/0.25.1440.875@0.25.1440.875" timestamp="1606147618189" />
-    <state x="569" y="283" key="Vcs.Push.Dialog.v2" timestamp="1606336400622">
-      <screen x="0" y="0" width="2560" height="1440" />
+    <state x="236" y="59" key="SettingsEditor/0.25.1536.935@0.25.1536.935" timestamp="1606436281206" />
+    <state x="341" y="209" key="Vcs.Push.Dialog.v2" timestamp="1606423849139">
+      <screen x="0" y="25" width="1536" height="935" />
     </state>
     <state x="320" y="177" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1606137861383" />
     <state x="569" y="283" key="Vcs.Push.Dialog.v2/0.0.2560.1440/-2560.0.2560.1440@0.0.2560.1440" timestamp="1606336400622" />
     <state x="320" y="197" key="Vcs.Push.Dialog.v2/0.25.1440.875@0.25.1440.875" timestamp="1606148361914" />
-    <state x="553" y="407" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606423470184">
+    <state x="341" y="209" key="Vcs.Push.Dialog.v2/0.25.1536.935@0.25.1536.935" timestamp="1606423849139" />
+    <state x="553" y="407" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606435341695">
       <screen x="0" y="25" width="1536" height="935" />
     </state>
     <state x="518" y="368" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1440.900@0.0.1440.900" timestamp="1606135644550" />
     <state x="921" y="589" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1440/-2560.0.2560.1440@0.0.2560.1440" timestamp="1606336460927" />
     <state x="518" y="382" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.877@0.23.1440.877" timestamp="1606135106799" />
-    <state x="553" y="407" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.25.1536.935@0.25.1536.935" timestamp="1606423470184" />
+    <state x="553" y="407" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.25.1536.935@0.25.1536.935" timestamp="1606435341695" />
     <state x="421" y="95" width="597" height="735" key="find.popup" timestamp="1606147550386">
       <screen x="0" y="25" width="1440" height="875" />
     </state>
