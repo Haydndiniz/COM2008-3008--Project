@@ -164,22 +164,22 @@ public class LoginController extends JPanel implements ActionListener {
                 String password = new String(passwordField.getPassword());
                 if (validateCredentials(username, password)) { //validates the credentials
 //                    //find the role
-//                    ResultSet result = null;
-                    String role = "Administrator";
-//                    try {
-//                        result = con.performQuery("SELECT role FROM Users WHERE username =  '" + username + "'");
-//                        while (result.next()) {
-//                            role = result.getString(1);
-//                        }
-//
-//                    } catch (SQLException ex) {
-//                        //display error message and leave the application
-//                        JOptionPane.showMessageDialog(null, "There was an error when processing the data.",
-//                                "ERROR", JOptionPane.ERROR_MESSAGE, null);
-//                        System.exit(0);
-//                    }
+                    ResultSet result = null;
+                    String role = "";
+                    try {
+                        result = con.performQuery("SELECT role FROM Users WHERE username =  '" + username + "'");
+                        while (result.next()) {
+                            role = result.getString(1);
+                        }
+
+                    } catch (SQLException ex) {
+                        //display error message and leave the application
+                        JOptionPane.showMessageDialog(null, "There was an error when processing the data.",
+                                "ERROR", JOptionPane.ERROR_MESSAGE, null);
+                        System.exit(0);
+                    }
                 switch (role) {
-                    case "Administrator":
+                    case "admin":
                         setVisible(false);
                         frame.setContentPane(new AdminFrame(frame, username));
                         break;

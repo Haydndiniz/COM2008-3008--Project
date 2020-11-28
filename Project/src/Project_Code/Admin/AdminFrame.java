@@ -133,6 +133,7 @@ public class AdminFrame extends JPanel implements ActionListener {
         setBounds(87, 13, 1000, 521);
 
         frame = f;
+        frame.setTitle("University Information System: Admin");
         frame.setContentPane(this);
         frame.setBounds(87, 13, 1030, 480);
         frame.setLocationRelativeTo(null);
@@ -142,5 +143,12 @@ public class AdminFrame extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String buttonPressed=e.getActionCommand();
+
+        switch (buttonPressed) {
+            case "View Users":
+                setVisible(false);
+                frame.setContentPane(new ViewUsers(frame, admin));
+                break;
+        }
     }
 }
