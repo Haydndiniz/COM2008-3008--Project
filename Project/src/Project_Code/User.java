@@ -7,10 +7,6 @@ public abstract class User {
     private String role;
     private DBController con;
 
-    public User() {
-        con = new DBController("team037","ee143bc0");
-    }
-
     public User(String username, String role) {
         this.username = username;
         this.role = role;
