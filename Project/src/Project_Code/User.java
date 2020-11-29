@@ -8,8 +8,6 @@ public abstract class User {
     private DBController con;
 
     public User() {
-        username = null;
-        role = null;
         con = new DBController("team037","ee143bc0");
     }
 

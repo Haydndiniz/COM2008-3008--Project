@@ -1,6 +1,5 @@
 package Project_Code;
 
-import Project_Code.*;
 import Project_Code.Admin.*;
 
 import java.sql.*;
@@ -61,14 +60,13 @@ public class LoginController extends JPanel implements ActionListener {
     }
 
     public static boolean validateUsername(String username)  {
-        ResultSet result = null;
         int exists = 0;
         try {
             //check firstly if the username exists in the database before extracting the password
             System.out.println(username);
-            result = con.performQuery("SELECT 1 FROM Users WHERE username = '" + username + "'");
+            ResultSet result = con.performQuery("SELECT 1 FROM Users WHERE username = '" + username + "'");
             while(result.next()) {
-                exists = Integer.valueOf(result.getString(1));
+                exists = Integer.parseInt(result.getString(1));
             }
             return (exists!=0);
 
@@ -91,8 +89,6 @@ public class LoginController extends JPanel implements ActionListener {
 
     }
     public static boolean validatePassword(String username, String password) {
-        String pass= password;
-
         ResultSet result = null;
         String storedPass = null;
         try{
@@ -102,7 +98,7 @@ public class LoginController extends JPanel implements ActionListener {
             while (result.next())
                 storedPass = result.getString(1);
 
-            return (pass.equals(storedPass));
+            return (password.equals(storedPass));
         }
         catch (SQLException ex) {
             //display error message and leave the application
@@ -117,7 +113,7 @@ public class LoginController extends JPanel implements ActionListener {
             System.exit(1);
         }
 
-        return (pass.equals(storedPass));
+        return (password.equals(storedPass));
 
     }
 
