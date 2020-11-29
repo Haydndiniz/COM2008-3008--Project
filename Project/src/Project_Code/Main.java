@@ -8,7 +8,6 @@ import java.awt.event.*;
 
 public class Main extends JFrame implements ActionListener {
 
-
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {

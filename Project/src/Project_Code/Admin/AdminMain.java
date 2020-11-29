@@ -26,7 +26,7 @@ public class AdminMain extends User {
      */
     public DefaultTableModel viewAllUsers (){
         ResultSet result = null;
-        DefaultTableModel t=new DefaultTableModel(new Object[][] {},new String[] {"Username", "Role"});
+        DefaultTableModel t = new DefaultTableModel(new Object[][] {},new String[] {"Username", "Role"});
         //select all the users with permissions
         Object [] users = new Object[2];
         try {
@@ -48,7 +48,6 @@ public class AdminMain extends User {
         }
 
         return  t;
-
     }
 
 }

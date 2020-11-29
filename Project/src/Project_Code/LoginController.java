@@ -93,7 +93,7 @@ public class LoginController extends JPanel implements ActionListener {
         String storedPass = null;
         try{
             //collate is used for case sensitivity
-            result = con.performQuery("SELECT password FROM Users WHERE username = '" + username + "'");
+            result = con.performQuery("SELECT password FROM UserAccounts WHERE username = '" + username + "'");
             System.out.println(result);
             while (result.next())
                 storedPass = result.getString(1);
