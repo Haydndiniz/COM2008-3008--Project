@@ -160,6 +160,7 @@ public class DBController {
 
         DBController con = new DBController("team037","ee143bc0");
         String xy = "admin";
+        //Test Queries Here
         ResultSet tables = con.performQuery("SELECT password FROM Users WHERE username = '" + xy + "'");
         while (tables.next()) {
             System.out.println(tables.getString(1));
