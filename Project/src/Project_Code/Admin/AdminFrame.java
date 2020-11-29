@@ -10,11 +10,10 @@ public class AdminFrame extends JPanel implements ActionListener {
     private AdminMain admin;
 
     /**
-     * Parameterized constructor
-     * Creates the frame containing menu items for admin
-     *
+     * Constructor
+     * Creates the frame containing all menu items for admin
      * @param f        - the frame created
-     * @param username - user name of Administrator
+     * @param username - username of the Admin user
      */
     public AdminFrame(JFrame f, String username) {
 
@@ -135,7 +134,7 @@ public class AdminFrame extends JPanel implements ActionListener {
         frame = f;
         frame.setTitle("University Information System: Admin");
         frame.setContentPane(this);
-        frame.setBounds(87, 13, 1030, 480);
+        frame.setBounds(87, 13, 800, 480);
         frame.setLocationRelativeTo(null);
 
     }
@@ -144,11 +143,14 @@ public class AdminFrame extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String buttonPressed=e.getActionCommand();
 
+        //switch frame on button press
+        //TODO: add remaining views for admin tasks
         switch (buttonPressed) {
             case "View Users":
                 setVisible(false);
                 frame.setContentPane(new ViewUsers(frame, admin));
                 break;
+
         }
     }
 }

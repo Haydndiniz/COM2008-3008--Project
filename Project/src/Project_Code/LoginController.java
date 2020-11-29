@@ -179,24 +179,25 @@ public class LoginController extends JPanel implements ActionListener {
                         System.exit(0);
                     }
                 switch (role) {
+
                     case "admin":
                         setVisible(false);
                         frame.setContentPane(new AdminFrame(frame, username));
                         break;
-
-//                        case "Registrar":
+                        //TODO: uncomment cases when the corresponding frame has been created
+//                        case "registrar":
 //                            setVisible(false);
-//                            frame.setContentPane(new RegistrarMenu(frame, username));
+//                            frame.setContentPane(new RegistrarFrame(frame, username));
 //                            break;
 //
-//                        case "Teacher":
+//                        case "teacher":
 //                            setVisible(false);
-//                            frame.setContentPane(new TeacherMenu(frame, username));
+//                            frame.setContentPane(new TeacherFrame(frame, username));
 //                            break;
 //
-//                        case "Student":
+//                        case "student":
 //                            setVisible(false);
-//                            frame.setContentPane(new StudentMenu(frame, username));
+//                            frame.setContentPane(new StudentFrame(frame, username));
 //                            break;
                 }
                 }
