@@ -1,6 +1,8 @@
 package Project_Code;
 
 import Project_Code.Admin.*;
+import Project_Code.Registrar.RegistrarFrame;
+import Project_Code.Registrar.testRegistrar;
 
 import java.sql.*;
 import java.awt.event.*;
@@ -19,7 +21,6 @@ public class LoginController extends JPanel implements ActionListener {
         private static DBController con = new DBController("team037", "ee143bc0");
 
     public LoginController(Main f,JMenuItem logout) {
-        //attributes
         setLayout(null);
 
         JLabel usernameLabel = new JLabel("Username");
@@ -59,12 +60,11 @@ public class LoginController extends JPanel implements ActionListener {
         loginButton.requestFocus();
     }
 
-    public static boolean validateUsername(String username)  {
+    private static boolean validateUsername(String username)  {
         int exists = 0;
         try {
             //check firstly if the username exists in the database before extracting the password
-            System.out.println(username);
-            ResultSet result = con.performQuery("SELECT 1 FROM Users WHERE username = '" + username + "'");
+            ResultSet result = con.performQuery("SELECT 1 FROM UserAccounts WHERE username = '" + username + "'");
             while(result.next()) {
                 exists = Integer.parseInt(result.getString(1));
             }
@@ -88,7 +88,7 @@ public class LoginController extends JPanel implements ActionListener {
         return (exists!=0);
 
     }
-    public static boolean validatePassword(String username, String password) {
+    private static boolean validatePassword(String username, String password) {
         ResultSet result = null;
         String storedPass = null;
         try{
@@ -117,21 +117,18 @@ public class LoginController extends JPanel implements ActionListener {
 
     }
 
-    public static boolean validateCredentials(String username, String password) {
+    private static boolean validateCredentials(String username, String password) {
         //check if values have been given
         if (username.equals("")) {
-            logoutItem.setVisible(false);
             JOptionPane.showMessageDialog(null,"Username is a required field.");
             return false;
         }
         if (password.equals("")) {
-            logoutItem.setVisible(false);
             JOptionPane.showMessageDialog(null,"Password is a required field.");
             return false;
         }
         //check if the username is valid
         if (!validateUsername(username)) {
-            logoutItem.setVisible(false);
             JOptionPane.showMessageDialog(null,"The username and password combination you have entered is incorrect.",
                     "ERROR", JOptionPane.ERROR_MESSAGE, null);
             return false;
@@ -139,7 +136,6 @@ public class LoginController extends JPanel implements ActionListener {
         }
         //check if the password is valid
         else if (!validatePassword(username, password)) {
-            logoutItem.setVisible(false);
             JOptionPane.showMessageDialog(null,"The username and password combination you have entered is incorrect.",
                     "ERROR", JOptionPane.ERROR_MESSAGE, null);
             return false;
@@ -150,15 +146,16 @@ public class LoginController extends JPanel implements ActionListener {
 
         @Override
     public void actionPerformed(ActionEvent e) {
-            logoutItem.setVisible(true);
             String buttonPressed = e.getActionCommand();
             if (buttonPressed.equals("Log In")) {
                 //get the username
                 //removes punctuation from the input, for security
                 String username = usernameTextField.getText().replaceAll("\\p{Punct}", "");
+                System.out.println(username);
                 //get the password for that username
                 String password = new String(passwordField.getPassword());
                 if (validateCredentials(username, password)) { //validates the credentials
+                    logoutItem.setVisible(true);
 //                    //find the role
                     ResultSet result = null;
                     String role = "";
@@ -180,11 +177,12 @@ public class LoginController extends JPanel implements ActionListener {
                         setVisible(false);
                         frame.setContentPane(new AdminFrame(frame, username));
                         break;
+
                         //TODO: uncomment cases when the corresponding frame has been created
-//                        case "registrar":
-//                            setVisible(false);
-//                            frame.setContentPane(new RegistrarFrame(frame, username));
-//                            break;
+                    case "registrar":
+                        setVisible(false);
+                        frame.setContentPane(new testRegistrar(frame, username));
+                        break;
 //
 //                        case "teacher":
 //                            setVisible(false);

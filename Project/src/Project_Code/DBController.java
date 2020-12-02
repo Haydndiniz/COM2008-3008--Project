@@ -42,7 +42,7 @@ public class DBController {
         this.con = con;
     }
 
-    public void openConnection() throws SQLException{
+    public void openConnection() {
         con = null;
 
         try{
@@ -77,7 +77,7 @@ public class DBController {
      * execute an Update Query
      * @return number of rows updated
      */
-    public int performUpdate(String update) throws SQLException {
+    public int performUpdate(String update)  {
         openConnection();
         int updates = 0;
         try {
@@ -99,7 +99,7 @@ public class DBController {
      * execute a Query
      * @return ResultSet the results
      */
-    public ResultSet performQuery(String query) throws SQLException{
+    public ResultSet performQuery(String query) {
         openConnection();
         result = null;
         stmt = null;
@@ -130,12 +130,14 @@ public class DBController {
      * execute a Prepared Statement
      * @return PreparedStatement
      */
-    public PreparedStatement getPreparedStatement(String query) throws SQLException{
-        openConnection();
+    public PreparedStatement getPreparedStatement(String query) {
         PreparedStatement pstmt = null;
 
         try {
+            openConnection();
             pstmt = con.prepareStatement(query);
+            closeConnection();
+
             return pstmt;
         }
         catch (SQLException ex){
@@ -151,7 +153,6 @@ public class DBController {
             System.exit(0);
         }
 
-        closeConnection();
         return pstmt;
 
     }
