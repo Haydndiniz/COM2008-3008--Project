@@ -142,7 +142,8 @@ public class AddModule extends JPanel implements ActionListener {
         } else if (degreeCode.length() >= 7) {
             JOptionPane.showMessageDialog(null,"Module name is too long.");
             return false;
-        } else if (this.admin.getRole() != "Admin") {
+        } else if (this.admin.getRole() != "admin") {
+            System.out.println(this.admin.getRole());
             JOptionPane.showMessageDialog(null,"Access denied.");
             return false;
         } else {

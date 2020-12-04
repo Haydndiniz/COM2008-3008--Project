@@ -143,7 +143,7 @@ public class AddUser extends JPanel implements ActionListener {
         } else if (surname.length() >= 45) {
             JOptionPane.showMessageDialog(null,"Surname is too long.");
             return false;
-        } else if (this.admin.getRole() != "Admin") {
+        } else if (this.admin.getRole() != "admin") {
             JOptionPane.showMessageDialog(null,"Access denied.");
             return false;
         } else {
@@ -224,10 +224,10 @@ public class AddUser extends JPanel implements ActionListener {
             int changes;
             //insert to UserAccounts
             changes = con.performUpdate("INSERT INTO UserAccounts (username, password)"
-                    + " VALUES ('"+username+"','"+hash+"'");
+                    + " VALUES ('"+username+"','"+hash+"')");
             //insert to UserSalts
             changes += con.performUpdate("INSERT INTO UserSalts (username, salt)"
-                    + " VALUES ('"+username+"','"+salt+"'");
+                    + " VALUES ('"+username+"','"+salt+"')");
             //insert to Users
             changes += con.performUpdate("INSERT INTO Users (username, role, forename, surname, title, email)"
                     + " VALUES ('"+username+"','"+role+"','"+forename+"','"+surname+"','"+title+"','"+email+"')");
