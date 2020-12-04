@@ -3,6 +3,7 @@ package Project_Code;
 
 import javax.swing.*;
 import java.sql.*;
+import java.util.*;
 /*
 Database controller.
 When main method is run, it displays all tables in the database
@@ -15,7 +16,8 @@ public class DBController {
     private Connection con = null;
     private ResultSet result;
     private static final String DB_URL = "jdbc:mysql://stusql.dcs.shef.ac.uk/team037";
-
+    public Map<String, Double> recModules = new HashMap<String, Double>();
+    public Map<String, Integer> moduleCredits = new HashMap<String, Integer>();
     public DBController(String username, String password) {
         this.username = username;
         this.password = password;
@@ -61,17 +63,19 @@ public class DBController {
      * close the connection
      * @throws SQLException
      */
-    public void closeConnection() throws SQLException{
-        if (con!=null)
+    public void closeConnection() throws SQLException {
+        if (con!=null){
             con.close();
+        }
     }
 
     /**
      * close the statement
      */
-    public void closeStatement() throws SQLException{
-        if (stmt!=null)
+    public void closeStatement() throws SQLException {
+        if (stmt!=null){
             stmt.close();
+        }
     }
     /**
      * execute an Update Query
@@ -121,7 +125,6 @@ public class DBController {
                     "ERROR", JOptionPane.ERROR_MESSAGE, null);
             System.exit(0);
         }
-
         return result;
 
     }
@@ -136,7 +139,6 @@ public class DBController {
         try {
             openConnection();
             pstmt = con.prepareStatement(query);
-            closeConnection();
 
             return pstmt;
         }
@@ -152,7 +154,6 @@ public class DBController {
                     "ERROR", JOptionPane.ERROR_MESSAGE, null);
             System.exit(0);
         }
-
         return pstmt;
 
     }
@@ -176,7 +177,6 @@ public class DBController {
                     "ERROR", JOptionPane.ERROR_MESSAGE, null);
             System.exit(0);
         }
-
         return result;
     }
     public int performPreparedUpdate(PreparedStatement pstmt)  {
@@ -192,7 +192,6 @@ public class DBController {
                     "ERROR", JOptionPane.ERROR_MESSAGE, null);
             System.exit(0);
         }
-
         return updates;
     }
 }

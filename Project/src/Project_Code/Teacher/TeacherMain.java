@@ -15,9 +15,7 @@ import java.sql.SQLException;
 public class TeacherMain extends User {
 
 
-    private DBController con = super.getDataAccessController();
-    private Map<String, Double> recModules = new HashMap<String, Double>();
-    private Map<String, Integer> moduleCredits = new HashMap<String, Integer>();
+    private DBController dac = super.getDataAccessController();
 
     public TeacherMain(String username) {
         super(username, "Teacher");
@@ -36,9 +34,9 @@ public class TeacherMain extends User {
             else{
                 query = "SELECT COUNT(*) FROM Student WHERE registrationNo=?";
             }
-            PreparedStatement pstmt = con.getPreparedStatement(query);
+            PreparedStatement pstmt = dac.getPreparedStatement(query);
             pstmt.setString(1, value);
-            result = con.performPreparedStatement(pstmt);
+            result = dac.performPreparedStatement(pstmt);
             int n = 0;
             while (result.next()) {
                 n = result.getInt(1);
@@ -77,9 +75,9 @@ public class TeacherMain extends User {
         //Method assumes there is only one match
         ResultSet result = null;
         try {
-            PreparedStatement pstmt = con.getPreparedStatement("SELECT * FROM Student WHERE username=?");
+            PreparedStatement pstmt = dac.getPreparedStatement("SELECT * FROM Student WHERE username=?");
             pstmt.setString(1, username);
-            result = con.performPreparedStatement(pstmt);
+            result = dac.performPreparedStatement(pstmt);
             while (result.next()) {
                 return result.getString("registrationNo");
             }
@@ -97,9 +95,9 @@ public class TeacherMain extends User {
         ResultSet result = null;
         String[] results = new String[2];
         try {
-            PreparedStatement pstmt = con.getPreparedStatement("SELECT * FROM Student WHERE registrationNo=?");
+            PreparedStatement pstmt = dac.getPreparedStatement("SELECT * FROM Student WHERE registrationNo=?");
             pstmt.setString(1, regNo);
-            result = con.performPreparedStatement(pstmt);
+            result = dac.performPreparedStatement(pstmt);
             while (result.next()) {
                 results[0] =  result.getString("username");
                 results[1] =  result.getString("degreeCode");
@@ -119,9 +117,9 @@ public class TeacherMain extends User {
         ResultSet result = null;
         String[] results = new String[2];
         try {
-            PreparedStatement pstmt = con.getPreparedStatement("SELECT * FROM Users WHERE username=?");
+            PreparedStatement pstmt = dac.getPreparedStatement("SELECT * FROM Users WHERE username=?");
             pstmt.setString(1, username);
-            result = con.performPreparedStatement(pstmt);
+            result = dac.performPreparedStatement(pstmt);
             while (result.next()) {
                 results[0] =  result.getString("forename");
                 results[1] =  result.getString("surname");
@@ -136,90 +134,14 @@ public class TeacherMain extends User {
         }
         return null;
     }
-    public String getUsername(String regNo){
-        //Method assumes there is only one match
-        ResultSet result = null;
-        try {
-            PreparedStatement pstmt = con.getPreparedStatement("SELECT * FROM Student WHERE registrationNo=?");
-            pstmt.setString(1, regNo);
-            result = con.performPreparedStatement(pstmt);
-            while (result.next()) {
-                return result.getString("username");
-            }
-        }
-        catch(SQLException ex) {
-            //display error message and leave the application
-            JOptionPane.showMessageDialog(null,"There was an error when processing the data.",
-                    "ERROR", JOptionPane.ERROR_MESSAGE, null);
-            System.exit(0);
-        }
-        return null;
-    }
-    public String getDegreeCode(String regNo){
-        //Method assumes there is only one match
-        ResultSet result = null;
-        try {
-            PreparedStatement pstmt = con.getPreparedStatement("SELECT * FROM Student WHERE registrationNo=?");
-            pstmt.setString(1, regNo);
-            result = con.performPreparedStatement(pstmt);
-            while (result.next()) {
-                return result.getString("degreeCode");
-            }
-        }
-        catch(SQLException ex) {
-            //display error message and leave the application
-            JOptionPane.showMessageDialog(null,"There was an error when processing the data.",
-                    "ERROR", JOptionPane.ERROR_MESSAGE, null);
-            System.exit(0);
-        }
-        return null;
-    }
-    public String getFirstName(String regNo){
-        //Method assumes there is only one match
-        ResultSet result = null;
-        try {
-            PreparedStatement pstmt = con.getPreparedStatement("SELECT * FROM Users WHERE username=?");
-            pstmt.setString(1, getUsername(regNo));
-            result = con.performPreparedStatement(pstmt);
-            while (result.next()) {
-                return result.getString("forename");
-            }
-        }
-        catch(SQLException ex) {
-            //display error message and leave the application
-            JOptionPane.showMessageDialog(null,"There was an error when processing the data.",
-                    "ERROR", JOptionPane.ERROR_MESSAGE, null);
-            System.exit(0);
-        }
-        return null;
-    }
-    public String getLastName(String regNo){
-        //Method assumes there is only one match
-        ResultSet result = null;
-        try {
-            PreparedStatement pstmt = con.getPreparedStatement("SELECT * FROM Users WHERE username=?");
-            pstmt.setString(1, getUsername(regNo));
-            result = con.performPreparedStatement(pstmt);
-            while (result.next()) {
-                return result.getString("surname");
-            }
-        }
-        catch(SQLException ex) {
-            //display error message and leave the application
-            JOptionPane.showMessageDialog(null,"There was an error when processing the data.",
-                    "ERROR", JOptionPane.ERROR_MESSAGE, null);
-            System.exit(0);
-        }
-        return null;
-    }
     public String getLevel(String regNo, String periodLabel){
         //Method assumes there is only one match
         ResultSet result = null;
         try {
-            PreparedStatement pstmt = con.getPreparedStatement("SELECT * FROM Period WHERE registrationNo=? AND periodLabel=?");
+            PreparedStatement pstmt = dac.getPreparedStatement("SELECT * FROM Period WHERE registrationNo=? AND periodLabel=?");
             pstmt.setString(1, regNo);
             pstmt.setString(2, periodLabel);
-            result = con.performPreparedStatement(pstmt);
+            result = dac.performPreparedStatement(pstmt);
             while (result.next()) {
                 return result.getString("levelCode");
             }
@@ -237,9 +159,9 @@ public class TeacherMain extends User {
         ResultSet result = null;
         List<String> periodList = new ArrayList<>();
         try {
-            PreparedStatement pstmt = con.getPreparedStatement("SELECT * FROM Period WHERE registrationNo=?");
+            PreparedStatement pstmt = dac.getPreparedStatement("SELECT * FROM Period WHERE registrationNo=?");
             pstmt.setString(1, regNo);
-            result = con.performPreparedStatement(pstmt);
+            result = dac.performPreparedStatement(pstmt);
             while (result.next()) {
                 periodList.add(result.getString("periodLabel"));
             }
@@ -258,10 +180,10 @@ public class TeacherMain extends User {
         ResultSet result = null;
         List<String> moduleList = new ArrayList<>();
         try {
-            PreparedStatement pstmt = con.getPreparedStatement("SELECT * FROM Study WHERE registrationNo=? AND periodLabel=?");
+            PreparedStatement pstmt = dac.getPreparedStatement("SELECT * FROM Study WHERE registrationNo=? AND periodLabel=?");
             pstmt.setString(1, regNo);
             pstmt.setString(2, periodLabel);
-            result = con.performPreparedStatement(pstmt);
+            result = dac.performPreparedStatement(pstmt);
             while (result.next()) {
                 moduleList.add(result.getString("moduleCode"));
             }
@@ -280,11 +202,11 @@ public class TeacherMain extends User {
         ResultSet result = null;
         String[] results = new String[2];
         try {
-            PreparedStatement pstmt = con.getPreparedStatement("SELECT * FROM Study WHERE registrationNo=? AND moduleCode=? AND periodLabel=?");
+            PreparedStatement pstmt = dac.getPreparedStatement("SELECT * FROM Study WHERE registrationNo=? AND moduleCode=? AND periodLabel=?");
             pstmt.setString(1, regNo);
             pstmt.setString(2, moduleCode);
             pstmt.setString(3, periodLabel);
-            result = con.performPreparedStatement(pstmt);
+            result = dac.performPreparedStatement(pstmt);
             while (result.next()) {
                 results[0] =  result.getString("initialGrade");
                 results[1] =  result.getString("resitGrade");
@@ -302,13 +224,13 @@ public class TeacherMain extends User {
     public void updateGrades(String regNo, String moduleCode, String periodLabel, String initGrade, String resitGrade){
         //Method assumes there is only one match
         try {
-            PreparedStatement pstmt = con.getPreparedStatement("UPDATE Study SET initialGrade=?, resitGrade=? WHERE registrationNo=? AND moduleCode=? AND periodLabel=?");
+            PreparedStatement pstmt = dac.getPreparedStatement("UPDATE Study SET initialGrade=?, resitGrade=? WHERE registrationNo=? AND moduleCode=? AND periodLabel=?");
             pstmt.setString(1, initGrade);
             pstmt.setString(2, resitGrade);
             pstmt.setString(3, regNo);
             pstmt.setString(4, moduleCode);
             pstmt.setString(5, periodLabel);
-            con.performPreparedUpdate(pstmt);
+            dac.performPreparedUpdate(pstmt);
         }
         catch(SQLException ex) {
             //display error message and leave the application
@@ -317,41 +239,29 @@ public class TeacherMain extends User {
             System.exit(0);
         }
     }
-    public Double getMeanGrade(String regNo, String periodLabel){
+    public String getUpperLevelCode(String degreeCode){
         //Method assumes there is only one match
         ResultSet result = null;
-        List<String> initGrades = new ArrayList<>();
-        List<String> resitGrades = new ArrayList<>();
         try {
-            PreparedStatement pstmt = con.getPreparedStatement("SELECT * FROM Study WHERE registrationNo=? AND periodLabel=?");
-            pstmt.setString(1, regNo);
-            pstmt.setString(2, periodLabel);
-            result = con.performPreparedStatement(pstmt);
+            PreparedStatement pstmt = dac.getPreparedStatement("SELECT * FROM ModuleApproval WHERE degreeCode=?");
+            pstmt.setString(1, degreeCode);
+            result = dac.performPreparedStatement(pstmt);
+            int maxLevel = 1;
+            int n = 0;
             while (result.next()) {
-                initGrades.add(result.getString("initialGrade"));
-                resitGrades.add(result.getString("resitGrade"));
-            };
-            Double initSum = 0.0;
-            Double meanGrade;
-            int count = 0;
-            for (String i:initGrades){
-                if (resitGrades.get(count) != null){
-                    if(Double.parseDouble(resitGrades.get(count)) >= 39.5){
-                        initSum+=40;
-                    }
+                if (result.getString("levelCode") == "P"){
+                    continue;
                 }
-                else{
-                    if (i != null){
-                        initSum += Double.parseDouble(i);
-                    }
-                    else{
-                        return null;
-                    }
+                n++;
+                int num = Integer.parseInt(result.getString("levelCode"));
+                if (num > maxLevel){
+                    maxLevel = num;
                 }
-                count++;
             }
-            meanGrade = initSum / initGrades.toArray().length;
-            return round(meanGrade, 1);
+            if (n > 0){
+                //If a value exists
+                return String.valueOf(maxLevel);
+            }
         }
         catch(SQLException ex) {
             //display error message and leave the application
@@ -361,26 +271,214 @@ public class TeacherMain extends User {
         }
         return null;
     }
-    public Map<String,Integer> getModuleCredits() {
-
-        return moduleCredits;
+    public String[] getMeanGrade(String regNo, String periodLabel, String levelCode){
+        //Method assumes there is only one match
+        ResultSet result = null;
+        String[] returnArr = new String[2];
+        List<List<String>> grades = new ArrayList<>();
+        try {
+            PreparedStatement pstmt = dac.getPreparedStatement("SELECT * FROM Study WHERE registrationNo=? AND periodLabel=?");
+            pstmt.setString(1, regNo);
+            pstmt.setString(2, periodLabel);
+            result = dac.performPreparedStatement(pstmt);
+            while (result.next()) {
+                String initGrade = result.getString("initialGrade");
+                String resitGrade = result.getString("resitGrade");
+                List<String> combinedGrades = new ArrayList<>();
+                combinedGrades.add(initGrade);
+                combinedGrades.add(resitGrade);
+                grades.add(combinedGrades);
+            };
+            Double initSum = 0.0;
+            Double meanGrade;
+            String checkPass = "pass";
+            Integer concededModules = 0;
+            for (List<String> i:grades){
+                Double resitGrade;
+                Double higherGrade;
+                if (i.get(0) == null){
+                    //If any initial grade is null, the outcome will be null
+                    return null;
+                }
+                if (i.get(1) == null){
+                    //If a resit grade is null, its value can be set to 0
+                    resitGrade = 0.0;
+                }
+                else{
+                    resitGrade = Double.parseDouble(i.get(1));
+                }
+                Double initGrade = Double.parseDouble(i.get(0));
+                int passMark = 40;
+                if (levelCode == "4"){
+                    passMark = 50;
+                }
+                if (initGrade > resitGrade){
+                    initSum += initGrade;
+                    higherGrade = initGrade;
+                }
+                else{
+                    initSum += Math.min(resitGrade, passMark);
+                    higherGrade = resitGrade;
+                }
+                if (higherGrade < passMark - 10){
+                    //Always fail
+                    checkPass = "fail";
+                }
+                else if(higherGrade < passMark){
+                    //Conceded module
+                    concededModules++;
+                }
+                if (concededModules > 1){
+                    //Always fail
+                    checkPass = "fail";
+                }
+                else if (concededModules == 1 && checkPass != "fail"){
+                    //Conceded pass
+                    checkPass = "conceded";
+                }
+            }
+            meanGrade = initSum / grades.toArray().length;
+            PreparedStatement pstmt2 = dac.getPreparedStatement("UPDATE Period SET meanGrade=? WHERE registrationNo=? AND periodLabel=?");
+            pstmt2.setString(1, String.valueOf(meanGrade));
+            pstmt2.setString(2, regNo);
+            pstmt2.setString(3, periodLabel);
+            dac.performPreparedUpdate(pstmt2);
+            returnArr[0] = String.valueOf(round(meanGrade, 1));
+            returnArr[1] = checkPass;
+            return returnArr;
+        }
+        catch(SQLException ex) {
+            //display error message and leave the application
+            JOptionPane.showMessageDialog(null,"There was an error when processing the data.",
+                    "ERROR", JOptionPane.ERROR_MESSAGE, null);
+            System.exit(0);
+        }
+        return null;
     }
-
-    public void getCredits(){
-
+    public String getStudentHighestLevel(String regNo){
+        //Method assumes there is only one match
+        ResultSet result = null;
+        try {
+            PreparedStatement pstmt = dac.getPreparedStatement("SELECT MAX(levelCode) FROM Period WHERE registrationNo=? AND levelCode='1' OR levelCode='2' OR levelCode='3'");
+            pstmt.setString(1, regNo);
+            result = dac.performPreparedStatement(pstmt);
+            while (result.next()) {
+                return result.getString("levelCode");
+            }
+        }
+        catch(SQLException ex) {
+            //display error message and leave the application
+            JOptionPane.showMessageDialog(null,"There was an error when processing the data.",
+                    "ERROR", JOptionPane.ERROR_MESSAGE, null);
+            System.exit(0);
+        }
+        return null;
     }
-
-
-
-    public String getOutcome(String regNo,String periodLabel,String levelCode,String degreeCode,double meanGrade) {
+    public String[] getOverallGrade(String regNo, String upperLevel){
+        //Method assumes there is only one match
+        ResultSet result = null;
+        String[] returnArr = new String[2];
+        List<List<String>> periods = new ArrayList<>();
+        try {
+            PreparedStatement pstmt = dac.getPreparedStatement("SELECT COUNT(*) FROM Period WHERE registrationNo=? AND levelCode='2' UNION " +
+                    "SELECT COUNT(*) FROM Period WHERE registrationNo=? AND levelCode='3' UNION " +
+                    "SELECT COUNT(*) FROM Period WHERE registrationNo=? AND levelCode='4'");
+            pstmt.setString(1, regNo);
+            pstmt.setString(2, regNo);
+            pstmt.setString(3, regNo);;
+            result = dac.performPreparedStatement(pstmt);
+            int total = 0;
+            while (result.next()) {
+                List<String> combinedPeriodResit = new ArrayList<>();
+                int current = Integer.parseInt(result.getString(1));
+                if (current != 0){
+                    total += current;
+                    combinedPeriodResit.add(getCharForNumber(total));
+                    if (current == 1){
+                        //no resit
+                        combinedPeriodResit.add("1");
+                    }
+                    else {
+                        //current == 2, level was resat
+                        combinedPeriodResit.add("2");
+                    }
+                    periods.add(combinedPeriodResit);
+                }
+            }
+            if (periods.toArray().length != Integer.parseInt(upperLevel) - 1){
+                //Final year of course not reached
+                return new String[]{null, null};
+            }
+            double sumGrade = 0;
+            double divisor = 0;
+            int passMark = 40;
+            returnArr[1] = "pass";
+            for (List<String> i : periods){
+                String level = getLevel(regNo, i.get(0));
+                boolean resit = false;
+                if (i.get(1) == "1"){
+                    resit = false;
+                }
+                else if (i.get(1) == "2"){
+                    resit = true;
+                }
+                String[] gradeArr = getMeanGrade(regNo, i.get(0), level);
+                if (gradeArr[1] == "fail"){
+                    returnArr[1] = "fail";
+                }
+                if (level == "2"){
+                    //Year 2
+                    if (resit){
+                        sumGrade += Integer.parseInt(gradeArr[0]);
+                    }
+                    else{
+                        sumGrade += Math.min(Integer.parseInt(gradeArr[0]), passMark);
+                    }
+                    divisor++;
+                }
+                else{
+                    //Year 3/4
+                    if (level == "4"){
+                        passMark = 50;
+                    }
+                    if (true){
+                        sumGrade += 2 * Integer.parseInt(gradeArr[0]);
+                    }
+                    else{
+                        sumGrade += 2 * Math.min(Integer.parseInt(gradeArr[0]), passMark);
+                    }
+                    divisor+=2;
+                }
+            }
+            returnArr[0] = String.valueOf(sumGrade/divisor);
+            return returnArr;
+        }
+        catch(SQLException ex) {
+            //display error message and leave the application
+            JOptionPane.showMessageDialog(null,"There was an error when processing the data.",
+                    "ERROR", JOptionPane.ERROR_MESSAGE, null);
+            System.exit(0);
+        }
+        return new String[]{null, null};
+    }
+    public String getOutcome(String regNo, String periodLabel,String levelCode,String degreeCode,Double meanGrade, String checkPass, boolean degreeClass) {
         //check if it is 1-year MSc
-        if (degreeCode.substring(3,4).equals("P")) {
+        String periodOutcome;
+        if (meanGrade == null){
+            return null;
+        }
+        else if (checkPass == "fail"){
+            periodOutcome = "fail";
+        }
+        else if (checkPass == "conceded"){
+            periodOutcome = "conceded pass";
+        }
+        else if (degreeCode.substring(3,4).equals("P")) {
             //check if student failed dissertation but succeeded in all the other modules
             double disertationGrade=0;
             int studentTotalCredits=0;
-
-            for (Map.Entry<String, Double> entry : recModules.entrySet()) {
-                int credit=moduleCredits.get(entry.getKey());
+            for (Map.Entry<String, Double> entry : dac.recModules.entrySet()) {
+                int credit=dac.moduleCredits.get(entry.getKey());
                 if (credit==60) {
                     //get the grade for the dissertation module
                     disertationGrade=entry.getValue();
@@ -389,26 +487,26 @@ public class TeacherMain extends User {
                     studentTotalCredits+=credit;
                 }
             }
-            //Special rule if student passes modules but fails dissertation
+            //Special rule if student passes modules but fails dissertaion
             if ((studentTotalCredits==120) &&(disertationGrade<50)) { //pass mark is 50
-                return "PGDip";
+                periodOutcome = "PGDip";
             }
             //Special rule if student passes 60 credits of modules
             if (studentTotalCredits==60) {
-                return "PGCert";
+                periodOutcome = "PGCert";
             }
 
             if (meanGrade>=69.5) {
-                return "distinction";
+                periodOutcome = "distinction";
             }
             else if (meanGrade>=59.5) {
-                return "merit";
+                periodOutcome = "merit";
             }
             else if (meanGrade>=49.5) {
-                return "pass";
+                periodOutcome = "pass";
             }
             else {
-                return "fail";
+                periodOutcome = "fail";
             }
         }
         //check if BSc,BEng degree
@@ -417,39 +515,68 @@ public class TeacherMain extends User {
                 return "pass (non-honours)";
             }
             if (meanGrade>=69.5) {
-                return "first class";
+                periodOutcome = "first class";
             }
             else if (meanGrade>=59.5) {
-                return "upper second";
+                periodOutcome = "upper second";
             }
             else if (meanGrade>=49.5) {
-                return "lower second";
+                periodOutcome = "lower second";
             }
             else if (meanGrade>=44.5){
-                return "third class";
+                periodOutcome = "third class";
             }
             else if (meanGrade>=39.5){
-                return "pass (non-honours)";
+                periodOutcome = "pass (non-honours)";
             }
             else{
-                return "fail";
+                periodOutcome = "fail";
             }
         }
         //else MComp/MEng degree
         else {
             if (meanGrade>=69.5) {
-                return "first class";
+                periodOutcome = "first class";
             }
             else if (meanGrade>=59.5) {
-                return "upper second";
+                periodOutcome = "upper second";
             }
             else if (meanGrade>=49.5) {
-                return "lower second";
+                periodOutcome = "lower second";
             }
             else {
-                return "fail";
+                periodOutcome = "fail";
             }
         }
+        try{
+            if (!degreeClass){
+                //For period outcomes,
+                if (periodOutcome != "fail"){
+                    if (periodOutcome != "conceded pass"){
+                        periodOutcome = "pass";
+                    }
+                }
+                PreparedStatement pstmt = dac.getPreparedStatement("UPDATE Period SET outcome=? WHERE registrationNo=? AND periodLabel=?");
+                pstmt.setString(1, periodOutcome);
+                pstmt.setString(2, regNo);
+                pstmt.setString(3, periodLabel);
+                dac.performPreparedUpdate(pstmt);
+            }
+            else{
+                //For degree classes (meanGrade would be adjusted to the correct value for all levels/weightings)
+                PreparedStatement pstmt = dac.getPreparedStatement("UPDATE Student SET degreeClass=? WHERE registrationNo=??");
+                pstmt.setString(1, periodOutcome);
+                pstmt.setString(2, regNo);
+                dac.performPreparedUpdate(pstmt);
+            }
+        }
+        catch(SQLException ex) {
+            //display error message and leave the application
+            JOptionPane.showMessageDialog(null,"There was an error when processing the data.",
+                    "ERROR", JOptionPane.ERROR_MESSAGE, null);
+            System.exit(0);
+        }
+        return periodOutcome;
     }
     public static double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
@@ -458,5 +585,8 @@ public class TeacherMain extends User {
         value = value * factor;
         long tmp = Math.round(value);
         return (double) tmp / factor;
+    }
+    private String getCharForNumber(int i) {
+        return i > 0 && i < 27 ? String.valueOf((char)(i + 64)) : null;
     }
 }

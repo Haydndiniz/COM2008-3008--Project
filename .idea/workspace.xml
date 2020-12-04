@@ -21,8 +21,21 @@
   <component name="ChangeListManager">
     <list default="true" id="c9fe5b6b-8c40-4624-9d20-5c2d54015260" name="Default Changelist" comment="updated file structure">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/Admin/AddUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/Admin/AddUser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/DBController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/DBController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/Teacher/DisplayStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/Teacher/DisplayStudent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/Teacher/SearchByStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/Teacher/SearchByStudent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/Teacher/TeacherMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/Teacher/TeacherMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project/Project_Code/DBController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project/Project_Code/DBController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project/Project_Code/Registrar/ManageModules.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project/Project_Code/Registrar/ManageModules.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project/Project_Code/Teacher/DisplayStudent$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project/Project_Code/Teacher/DisplayStudent$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project/Project_Code/Teacher/DisplayStudent$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project/Project_Code/Teacher/DisplayStudent$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project/Project_Code/Teacher/DisplayStudent$ItemChangeListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project/Project_Code/Teacher/DisplayStudent$ItemChangeListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project/Project_Code/Teacher/DisplayStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project/Project_Code/Teacher/DisplayStudent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project/Project_Code/Teacher/SearchByStudent$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project/Project_Code/Teacher/SearchByStudent$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project/Project_Code/Teacher/SearchByStudent$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project/Project_Code/Teacher/SearchByStudent$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project/Project_Code/Teacher/SearchByStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project/Project_Code/Teacher/SearchByStudent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project/Project_Code/Teacher/TeacherMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project/Project_Code/Teacher/TeacherMain.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,6 +120,19 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -304,7 +330,11 @@
       <screen x="0" y="25" width="1536" height="935" />
     </state>
     <state x="571" y="206" key="CreateSnapShotAction.MyDialog/0.25.1536.935@0.25.1536.935" timestamp="1606436760181" />
-    <state width="1719" height="118" key="GridCell.Tab.0.bottom" timestamp="1607091683797">
+    <state x="207" y="224" width="1579" height="742" key="DiffContextDialog" timestamp="1607116068343">
+      <screen x="64" y="0" width="1856" height="1080" />
+    </state>
+    <state x="207" y="224" width="1579" height="742" key="DiffContextDialog/64.0.1856.1080/1920.0.1366.768@64.0.1856.1080" timestamp="1607116068343" />
+    <state width="859" height="107" key="GridCell.Tab.0.bottom" timestamp="1607117061513">
       <screen x="64" y="0" width="1856" height="1080" />
     </state>
     <state width="2518" height="261" key="GridCell.Tab.0.bottom/0.0.2560.1440/-2560.0.2560.1440@0.0.2560.1440" timestamp="1606338681435" />
@@ -315,8 +345,8 @@
     <state width="875" height="176" key="GridCell.Tab.0.bottom/0.25.1792.1095@0.25.1792.1095" timestamp="1606658016568" />
     <state width="1719" height="121" key="GridCell.Tab.0.bottom/62.0.1858.1080/1920.0.1366.768@62.0.1858.1080" timestamp="1607088956270" />
     <state width="1559" height="151" key="GridCell.Tab.0.bottom/63.0.1857.1080/1920.0.1366.768@63.0.1857.1080" timestamp="1606938224490" />
-    <state width="1719" height="118" key="GridCell.Tab.0.bottom/64.0.1856.1080/1920.0.1366.768@64.0.1856.1080" timestamp="1607091683797" />
-    <state width="1719" height="118" key="GridCell.Tab.0.center" timestamp="1607091683797">
+    <state width="859" height="107" key="GridCell.Tab.0.bottom/64.0.1856.1080/1920.0.1366.768@64.0.1856.1080" timestamp="1607117061513" />
+    <state width="859" height="107" key="GridCell.Tab.0.center" timestamp="1607117061513">
       <screen x="64" y="0" width="1856" height="1080" />
     </state>
     <state width="2518" height="261" key="GridCell.Tab.0.center/0.0.2560.1440/-2560.0.2560.1440@0.0.2560.1440" timestamp="1606338681433" />
@@ -327,8 +357,8 @@
     <state width="875" height="176" key="GridCell.Tab.0.center/0.25.1792.1095@0.25.1792.1095" timestamp="1606658016567" />
     <state width="1719" height="121" key="GridCell.Tab.0.center/62.0.1858.1080/1920.0.1366.768@62.0.1858.1080" timestamp="1607088956270" />
     <state width="1559" height="151" key="GridCell.Tab.0.center/63.0.1857.1080/1920.0.1366.768@63.0.1857.1080" timestamp="1606938224490" />
-    <state width="1719" height="118" key="GridCell.Tab.0.center/64.0.1856.1080/1920.0.1366.768@64.0.1856.1080" timestamp="1607091683797" />
-    <state width="1719" height="118" key="GridCell.Tab.0.left" timestamp="1607091683797">
+    <state width="859" height="107" key="GridCell.Tab.0.center/64.0.1856.1080/1920.0.1366.768@64.0.1856.1080" timestamp="1607117061513" />
+    <state width="859" height="107" key="GridCell.Tab.0.left" timestamp="1607117061513">
       <screen x="64" y="0" width="1856" height="1080" />
     </state>
     <state width="747" height="144" key="GridCell.Tab.0.left/0.0.1536.960@0.0.1536.960" timestamp="1606423790368" />
@@ -339,8 +369,8 @@
     <state width="875" height="176" key="GridCell.Tab.0.left/0.25.1792.1095@0.25.1792.1095" timestamp="1606658016567" />
     <state width="1719" height="121" key="GridCell.Tab.0.left/62.0.1858.1080/1920.0.1366.768@62.0.1858.1080" timestamp="1607088956269" />
     <state width="1559" height="151" key="GridCell.Tab.0.left/63.0.1857.1080/1920.0.1366.768@63.0.1857.1080" timestamp="1606938224490" />
-    <state width="1719" height="118" key="GridCell.Tab.0.left/64.0.1856.1080/1920.0.1366.768@64.0.1856.1080" timestamp="1607091683797" />
-    <state width="1719" height="118" key="GridCell.Tab.0.right" timestamp="1607091683797">
+    <state width="859" height="107" key="GridCell.Tab.0.left/64.0.1856.1080/1920.0.1366.768@64.0.1856.1080" timestamp="1607117061513" />
+    <state width="859" height="107" key="GridCell.Tab.0.right" timestamp="1607117061513">
       <screen x="64" y="0" width="1856" height="1080" />
     </state>
     <state width="2518" height="261" key="GridCell.Tab.0.right/0.0.2560.1440/-2560.0.2560.1440@0.0.2560.1440" timestamp="1606338681434" />
@@ -351,7 +381,7 @@
     <state width="875" height="176" key="GridCell.Tab.0.right/0.25.1792.1095@0.25.1792.1095" timestamp="1606658016567" />
     <state width="1719" height="121" key="GridCell.Tab.0.right/62.0.1858.1080/1920.0.1366.768@62.0.1858.1080" timestamp="1607088956270" />
     <state width="1559" height="151" key="GridCell.Tab.0.right/63.0.1857.1080/1920.0.1366.768@63.0.1857.1080" timestamp="1606938224490" />
-    <state width="1719" height="118" key="GridCell.Tab.0.right/64.0.1856.1080/1920.0.1366.768@64.0.1856.1080" timestamp="1607091683797" />
+    <state width="859" height="107" key="GridCell.Tab.0.right/64.0.1856.1080/1920.0.1366.768@64.0.1856.1080" timestamp="1607117061513" />
     <state width="1719" height="305" key="GridCell.Tab.1.bottom" timestamp="1607087330675">
       <screen x="62" y="0" width="1858" height="1080" />
     </state>
@@ -386,6 +416,10 @@
       <screen x="64" y="0" width="1856" height="1080" />
     </state>
     <state x="635" y="356" key="MultipleFileMergeDialog/64.0.1856.1080/1920.0.1366.768@64.0.1856.1080" timestamp="1607091748782" />
+    <state x="732" y="315" key="RollbackChangesDialog" timestamp="1607116135202">
+      <screen x="64" y="0" width="1856" height="1080" />
+    </state>
+    <state x="732" y="315" key="RollbackChangesDialog/64.0.1856.1080/1920.0.1366.768@64.0.1856.1080" timestamp="1607116135202" />
     <state x="236" y="59" key="SettingsEditor" timestamp="1606436281206">
       <screen x="0" y="25" width="1536" height="935" />
     </state>
@@ -402,10 +436,10 @@
     <state x="341" y="209" key="Vcs.Push.Dialog.v2/0.25.1536.935@0.25.1536.935" timestamp="1606423849139" />
     <state x="398" y="240" key="Vcs.Push.Dialog.v2/0.25.1792.1095@0.25.1792.1095" timestamp="1606590926330" />
     <state x="476" y="212" key="Vcs.Push.Dialog.v2/64.0.1856.1080/1920.0.1366.768@64.0.1856.1080" timestamp="1607091701205" />
-    <state x="207" y="224" width="1579" height="742" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1607091839347">
+    <state x="207" y="224" width="1579" height="742" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1607116401857">
       <screen x="64" y="0" width="1856" height="1080" />
     </state>
-    <state x="207" y="224" width="1579" height="742" key="com.intellij.history.integration.ui.views.FileHistoryDialog/64.0.1856.1080/1920.0.1366.768@64.0.1856.1080" timestamp="1607091839347" />
+    <state x="207" y="224" width="1579" height="742" key="com.intellij.history.integration.ui.views.FileHistoryDialog/64.0.1856.1080/1920.0.1366.768@64.0.1856.1080" timestamp="1607116401857" />
     <state x="732" y="441" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607091786602">
       <screen x="64" y="0" width="1856" height="1080" />
     </state>
@@ -430,10 +464,10 @@
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/COM2008_3008__Project$DBController.ic" NAME="DBController Coverage Results" MODIFIED="1606422376700" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/COM2008_3008__Project$Main.ic" NAME="Main Coverage Results" MODIFIED="1606423001068" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Project_Code.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/COM2008_3008__Project$Main.ic" NAME="Main Coverage Results" MODIFIED="1606423001068" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/COM2008_3008__Project$DBController.ic" NAME="DBController Coverage Results" MODIFIED="1606422376700" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>Project_Code.*</FILTER>
     </SUITE>
   </component>

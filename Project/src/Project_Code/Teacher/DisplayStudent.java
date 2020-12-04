@@ -1,5 +1,7 @@
 package Project_Code.Teacher;
 
+import Project_Code.LoginController;
+
 import javax.naming.directory.SearchControls;
 import javax.swing.*;
 import java.awt.event.*;
@@ -13,6 +15,8 @@ public class DisplayStudent extends JPanel implements ActionListener {
     private String regNo;
     private JTextField initGrade;;
     private JTextField resitGrade;
+    private String level;
+    private JLabel levelLabel;
 
     /**
      * Parameterized constructor
@@ -144,21 +148,34 @@ public class DisplayStudent extends JPanel implements ActionListener {
         label_degree.setBounds(112, 250, 200, 40);
         add(label_degree);
 
-        JLabel label_level = new JLabel(teacher.getLevel(regNo, String.valueOf(periodsList.getSelectedItem())));
+        level = teacher.getLevel(regNo, String.valueOf(periodsList.getSelectedItem()));
+        String upperLevel = teacher.getUpperLevelCode(studentDetails[1]);
+        JLabel label_level = new JLabel(level);
         label_level.setBounds(112, 290, 200, 40);
         add(label_level);
+        levelLabel = label_level;
 
-        JLabel label_meanGrade = new JLabel(String.valueOf(teacher.getMeanGrade(regNo, String.valueOf(periodsList.getSelectedItem()))));
+        String[] gradeResults = teacher.getMeanGrade(regNo, String.valueOf(periodsList.getSelectedItem()), level);
+        Double meanGrade = Double.parseDouble(gradeResults[0]);
+        String checkPass = gradeResults[1];
+        JLabel label_meanGrade = new JLabel(String.valueOf(meanGrade));
         label_meanGrade.setBounds(112, 490, 100, 40);
         add(label_meanGrade);
 
-        JLabel label_outcome = new JLabel();
-        label_outcome.setBounds(112, 490, 100, 40);
+        JLabel label_outcome = new JLabel(teacher.getOutcome(regNo, String.valueOf(periodsList.getSelectedItem()), level, studentDetails[1], meanGrade, checkPass, false));
+        label_outcome.setBounds(112, 530, 100, 40);
         add(label_outcome);
 
-        JLabel label_degreeGrade = new JLabel();
-        label_degreeGrade.setBounds(112, 490, 100, 40);
-        add(label_degreeGrade);
+        String[] overallGradeArr = teacher.getOverallGrade(regNo, upperLevel);
+        System.out.println(overallGradeArr[0]);
+        System.out.println(overallGradeArr[1]);
+        Double overallGrade = null;
+        if (overallGradeArr[0] != null){
+            overallGrade = Double.parseDouble(overallGradeArr[0]);
+        }
+        JLabel label_degreeClass = new JLabel(teacher.getOutcome(regNo, "X", upperLevel, studentDetails[1], overallGrade, overallGradeArr[1], true));
+        label_degreeClass.setBounds(112, 570, 100, 40);
+        add(label_degreeClass);
 
         String[] studentGrades = teacher.getGrades(regNo, String.valueOf(modulesList.getSelectedItem()), String.valueOf(periodsList.getSelectedItem()));
         JTextField label_initialGrade = new JTextField(studentGrades[0]);
@@ -190,7 +207,7 @@ public class DisplayStudent extends JPanel implements ActionListener {
         frame.setLocationRelativeTo(null);
     }
     public static boolean isNumeric(String strNum) {
-        if (strNum == null) {
+        if (strNum == null || strNum == "") {
             return false;
         }
         try {
@@ -212,6 +229,8 @@ public class DisplayStudent extends JPanel implements ActionListener {
                     for(String s:studentModules){
                         modulesList.addItem(s);
                     }
+                    level = teacher.getLevel(regNo, String.valueOf(periodsList.getSelectedItem()));
+                    levelLabel.setText(level);
                 }
                 else{
                     //Module changed
@@ -229,21 +248,53 @@ public class DisplayStudent extends JPanel implements ActionListener {
         switch (buttonPressed) {
             case "Go Back":
                 setVisible(false);
-                frame.setContentPane(new SearchByStudent(frame, teacher));
+                frame.setContentPane(new TeacherFrame(frame, teacher.getUsername()));
                 break;
             case "Apply":
-                if (isNumeric(initGrade.getText()) && isNumeric(resitGrade.getText())){
-                    if (Double.parseDouble(initGrade.getText()) <= 100 && Double.parseDouble(resitGrade.getText()) <= 100) {
-                        teacher.updateGrades(regNo, String.valueOf(modulesList.getSelectedItem()), String.valueOf(periodsList.getSelectedItem()), initGrade.getText(), resitGrade.getText());
+                boolean validInit = false; //Is the initial grade non-null?
+                boolean validReset = false; //Is the resit grade non-null?
+                boolean fitsRange = true; //For grades that are are non-null, are they less than or equal to 100?
+                if (isNumeric(initGrade.getText())){
+                    if (Double.parseDouble(initGrade.getText()) <= 100) {
+                        if (isNumeric(resitGrade.getText())){
+                            if(Double.parseDouble(resitGrade.getText()) <= 100){
+                                validInit = true;
+                                validReset = true;
+                            }
+                            else{
+                                fitsRange = false;
+                            }
+                        }
+                        else{
+                            fitsRange = true;
+                            validInit = true;
+                        }
                     }
                     else{
-                        JOptionPane.showMessageDialog(null,"Please enter valid grades",
-                                "ERROR", JOptionPane.ERROR_MESSAGE, null);
+                        fitsRange = false;
                     }
+                }
+                if (fitsRange){
+                    String initValue;
+                    String resitValue;
+                    if (validInit){
+                        initValue = initGrade.getText();
+                    }
+                    else{
+                        initValue = null;
+                    }
+                    if (validReset){
+                        resitValue = resitGrade.getText();
+                    }
+                    else{
+                        resitValue = null;
+                    }
+                    teacher.updateGrades(regNo, String.valueOf(modulesList.getSelectedItem()), String.valueOf(periodsList.getSelectedItem()), initValue, resitValue);
                 }
                 else{
                     JOptionPane.showMessageDialog(null,"Please enter valid grades",
                             "ERROR", JOptionPane.ERROR_MESSAGE, null);
+
                 }
         }
     }

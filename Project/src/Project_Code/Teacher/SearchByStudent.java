@@ -1,5 +1,7 @@
 package Project_Code.Teacher;
 
+import Project_Code.LoginController;
+
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -69,10 +71,10 @@ public class SearchByStudent extends JPanel implements ActionListener {
         add(textField2);
 
         //back button
-        //JButton btnGoBack = new JButton("Go Back");
-        //btnGoBack.setBounds(12, 213, 97, 25);
-        //add(btnGoBack);
-        //btnGoBack.addActionListener(this);
+        JButton btnGoBack = new JButton("Go Back");
+        btnGoBack.setBounds(12, 213, 97, 25);
+        add(btnGoBack);
+        btnGoBack.addActionListener(this);
 
         frame=f;
         frame.setContentPane(this);
