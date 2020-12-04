@@ -52,7 +52,7 @@ public class AddUser extends JPanel implements ActionListener {
         roleLabel.setBounds(57, 112, 134, 25);
         add(roleLabel);
 
-        roleDropdown = new JComboBox<String>(new String[]{"Admin", "Registrar", "Teacher", "Student"});
+        roleDropdown = new JComboBox<String>(new String[]{"Admin", "Registrar", "Teacher"});
         roleDropdown.setBounds(211, 112, 132, 25);
         add(roleDropdown);
 
@@ -95,6 +95,19 @@ public class AddUser extends JPanel implements ActionListener {
         passwordField.setText(generateRandomPassword());
         passwordField.setBounds(211, 272, 132, 25);
         add(passwordField);
+
+        //show password checkbox
+        JCheckBox passwordCheckbox = new JCheckBox("Show Password");
+        passwordCheckbox.setBounds(209,300,140,22);
+        passwordCheckbox.addActionListener(e -> {
+            if(passwordCheckbox.isSelected()){
+                passwordField.setEchoChar((char)0);
+            } else{
+                passwordField.setEchoChar('*');
+
+            }
+        });
+        add(passwordCheckbox);
 
         //Add button
         JButton btnAddUsr = new JButton("Add User");
@@ -223,8 +236,7 @@ public class AddUser extends JPanel implements ActionListener {
 
             int changes;
             //insert to UserAccounts
-            changes = con.performUpdate("INSERT INTO UserAccounts (username, password)"
-                    + " VALUES ('"+username+"','"+hash+"')");
+            changes = con.performUpdate("INSERT INTO UserAccounts (username, password) VALUES ('"+username+"','"+hash+"')");
             //insert to UserSalts
             changes += con.performUpdate("INSERT INTO UserSalts (username, salt)"
                     + " VALUES ('"+username+"','"+salt+"')");
