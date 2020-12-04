@@ -156,4 +156,43 @@ public class DBController {
         return pstmt;
 
     }
+    public ResultSet performPreparedStatement(PreparedStatement pstmt) {
+        openConnection();
+        result = null;
+
+        try {
+            result = pstmt.executeQuery();
+            return result;
+        }
+        catch (SQLException ex){
+            //display error message and leave the application
+            JOptionPane.showMessageDialog(null,"There was an error when processing the data.",
+                    "ERROR", JOptionPane.ERROR_MESSAGE, null);
+            System.exit(0);
+        }
+        catch (NullPointerException nex) {
+            //display error message and leave the application
+            JOptionPane.showMessageDialog(null,"There was an error when processing the data.",
+                    "ERROR", JOptionPane.ERROR_MESSAGE, null);
+            System.exit(0);
+        }
+
+        return result;
+    }
+    public int performPreparedUpdate(PreparedStatement pstmt)  {
+        openConnection();
+        int updates = 0;
+        try {
+            updates = pstmt.executeUpdate();
+            return updates;
+        }
+        catch (SQLException ex) {
+            //display error message and leave the application
+            JOptionPane.showMessageDialog(null,"There was an error when processing the data.",
+                    "ERROR", JOptionPane.ERROR_MESSAGE, null);
+            System.exit(0);
+        }
+
+        return updates;
+    }
 }

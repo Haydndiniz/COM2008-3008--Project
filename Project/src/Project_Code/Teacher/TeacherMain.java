@@ -371,7 +371,7 @@ public class TeacherMain extends User {
             //        //get the grade for the dissertation module
             //        disertationGrade=entry.getValue();
             //    }
-            //    if (entry.getValue()>50) {
+            //   if (entry.getValue()>50) {
             //        studentTotalCredits+=credit;
             //    }
             //}
