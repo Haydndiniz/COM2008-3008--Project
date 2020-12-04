@@ -1,12 +1,18 @@
 package Project_Code.Admin;
 
+import Project_Code.DBController;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class RemoveUser extends JPanel implements ActionListener {
     private JFrame frame;
     private AdminMain admin;
+    private JTextField usernameField;
+    private static DBController con = new DBController("team037", "ee143bc0");
 
     /**
      * Parameterized constructor
@@ -32,9 +38,9 @@ public class RemoveUser extends JPanel implements ActionListener {
         add(roleLabel);
 
         // UsernameField
-        JTextField forenameField = new JTextField(20);
-        forenameField.setBounds(211, 87, 132, 25);
-        add(forenameField);
+        usernameField = new JTextField(20);
+        usernameField.setBounds(211, 87, 132, 25);
+        add(usernameField);
 
         //Add button
         JButton btnRemoveUsr = new JButton("Remove");
@@ -54,6 +60,64 @@ public class RemoveUser extends JPanel implements ActionListener {
         frame.setLocationRelativeTo(null);
     }
 
+    private boolean deleteUsername(String username) throws SQLException {
+
+        ResultSet result;
+
+        try {
+
+            String query = "SELECT COUNT(*) FROM Users WHERE username ='"+username+"'";
+            System.out.println(query);
+            result = con.performQuery(query);
+
+            int count = 0;
+            while(result.next()) {
+                System.out.println(result.getInt(1));
+                count = result.getInt(1);
+            }
+
+            if (count != 0) {
+                System.out.println("User found.");
+                // DELETE
+                int changes;
+                changes=con.performUpdate("DELETE FROM Users WHERE username = '"+username+"' ");
+                changes+=con.performUpdate("DELETE FROM UserSalts WHERE username = '"+username+"' ");
+                changes+=con.performUpdate("DELETE FROM UserAccounts WHERE username = '"+username+"' ");
+
+                System.out.println(changes);
+                con.closeConnection();
+                con.closeStatement();
+
+                JOptionPane.showMessageDialog(null,"User deleted successfully");
+                setVisible(false);
+                frame.setContentPane(new AdminFrame(frame, admin.getUsername()));
+
+            } else {
+                System.out.println("User does not exist.");
+                JOptionPane.showMessageDialog(null,"User not found.",
+                        "ERROR", JOptionPane.ERROR_MESSAGE, null);
+                return false;
+            }
+
+            System.out.println(result);
+
+            con.closeConnection();
+            con.closeStatement();
+
+            return true;
+
+        }
+        catch(SQLException ex) {
+            //display error message and leave the application
+            JOptionPane.showMessageDialog(null,"There was an error, SQL.",
+                    "ERROR", JOptionPane.ERROR_MESSAGE, null);
+            ex.printStackTrace();
+            System.exit(0);
+        }
+
+        return false;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String buttonPressed=e.getActionCommand();
@@ -62,7 +126,17 @@ public class RemoveUser extends JPanel implements ActionListener {
                 setVisible(false);
                 frame.setContentPane(new AdminFrame(frame, admin.getUsername()));
             case "Remove":
-                //setVisible(false);
+
+                if (usernameField.equals("")) {
+                    JOptionPane.showMessageDialog(null,"Username is a required field.");
+                } else {
+                    try {
+                        deleteUsername(usernameField.getText());
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                }
+
         }
     }
 }
