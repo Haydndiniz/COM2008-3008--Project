@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.Objects;
 
 public class AddNewStudent extends JPanel implements ActionListener {
-    private RegistrarMain registrar;
+    private final RegistrarMain registrar;
     private final JFrame frame;
     private final DBController con = new DBController("team037","ee143bc0");
 
@@ -79,7 +79,7 @@ public class AddNewStudent extends JPanel implements ActionListener {
                 comboBox.removeAllItems();
                 comboBox.addItem("");
                 try {
-                    result2=con.performQuery("SELECT levelCode FROM ModuleApproval WHERE degreeCode ='"+degreeCode+"' ");
+                    result2=con.performQuery("SELECT DISTINCT levelCode FROM ModuleApproval WHERE degreeCode ='"+degreeCode+"' ");
                     while (result2.next()) {
                         comboBox.addItem(result2.getString(1));
                     }
