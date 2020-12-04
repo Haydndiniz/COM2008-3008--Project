@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
+import static Project_Code.Registrar.RegistrarMain.generateRandomPassword;
+
 public class AddNewStudent extends JPanel implements ActionListener {
     private final RegistrarMain registrar;
     private final JFrame frame;
@@ -194,7 +196,20 @@ public class AddNewStudent extends JPanel implements ActionListener {
         //password field
         passwordField = new JPasswordField();
         passwordField.setBounds(211, 340, 116, 22);
+        passwordField.setText(generateRandomPassword());
         add(passwordField);
+
+        JCheckBox passwordCheckbox = new JCheckBox("Show Password");
+        passwordCheckbox.setBounds(211,370,140,22);
+        passwordCheckbox.addActionListener(e -> {
+            if(passwordCheckbox.isSelected()){
+                passwordField.setEchoChar((char)0);
+            } else{
+                passwordField.setEchoChar('*');
+
+            }
+        });
+        add(passwordCheckbox);
 
         //frame configurations
         frame=f;

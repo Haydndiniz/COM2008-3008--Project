@@ -5,6 +5,7 @@ import Project_Code.User;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.security.SecureRandom;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -469,6 +470,21 @@ public class RegistrarMain extends User {
             return false;
         }
         return true;
+    }
+
+    public static String generateRandomPassword() {
+        // ASCII range - alphanumeric (0-9, a-z, A-Z)
+        final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        SecureRandom random = new SecureRandom();
+        StringBuilder pword = new StringBuilder();
+
+
+        for (int i = 0; i < 10; i++) {
+            int randomIndex = random.nextInt(chars.length());
+            pword.append(chars.charAt(randomIndex));
+        }
+        return pword.toString();
     }
 
 
