@@ -1,7 +1,6 @@
 package Project_Code.Registrar;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -12,12 +11,6 @@ public class ViewRegStudents extends JPanel implements ActionListener {
     private JTable table,table1;
     private RegistrarMain registrar;
 
-
-    /**
-     * Function that displays the students that have already registered
-     * @param f the JFrame
-     * @param reg the registerMain object
-     */
     public ViewRegStudents(JFrame f, RegistrarMain reg) {
         registrar = reg;
 

@@ -1,8 +1,8 @@
 package Project_Code;
 
+
 import javax.swing.*;
 import java.sql.*;
-
 /*
 Database controller.
 When main method is run, it displays all tables in the database
@@ -156,17 +156,4 @@ public class DBController {
         return pstmt;
 
     }
-
-    public static void main(String[] args) throws SQLException {
-
-        DBController con = new DBController("team037","ee143bc0");
-        String xy = "admin";
-        //Test Queries Here
-        ResultSet tables = con.performQuery("SELECT password FROM UserAccounts WHERE username = '" + xy + "'");
-        while (tables.next()) {
-            System.out.println(tables.getString(1));
-        }
-        System.out.println(tables);
-    }
-
 }
