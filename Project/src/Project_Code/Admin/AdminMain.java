@@ -50,4 +50,127 @@ public class AdminMain extends User {
         return  t;
     }
 
+    /**
+     * viewAllDepartments
+     * @return a table with all department code and names
+     */
+    public DefaultTableModel viewAllDepartments (){
+        ResultSet result = null;
+        DefaultTableModel t = new DefaultTableModel(new Object[][] {},new String[] {"Department Code", "Department Name"});
+
+        Object [] departments = new Object[2];
+        try {
+            result = dac.performQuery("SELECT * FROM Department");
+            while (result.next()) {
+                departments[0] = result.getString(1);
+                departments[1] = result.getString(2);
+                t.addRow(departments);
+            }
+            //close connection and statement
+            dac.closeConnection();
+            dac.closeStatement();
+        }
+        catch(SQLException ex) {
+            //display error message and leave the application
+            JOptionPane.showMessageDialog(null,"There was an error when processing the data.",
+                    "ERROR", JOptionPane.ERROR_MESSAGE, null);
+            System.exit(0);
+        }
+
+        return  t;
+    }
+
+    /**
+     * viewAllCourses
+     * @return a table with all department code and names
+     */
+    public DefaultTableModel viewAllCourses (){
+        ResultSet result = null;
+        DefaultTableModel t = new DefaultTableModel(new Object[][] {},new String[] {"Course Code", "Course Name"});
+
+        Object [] courses = new Object[2];
+        try {
+            result = dac.performQuery("SELECT * FROM Degree");
+            while (result.next()) {
+                courses[0] = result.getString(1);
+                courses[1] = result.getString(2);
+                t.addRow(courses);
+            }
+            //close connection and statement
+            dac.closeConnection();
+            dac.closeStatement();
+        }
+        catch(SQLException ex) {
+            //display error message and leave the application
+            JOptionPane.showMessageDialog(null,"There was an error when processing the data.",
+                    "ERROR", JOptionPane.ERROR_MESSAGE, null);
+            System.exit(0);
+        }
+
+        return  t;
+    }
+
+    /**
+     * viewCoursesPerDepartment
+     * @return a table with all department code and names
+     */
+    public DefaultTableModel viewCoursesPerDepartment (){
+        ResultSet result = null;
+        DefaultTableModel t = new DefaultTableModel(new Object[][] {},new String[] {"Department Code", "Course Code"});
+
+        Object [] coursePerDepartment = new Object[2];
+        try {
+            result = dac.performQuery("SELECT * FROM DegreeApproval");
+            while (result.next()) {
+                coursePerDepartment[0] = result.getString(1);
+                coursePerDepartment[1] = result.getString(2);
+                t.addRow(coursePerDepartment);
+            }
+            //close connection and statement
+            dac.closeConnection();
+            dac.closeStatement();
+        }
+        catch(SQLException ex) {
+            //display error message and leave the application
+            JOptionPane.showMessageDialog(null,"There was an error when processing the data.",
+                    "ERROR", JOptionPane.ERROR_MESSAGE, null);
+            System.exit(0);
+        }
+
+        return  t;
+    }
+
+    /**
+     * viewAllModules
+     * @return a table with all department code and names
+     */
+    public DefaultTableModel viewAllModules (){
+        ResultSet result = null;
+        DefaultTableModel t = new DefaultTableModel(new Object[][] {},new String[] {"Module Code", "Module Name", "Credits", "Department Code", "Period"});
+
+        Object [] modules = new Object[5];
+        try {
+            result = dac.performQuery("SELECT * FROM Module");
+            while (result.next()) {
+                modules[0] = result.getString(1);
+                modules[1] = result.getString(2);
+                modules[2] = result.getString(3);
+                modules[3] = result.getString(4);
+                modules[4] = result.getString(5);
+                t.addRow(modules);
+            }
+            //close connection and statement
+            dac.closeConnection();
+            dac.closeStatement();
+        }
+        catch(SQLException ex) {
+            //display error message and leave the application
+            JOptionPane.showMessageDialog(null,"There was an error when processing the data.",
+                    "ERROR", JOptionPane.ERROR_MESSAGE, null);
+            System.exit(0);
+        }
+
+        return  t;
+    }
+
 }

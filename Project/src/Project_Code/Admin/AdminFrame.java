@@ -19,7 +19,7 @@ public class AdminFrame extends JPanel implements ActionListener {
 
         admin = new AdminMain(username);
 
-        //create a 4 row 6 column grid
+        //create a 6 row 4 column grid
         setLayout(new GridLayout(6, 4, 0, 0));
 
         //add labels in first row
@@ -69,7 +69,7 @@ public class AdminFrame extends JPanel implements ActionListener {
         add(removeCourseButton);
         removeCourseButton.addActionListener(this);
 
-        JButton btnAddModuleFor = new JButton("Add Module for Degree");
+        JButton btnAddModuleFor = new JButton("Remove Module");
         add(btnAddModuleFor);
         btnAddModuleFor.addActionListener(this);
 
@@ -86,7 +86,7 @@ public class AdminFrame extends JPanel implements ActionListener {
         add(viewCoursesButton);
         viewCoursesButton.addActionListener(this);
 
-        JButton removeModuleButton = new JButton("Remove Module");
+        JButton removeModuleButton = new JButton("View Modules");
         add(removeModuleButton);
         removeModuleButton.addActionListener(this);
 
@@ -99,16 +99,10 @@ public class AdminFrame extends JPanel implements ActionListener {
         column1.setOrientation(SwingConstants.VERTICAL);
         add(column1);
 
-
         //view degrees per department
         JButton btnViewCoursesPer = new JButton("View Courses per Department");
         add(btnViewCoursesPer);
         btnViewCoursesPer.addActionListener(this);
-
-        //view modules per degree
-        JButton viewModulesButton = new JButton("View Modules Per Degree");
-        add(viewModulesButton);
-        viewModulesButton.addActionListener(this);
 
         //separators for columns
         JSeparator column2 = new JSeparator();
@@ -122,12 +116,6 @@ public class AdminFrame extends JPanel implements ActionListener {
         JSeparator column4 = new JSeparator();
         column4.setOrientation(SwingConstants.VERTICAL);
         add(column4);
-
-        //view the modules
-        JButton btnViewModules = new JButton("View Modules");
-        add(btnViewModules);
-        btnViewModules.addActionListener(this);
-
 
         setBounds(87, 13, 1000, 521);
 
@@ -144,13 +132,59 @@ public class AdminFrame extends JPanel implements ActionListener {
         String buttonPressed=e.getActionCommand();
 
         //switch frame on button press
-        //TODO: add remaining views for admin tasks
         switch (buttonPressed) {
             case "View Users":
                 setVisible(false);
                 frame.setContentPane(new ViewUsers(frame, admin));
                 break;
-
+            case "Add User":
+                setVisible(false);
+                frame.setContentPane(new AddUser(frame, admin));
+                break;
+            case "Remove User":
+                setVisible(false);
+                frame.setContentPane(new RemoveUser(frame, admin));
+                break;
+            case "Add Department":
+                setVisible(false);
+                frame.setContentPane(new AddDepartment(frame, admin));
+                break;
+            case "Remove Department":
+                setVisible(false);
+                frame.setContentPane(new RemoveDepartment(frame, admin));
+                break;
+            case "View Departments":
+                setVisible(false);
+                frame.setContentPane(new ViewDepartments(frame, admin));
+                break;
+            case "Add Course":
+                setVisible(false);
+                frame.setContentPane(new AddCourse(frame, admin));
+                break;
+            case "Remove Course":
+                setVisible(false);
+                frame.setContentPane(new RemoveCourse(frame, admin));
+                break;
+            case "View Courses":
+                setVisible(false);
+                frame.setContentPane(new ViewCourses(frame, admin));
+                break;
+            case "View Courses per Department":
+                setVisible(false);
+                frame.setContentPane(new ViewCoursesPerDepartment(frame, admin));
+                break;
+            case "Add Module":
+                setVisible(false);
+                frame.setContentPane(new AddModule(frame, admin));
+                break;
+            case "Remove Module":
+                setVisible(false);
+                frame.setContentPane(new RemoveModule(frame, admin));
+                break;
+            case "View Modules":
+                setVisible(false);
+                frame.setContentPane(new ViewModules(frame, admin));
+                break;
         }
     }
 }
