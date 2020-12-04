@@ -10,10 +10,10 @@ import java.util.Objects;
 import javax.swing.*;
 
 /**
- * Form that removes a registered Student
- *
+ * RemoveRegStudent
+ * removes a student from the databse
  */
-@SuppressWarnings("serial")
+
 public class RemoveRegStudent extends JPanel implements ActionListener{
     private JFrame frame;
     private RegistrarMain registrar;
@@ -25,11 +25,6 @@ public class RemoveRegStudent extends JPanel implements ActionListener{
     private JLabel lblLevelCode;
     private JLabel label_5;
 
-    /**
-     * Removes a registered student from the database
-     * @param f
-     * @param reg
-     */
     public RemoveRegStudent(JFrame f, RegistrarMain reg) {
         //bind the registrar object
         registrar = reg;

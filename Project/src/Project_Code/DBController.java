@@ -1,8 +1,8 @@
 package Project_Code;
 
+
 import javax.swing.*;
 import java.sql.*;
-
 /*
 Database controller.
 When main method is run, it displays all tables in the database
@@ -42,7 +42,7 @@ public class DBController {
         this.con = con;
     }
 
-    public void openConnection() throws SQLException{
+    public void openConnection() {
         con = null;
 
         try{
@@ -77,7 +77,7 @@ public class DBController {
      * execute an Update Query
      * @return number of rows updated
      */
-    public int performUpdate(String update) throws SQLException {
+    public int performUpdate(String update)  {
         openConnection();
         int updates = 0;
         try {
@@ -99,10 +99,11 @@ public class DBController {
      * execute a Query
      * @return ResultSet the results
      */
-    public ResultSet performQuery(String query) throws SQLException{
+    public ResultSet performQuery(String query) {
         openConnection();
         result = null;
         stmt = null;
+
         try {
             stmt = con.createStatement();
             result = stmt.executeQuery(query);
@@ -120,8 +121,7 @@ public class DBController {
                     "ERROR", JOptionPane.ERROR_MESSAGE, null);
             System.exit(0);
         }
-        closeConnection();
-        closeStatement();
+
         return result;
 
     }
@@ -130,12 +130,14 @@ public class DBController {
      * execute a Prepared Statement
      * @return PreparedStatement
      */
-    public PreparedStatement getPreparedStatement(String query) throws SQLException{
-        openConnection();
+    public PreparedStatement getPreparedStatement(String query) {
         PreparedStatement pstmt = null;
 
         try {
+            openConnection();
             pstmt = con.prepareStatement(query);
+            closeConnection();
+
             return pstmt;
         }
         catch (SQLException ex){
@@ -151,61 +153,7 @@ public class DBController {
             System.exit(0);
         }
 
-        closeConnection();
         return pstmt;
 
     }
-    public ResultSet performPreparedStatement(PreparedStatement pstmt) throws SQLException{
-        openConnection();
-        result = null;
-        try {
-            result = pstmt.executeQuery();
-            return result;
-        }
-        catch (SQLException ex){
-            //display error message and leave the application
-            JOptionPane.showMessageDialog(null,"There was an error when processing the data.",
-                    "ERROR", JOptionPane.ERROR_MESSAGE, null);
-            System.exit(0);
-        }
-        catch (NullPointerException nex) {
-            //display error message and leave the application
-            JOptionPane.showMessageDialog(null,"There was an error when processing the data.",
-                    "ERROR", JOptionPane.ERROR_MESSAGE, null);
-            System.exit(0);
-        }
-
-        closeConnection();
-        pstmt.close();
-        return result;
-    }
-    public int performPreparedUpdate(PreparedStatement pstmt) throws SQLException {
-        openConnection();
-        int updates = 0;
-        try {
-            updates = pstmt.executeUpdate();
-            return updates;
-        }
-        catch (SQLException ex) {
-            //display error message and leave the application
-            JOptionPane.showMessageDialog(null,"There was an error when processing the data.",
-                    "ERROR", JOptionPane.ERROR_MESSAGE, null);
-            System.exit(0);
-        }
-
-        return updates;
-    }
-
-    public static void main(String[] args) throws SQLException {
-
-        DBController con = new DBController("team037","ee143bc0");
-        String xy = "admin";
-        //Test Queries Here
-        ResultSet tables = con.performQuery("SELECT password FROM UserAccounts WHERE username = '" + xy + "'");
-        while (tables.next()) {
-            System.out.println(tables.getString(1));
-        }
-        System.out.println(tables);
-    }
-
 }

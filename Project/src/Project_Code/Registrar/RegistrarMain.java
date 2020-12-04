@@ -43,12 +43,13 @@ public class RegistrarMain extends User {
         //period label
         String periodLabel="A";
 
-        //convert the dates given in mysql format DATE (yyyymmdd)
-        if (checkDates(startDate,endDate)){
-            startDate=startDate.substring(6, 10)+startDate.substring(3,5)+startDate.substring(0,2);
-            endDate=endDate.substring(6, 10)+endDate.substring(3,5)+endDate.substring(0,2);
+        if (!(checkDates(startDate,endDate))){
+            return false;
         }
 
+        //convert the dates given in mysql format DATE (yyyymmdd)
+        startDate=startDate.substring(6, 10)+startDate.substring(3,5)+startDate.substring(0,2);
+        endDate=endDate.substring(6, 10)+endDate.substring(3,5)+endDate.substring(0,2);
 
         int changes;
         //insert to UserAccounts
@@ -453,8 +454,7 @@ public class RegistrarMain extends User {
             return false;
         }
 
-        //check the that the starting year is at least over 2018
-        if (startY<=2020) {
+        if (startY<2020) {
             JOptionPane.showMessageDialog(null,"The start date should be after the current date");
             return false;
         }

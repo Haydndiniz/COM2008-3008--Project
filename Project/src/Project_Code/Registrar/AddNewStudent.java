@@ -114,8 +114,7 @@ public class AddNewStudent extends JPanel implements ActionListener {
         comboBox_4.setBounds(211, 34, 116, 22);
         comboBox_4.addItem("");
         comboBox_4.addItem("Mr");
-        comboBox_4.addItem("Mrs");
-        comboBox_4.addItem("Miss");
+        comboBox_4.addItem("Ms");
         add(comboBox_4);
 
         //forename text field
