@@ -1,7 +1,8 @@
 package Project_Code;
 
 import Project_Code.Admin.*;
-import Project_Code.Registrar.RegistrarFrame;
+import Project_Code.Registrar.*;
+import Project_Code.Teacher.*;
 
 import java.sql.*;
 import java.awt.event.*;
@@ -13,11 +14,12 @@ import javax.swing.*;
  */
 public class LoginController extends JPanel implements ActionListener {
 
-        private JFrame frame;
-        private JPasswordField passwordField;
-        private JTextField usernameTextField;
-        private static JMenuItem logoutItem;
-        private static DBController con = new DBController("team037", "ee143bc0");
+    private TeacherMain teacher;
+    private JFrame frame;
+    private JPasswordField passwordField;
+    private JTextField usernameTextField;
+    private static JMenuItem logoutItem;
+    private static DBController con = new DBController("team037", "ee143bc0");
 
     public LoginController(Main f,JMenuItem logout) {
         setLayout(null);
@@ -88,7 +90,7 @@ public class LoginController extends JPanel implements ActionListener {
 
     }
     private static boolean validatePassword(String username, String password) {
-        ResultSet result;
+        ResultSet result = null;
         String storedPass = null;
         try{
             //collate is used for case sensitivity
@@ -148,8 +150,7 @@ public class LoginController extends JPanel implements ActionListener {
             String buttonPressed = e.getActionCommand();
             if (buttonPressed.equals("Log In")) {
                 //get the username
-
-                //removes punctuation from the input
+                //removes punctuation from the input, for security
                 String username = usernameTextField.getText().replaceAll("\\p{Punct}", "");
                 System.out.println(username);
                 //get the password for that username
@@ -177,21 +178,19 @@ public class LoginController extends JPanel implements ActionListener {
                         setVisible(false);
                         frame.setContentPane(new AdminFrame(frame, username));
                         break;
-
-                        case "registrar":
+                    case "registrar":
                         setVisible(false);
                         frame.setContentPane(new RegistrarFrame(frame, username));
                         break;
-//
-//                        case "teacher":
-//                            setVisible(false);
-//                            frame.setContentPane(new TeacherFrame(frame, username));
-//                            break;
-//
-//                        case "student":
-//                            setVisible(false);
-//                            frame.setContentPane(new StudentFrame(frame, username));
-//                            break;
+                    case "teacher":
+                        setVisible(false);
+                        teacher = new TeacherMain(username);
+                        frame.setContentPane(new SearchByStudent(frame, teacher));
+                        break;
+//                     case "student":
+//                         setVisible(false);
+//                         frame.setContentPane(new StudentFrame(frame, username));
+//                         break;
                 }
                 }
             }

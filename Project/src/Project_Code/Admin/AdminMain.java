@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 /**
  * AdminMain inherits user
- * Implements all actions carried out by Admin role
+ * Implements all actions carried out by admin role
  */
 public class AdminMain extends User {
 
@@ -17,7 +17,7 @@ public class AdminMain extends User {
     private DBController dac = super.getDataAccessController();
 
     public AdminMain(String username) {
-        super(username, "Admin");
+        super(username, "admin");
     }
 
     /**
