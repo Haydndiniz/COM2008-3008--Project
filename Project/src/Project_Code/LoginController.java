@@ -2,7 +2,6 @@ package Project_Code;
 
 import Project_Code.Admin.*;
 import Project_Code.Registrar.RegistrarFrame;
-import Project_Code.Registrar.testRegistrar;
 
 import java.sql.*;
 import java.awt.event.*;
@@ -89,7 +88,7 @@ public class LoginController extends JPanel implements ActionListener {
 
     }
     private static boolean validatePassword(String username, String password) {
-        ResultSet result = null;
+        ResultSet result;
         String storedPass = null;
         try{
             //collate is used for case sensitivity
@@ -149,7 +148,8 @@ public class LoginController extends JPanel implements ActionListener {
             String buttonPressed = e.getActionCommand();
             if (buttonPressed.equals("Log In")) {
                 //get the username
-                //removes punctuation from the input, for security
+
+                //removes punctuation from the input
                 String username = usernameTextField.getText().replaceAll("\\p{Punct}", "");
                 System.out.println(username);
                 //get the password for that username
@@ -178,10 +178,9 @@ public class LoginController extends JPanel implements ActionListener {
                         frame.setContentPane(new AdminFrame(frame, username));
                         break;
 
-                        //TODO: uncomment cases when the corresponding frame has been created
-                    case "registrar":
+                        case "registrar":
                         setVisible(false);
-                        frame.setContentPane(new testRegistrar(frame, username));
+                        frame.setContentPane(new RegistrarFrame(frame, username));
                         break;
 //
 //                        case "teacher":

@@ -79,7 +79,7 @@ public class AddNewStudent extends JPanel implements ActionListener {
                 comboBox.removeAllItems();
                 comboBox.addItem("");
                 try {
-                    result2=con.performQuery("SELECT levelCode FROM LevelApproval WHERE degreeCode ='"+degreeCode+"' ");
+                    result2=con.performQuery("SELECT levelCode FROM ModuleApproval WHERE degreeCode ='"+degreeCode+"' ");
                     while (result2.next()) {
                         comboBox.addItem(result2.getString(1));
                     }

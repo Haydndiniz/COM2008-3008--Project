@@ -28,8 +28,6 @@ public class RegistrarMain extends User {
 
     public boolean addNewStudent(String title, String surname, String forename,
                                  String level, String degreeCode, String tutor, String startDate, String endDate, String password) throws SQLException {
-        //check if text input fields are blank
-
 
         // create student username
         int counter=0;
@@ -275,11 +273,11 @@ public class RegistrarMain extends User {
                 "Student t1 JOIN Study t2 ON t1.registrationNo = t2.registrationNo JOIN Module t3 ON t2.moduleCode = t3.moduleCode " +
                 "WHERE t2.periodLabel= (SELECT MAX(periodLabel) FROM Study WHERE registrationNo = t1.registrationNo) GROUP BY registrationNo");
         while (result.next()) {
-            currentStatus[0] = result.getString(1);
-            currentStatus[1] = result.getString(2);
-            currentStatus[2] = result.getString(3);
-            currentStatus[3] = result.getString(4);
-            currentStatus[4] = result.getString(5);
+            currentStatus[0] = result.getString(1);//Registration No
+            currentStatus[1] = result.getString(2);//degreecode
+            currentStatus[2] = result.getString(3);//modulecode
+            currentStatus[3] = result.getString(4);//periodlabel
+            currentStatus[4] = result.getString(5);//credits
             if (result.getString(2).charAt(3) == 'P')
                 currentStatus[5] = 180;
             else
@@ -293,6 +291,7 @@ public class RegistrarMain extends User {
         return defaultTable;
 
     }
+
     public boolean addOptionalModule(String regNum,String moduleCode, String periodLabel, int totalCredits) throws SQLException {
         ResultSet result;
         //check if there are blanks
@@ -342,6 +341,7 @@ public class RegistrarMain extends User {
         con.closeStatement();
         return changes>0;
     }
+
     public DefaultTableModel viewModules(String degreeCode, String levelCode, int core) throws NumberFormatException, SQLException{
         ResultSet result;
 
@@ -395,11 +395,11 @@ public class RegistrarMain extends User {
         return failures;
     }
 
-    public boolean checkLevelExists(String d,String l) throws SQLException {
+    public boolean checkLevelExists(String degreeCode,String levelCode) throws SQLException {
         ResultSet result;
         int count=0;
-        result = con.performQuery("SELECT EXISTS(SELECT 1 FROM LevelApproval WHERE degreeCode = '" +
-                d + "' AND levelCode = '"+l+"' COLLATE latin1_bin)"); //collate is used for case sensitivity
+        result = con.performQuery("SELECT EXISTS(SELECT 1 FROM ModuleApproval WHERE degreeCode = '" +
+                degreeCode + "' AND levelCode = '"+levelCode+"' COLLATE latin1_bin)");
         while (result.next()) {
             count=Integer.parseInt(result.getString(1));
         }
