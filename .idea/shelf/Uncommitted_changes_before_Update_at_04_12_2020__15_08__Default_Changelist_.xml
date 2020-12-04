@@ -1,0 +1,19 @@
+<changelist name="Uncommitted_changes_before_Update_at_04_12_2020,_15_08_[Default_Changelist]" date="1607094538318" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_04_12_2020,_15_08_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 04/12/2020, 15:08 [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Project/Project_Code/Admin/AddUser.class" />
+    <option name="AFTER_PATH" value="out/production/Project/Project_Code/Admin/AddUser.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_04_12_2020,_15_08_[Default_Changelist]/AddUser.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Project/Project_Code/DBController.class" />
+    <option name="AFTER_PATH" value="out/production/Project/Project_Code/DBController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_04_12_2020,_15_08_[Default_Changelist]/DBController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Project/Project_Code/Admin/AdminMain.class" />
+    <option name="AFTER_PATH" value="out/production/Project/Project_Code/Admin/AdminMain.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_04_12_2020,_15_08_[Default_Changelist]/AdminMain.class" />
+  </binary>
+</changelist>

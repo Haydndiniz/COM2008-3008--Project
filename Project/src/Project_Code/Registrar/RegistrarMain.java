@@ -132,7 +132,6 @@ public class RegistrarMain extends User {
 
         String query = ("INSERT INTO Study (registrationNo,moduleCode,periodLabel)");
         // iterate over required modules in memory and
-        // insert these into the database
         ListIterator<String> modules = oblModules.listIterator();
         while(modules.hasNext()) {
             con.performUpdate(query+"VALUES ('"+regNum+"','"+modules.next()+"','"+periodLabel+"')");

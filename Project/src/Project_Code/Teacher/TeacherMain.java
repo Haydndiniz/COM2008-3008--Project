@@ -15,7 +15,9 @@ import java.sql.SQLException;
 public class TeacherMain extends User {
 
 
-    private DBController dac = super.getDataAccessController();
+    private DBController con = super.getDataAccessController();
+    private Map<String, Double> recModules = new HashMap<String, Double>();
+    private Map<String, Integer> moduleCredits = new HashMap<String, Integer>();
 
     public TeacherMain(String username) {
         super(username, "Teacher");
@@ -34,9 +36,9 @@ public class TeacherMain extends User {
             else{
                 query = "SELECT COUNT(*) FROM Student WHERE registrationNo=?";
             }
-            PreparedStatement pstmt = dac.getPreparedStatement(query);
+            PreparedStatement pstmt = con.getPreparedStatement(query);
             pstmt.setString(1, value);
-            result = dac.performPreparedStatement(pstmt);
+            result = con.performPreparedStatement(pstmt);
             int n = 0;
             while (result.next()) {
                 n = result.getInt(1);
@@ -75,9 +77,9 @@ public class TeacherMain extends User {
         //Method assumes there is only one match
         ResultSet result = null;
         try {
-            PreparedStatement pstmt = dac.getPreparedStatement("SELECT * FROM Student WHERE username=?");
+            PreparedStatement pstmt = con.getPreparedStatement("SELECT * FROM Student WHERE username=?");
             pstmt.setString(1, username);
-            result = dac.performPreparedStatement(pstmt);
+            result = con.performPreparedStatement(pstmt);
             while (result.next()) {
                 return result.getString("registrationNo");
             }
@@ -95,9 +97,9 @@ public class TeacherMain extends User {
         ResultSet result = null;
         String[] results = new String[2];
         try {
-            PreparedStatement pstmt = dac.getPreparedStatement("SELECT * FROM Student WHERE registrationNo=?");
+            PreparedStatement pstmt = con.getPreparedStatement("SELECT * FROM Student WHERE registrationNo=?");
             pstmt.setString(1, regNo);
-            result = dac.performPreparedStatement(pstmt);
+            result = con.performPreparedStatement(pstmt);
             while (result.next()) {
                 results[0] =  result.getString("username");
                 results[1] =  result.getString("degreeCode");
@@ -117,9 +119,9 @@ public class TeacherMain extends User {
         ResultSet result = null;
         String[] results = new String[2];
         try {
-            PreparedStatement pstmt = dac.getPreparedStatement("SELECT * FROM Users WHERE username=?");
+            PreparedStatement pstmt = con.getPreparedStatement("SELECT * FROM Users WHERE username=?");
             pstmt.setString(1, username);
-            result = dac.performPreparedStatement(pstmt);
+            result = con.performPreparedStatement(pstmt);
             while (result.next()) {
                 results[0] =  result.getString("forename");
                 results[1] =  result.getString("surname");
@@ -138,9 +140,9 @@ public class TeacherMain extends User {
         //Method assumes there is only one match
         ResultSet result = null;
         try {
-            PreparedStatement pstmt = dac.getPreparedStatement("SELECT * FROM Student WHERE registrationNo=?");
+            PreparedStatement pstmt = con.getPreparedStatement("SELECT * FROM Student WHERE registrationNo=?");
             pstmt.setString(1, regNo);
-            result = dac.performPreparedStatement(pstmt);
+            result = con.performPreparedStatement(pstmt);
             while (result.next()) {
                 return result.getString("username");
             }
@@ -157,9 +159,9 @@ public class TeacherMain extends User {
         //Method assumes there is only one match
         ResultSet result = null;
         try {
-            PreparedStatement pstmt = dac.getPreparedStatement("SELECT * FROM Student WHERE registrationNo=?");
+            PreparedStatement pstmt = con.getPreparedStatement("SELECT * FROM Student WHERE registrationNo=?");
             pstmt.setString(1, regNo);
-            result = dac.performPreparedStatement(pstmt);
+            result = con.performPreparedStatement(pstmt);
             while (result.next()) {
                 return result.getString("degreeCode");
             }
@@ -176,9 +178,9 @@ public class TeacherMain extends User {
         //Method assumes there is only one match
         ResultSet result = null;
         try {
-            PreparedStatement pstmt = dac.getPreparedStatement("SELECT * FROM Users WHERE username=?");
+            PreparedStatement pstmt = con.getPreparedStatement("SELECT * FROM Users WHERE username=?");
             pstmt.setString(1, getUsername(regNo));
-            result = dac.performPreparedStatement(pstmt);
+            result = con.performPreparedStatement(pstmt);
             while (result.next()) {
                 return result.getString("forename");
             }
@@ -195,9 +197,9 @@ public class TeacherMain extends User {
         //Method assumes there is only one match
         ResultSet result = null;
         try {
-            PreparedStatement pstmt = dac.getPreparedStatement("SELECT * FROM Users WHERE username=?");
+            PreparedStatement pstmt = con.getPreparedStatement("SELECT * FROM Users WHERE username=?");
             pstmt.setString(1, getUsername(regNo));
-            result = dac.performPreparedStatement(pstmt);
+            result = con.performPreparedStatement(pstmt);
             while (result.next()) {
                 return result.getString("surname");
             }
@@ -214,10 +216,10 @@ public class TeacherMain extends User {
         //Method assumes there is only one match
         ResultSet result = null;
         try {
-            PreparedStatement pstmt = dac.getPreparedStatement("SELECT * FROM Period WHERE registrationNo=? AND periodLabel=?");
+            PreparedStatement pstmt = con.getPreparedStatement("SELECT * FROM Period WHERE registrationNo=? AND periodLabel=?");
             pstmt.setString(1, regNo);
             pstmt.setString(2, periodLabel);
-            result = dac.performPreparedStatement(pstmt);
+            result = con.performPreparedStatement(pstmt);
             while (result.next()) {
                 return result.getString("levelCode");
             }
@@ -235,9 +237,9 @@ public class TeacherMain extends User {
         ResultSet result = null;
         List<String> periodList = new ArrayList<>();
         try {
-            PreparedStatement pstmt = dac.getPreparedStatement("SELECT * FROM Period WHERE registrationNo=?");
+            PreparedStatement pstmt = con.getPreparedStatement("SELECT * FROM Period WHERE registrationNo=?");
             pstmt.setString(1, regNo);
-            result = dac.performPreparedStatement(pstmt);
+            result = con.performPreparedStatement(pstmt);
             while (result.next()) {
                 periodList.add(result.getString("periodLabel"));
             }
@@ -256,10 +258,10 @@ public class TeacherMain extends User {
         ResultSet result = null;
         List<String> moduleList = new ArrayList<>();
         try {
-            PreparedStatement pstmt = dac.getPreparedStatement("SELECT * FROM Study WHERE registrationNo=? AND periodLabel=?");
+            PreparedStatement pstmt = con.getPreparedStatement("SELECT * FROM Study WHERE registrationNo=? AND periodLabel=?");
             pstmt.setString(1, regNo);
             pstmt.setString(2, periodLabel);
-            result = dac.performPreparedStatement(pstmt);
+            result = con.performPreparedStatement(pstmt);
             while (result.next()) {
                 moduleList.add(result.getString("moduleCode"));
             }
@@ -278,11 +280,11 @@ public class TeacherMain extends User {
         ResultSet result = null;
         String[] results = new String[2];
         try {
-            PreparedStatement pstmt = dac.getPreparedStatement("SELECT * FROM Study WHERE registrationNo=? AND moduleCode=? AND periodLabel=?");
+            PreparedStatement pstmt = con.getPreparedStatement("SELECT * FROM Study WHERE registrationNo=? AND moduleCode=? AND periodLabel=?");
             pstmt.setString(1, regNo);
             pstmt.setString(2, moduleCode);
             pstmt.setString(3, periodLabel);
-            result = dac.performPreparedStatement(pstmt);
+            result = con.performPreparedStatement(pstmt);
             while (result.next()) {
                 results[0] =  result.getString("initialGrade");
                 results[1] =  result.getString("resitGrade");
@@ -300,13 +302,13 @@ public class TeacherMain extends User {
     public void updateGrades(String regNo, String moduleCode, String periodLabel, String initGrade, String resitGrade){
         //Method assumes there is only one match
         try {
-            PreparedStatement pstmt = dac.getPreparedStatement("UPDATE Study SET initialGrade=?, resitGrade=? WHERE registrationNo=? AND moduleCode=? AND periodLabel=?");
+            PreparedStatement pstmt = con.getPreparedStatement("UPDATE Study SET initialGrade=?, resitGrade=? WHERE registrationNo=? AND moduleCode=? AND periodLabel=?");
             pstmt.setString(1, initGrade);
             pstmt.setString(2, resitGrade);
             pstmt.setString(3, regNo);
             pstmt.setString(4, moduleCode);
             pstmt.setString(5, periodLabel);
-            dac.performPreparedUpdate(pstmt);
+            con.performPreparedUpdate(pstmt);
         }
         catch(SQLException ex) {
             //display error message and leave the application
@@ -321,10 +323,10 @@ public class TeacherMain extends User {
         List<String> initGrades = new ArrayList<>();
         List<String> resitGrades = new ArrayList<>();
         try {
-            PreparedStatement pstmt = dac.getPreparedStatement("SELECT * FROM Study WHERE registrationNo=? AND periodLabel=?");
+            PreparedStatement pstmt = con.getPreparedStatement("SELECT * FROM Study WHERE registrationNo=? AND periodLabel=?");
             pstmt.setString(1, regNo);
             pstmt.setString(2, periodLabel);
-            result = dac.performPreparedStatement(pstmt);
+            result = con.performPreparedStatement(pstmt);
             while (result.next()) {
                 initGrades.add(result.getString("initialGrade"));
                 resitGrades.add(result.getString("resitGrade"));
@@ -359,23 +361,27 @@ public class TeacherMain extends User {
         }
         return null;
     }
+    public Map<String,Integer> getModuleCredits() {
+        return moduleCredits;
+    }
+
     public String getOutcome(String regNo,String periodLabel,String levelCode,String degreeCode,double meanGrade) {
         //check if it is 1-year MSc
         if (degreeCode.substring(3,4).equals("P")) {
             //check if student failed dissertation but succeeded in all the other modules
             double disertationGrade=0;
             int studentTotalCredits=0;
-            //for (Map.Entry<String, Double> entry : recModules.entrySet()) {
-            //    int credit=moduleCredits.get(entry.getKey());
-            //    if (credit==60) {
-            //        //get the grade for the dissertation module
-            //        disertationGrade=entry.getValue();
-            //    }
-            //   if (entry.getValue()>50) {
-            //        studentTotalCredits+=credit;
-            //    }
-            //}
-            //Special rule if student passes modules but fails dissertaion
+            for (Map.Entry<String, Double> entry : recModules.entrySet()) {
+                int credit=moduleCredits.get(entry.getKey());
+                if (credit==60) {
+                    //get the grade for the dissertation module
+                    disertationGrade=entry.getValue();
+                }
+               if (entry.getValue()>50) {
+                    studentTotalCredits+=credit;
+                }
+            }
+            //Special rule if student passes modules but fails dissertation
             if ((studentTotalCredits==120) &&(disertationGrade<50)) { //pass mark is 50
                 return "PGDip";
             }
