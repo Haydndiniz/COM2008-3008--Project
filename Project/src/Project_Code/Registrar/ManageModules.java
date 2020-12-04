@@ -20,7 +20,7 @@ public class ManageModules extends JPanel implements ActionListener {
     private JComboBox<String> comboBox, comboBox_1, comboBox_2;
     private JButton btnGoBack, button_6, button;
 
-    private String degreeCode, levelCode, regNo, periodLabel;
+    private String degreeCode, levelCode, regNum, periodLabel;
     private int totalCredits;
 
     private JLabel label_1;
@@ -102,13 +102,13 @@ public class ManageModules extends JPanel implements ActionListener {
                     "ERROR", JOptionPane.ERROR_MESSAGE, null);
             System.exit(0);
         }
-        //when a registration number is selected
-        //the panel sets up the components and shows them
+
+        //show options on registrar panel
         comboBox.addActionListener(event -> {
-            regNo = Objects.requireNonNull(comboBox.getSelectedItem()).toString();
-            if (!regNo.equals("")) { //if the registration number is not blank
+            regNum = Objects.requireNonNull(comboBox.getSelectedItem()).toString();
+            if (!regNum.equals("")) { //if the registration number is not blank
                 try {
-                    findStudentDetails(regNo);
+                    findStudentDetails(regNum);
                 } catch (SQLException e1) {
                     //display error message and leave the application
                     JOptionPane.showMessageDialog(null, "There was an error when processing the data.",
@@ -120,12 +120,12 @@ public class ManageModules extends JPanel implements ActionListener {
                     viewComponents(false);
                 }//check if placement year
                 else if (levelCode.equals("P")) {
-                    JOptionPane.showMessageDialog(null, "Student is in currently in Placement");
+                    JOptionPane.showMessageDialog(null, "Student is currently on Placement");
                     viewComponents(false);
                 }//if student has failed more than once
                 else {
                     try {
-                        if (registrar.numberOfFailures(regNo) > 1) {
+                        if (registrar.numberOfFailures(regNum) > 1) {
                             JOptionPane.showMessageDialog(null, "Student has failed and is not progressed to any level");
                             viewComponents(false);
                         } else {
@@ -311,7 +311,7 @@ public class ManageModules extends JPanel implements ActionListener {
             case "Add Optional Module":
                 String addModuleCode = Objects.requireNonNull(comboBox_1.getSelectedItem()).toString();
                 try { //add the optional module
-                    if (registrar.addOptionalModule(regNo, addModuleCode, periodLabel, totalCredits)) {
+                    if (registrar.addOptionalModule(regNum, addModuleCode, periodLabel, totalCredits)) {
                         JOptionPane.showMessageDialog(null, "Optional Module Added");
                         setupComponents();//re-set up the components
                     }
@@ -329,7 +329,7 @@ public class ManageModules extends JPanel implements ActionListener {
             case "Drop Optional Module":
                 String dropModuleCode = Objects.requireNonNull(comboBox_2.getSelectedItem()).toString();
                 try {//drop the optional module
-                    if (registrar.dropOptionalModule(regNo, dropModuleCode, periodLabel)) {
+                    if (registrar.dropOptionalModule(regNum, dropModuleCode, periodLabel)) {
                         JOptionPane.showMessageDialog(null, "Optional Module Dropped");
                         setupComponents();//re-set up the components
                     }
@@ -351,16 +351,16 @@ public class ManageModules extends JPanel implements ActionListener {
      * Finds the students details using the registration number selected from the database
      *
      */
-    public void findStudentDetails(String regNo) throws SQLException {
+    public void findStudentDetails(String regNum) throws SQLException {
         ResultSet result;
         try {
-            result = con.performQuery("SELECT * FROM Student WHERE registrationNo='" + Integer.parseInt(regNo) + "'");
+            result = con.performQuery("SELECT * FROM Student WHERE registrationNo='" + Integer.parseInt(regNum) + "'");
             while (result.next()) {
                 degreeCode = result.getString(2);
                 degreeClass = result.getString(5);
             }
             ResultSet result2;
-            result2 = con.performQuery("SELECT periodLabel,levelCode FROM Period WHERE registrationNo='" + regNo + "' ORDER BY periodLabel DESC LIMIT 1");
+            result2 = con.performQuery("SELECT periodLabel,levelCode FROM Period WHERE registrationNo='" + regNum + "' ORDER BY periodLabel DESC LIMIT 1");
             while (result2.next()) {
                 periodLabel = result2.getString(1);//gets the latest period label
                 levelCode = result2.getString(2);//gets the latest level code
@@ -427,7 +427,7 @@ public class ManageModules extends JPanel implements ActionListener {
      */
     public void setupComponents() {
         try {
-            findStudentDetails(regNo);
+            findStudentDetails(regNum);
             label_4.setText(degreeCode);
             label_5.setText(levelCode);
             label_13.setText(periodLabel);
@@ -443,7 +443,7 @@ public class ManageModules extends JPanel implements ActionListener {
 
             //get all the modules
             ArrayList<String> studentModules = new ArrayList<String>();
-            result = con.performQuery("SELECT * FROM Study WHERE registrationNo='" + Integer.parseInt(regNo) + "' AND periodLabel='" + periodLabel + "' ");
+            result = con.performQuery("SELECT * FROM Study WHERE registrationNo='" + Integer.parseInt(regNum) + "' AND periodLabel='" + periodLabel + "' ");
             while (result.next()) {
                 studentModules.add(result.getString(4));
             }
@@ -476,7 +476,7 @@ public class ManageModules extends JPanel implements ActionListener {
                 }
             }
 
-            recordTable.setModel(registrar.findStudentRecord(regNo, periodLabel, levelCode, degreeCode));
+            recordTable.setModel(registrar.findStudentRecord(regNum, periodLabel, levelCode, degreeCode));
 
             //check if the student has failed by
             //by transforming the period label to an ascii character so that we get its integer

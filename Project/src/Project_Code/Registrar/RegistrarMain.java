@@ -162,8 +162,7 @@ public class RegistrarMain extends User {
         while (result.next()) {
             username=result.getString(3);
         }
-        //delete from database
-
+        //delete from Study
         changes=con.performUpdate("DELETE FROM Study WHERE registrationNo= '"+Integer.valueOf(regNum)+"' ");
         con.closeConnection();
         con.closeStatement();
@@ -176,28 +175,24 @@ public class RegistrarMain extends User {
 
         //delete from Students
         changes+=con.performUpdate("DELETE FROM Student WHERE registrationNo= '"+Integer.valueOf(regNum)+"' ");
-        //close connection and statement
         con.closeConnection();
         con.closeStatement();
 
         //delete from StudyGrades
-        changes+=con.performUpdate("DELETE FROM Study WHERE registrationNo= '"+Integer.valueOf(regNum)+"' ");
-        //close connection and statement
+        changes+=con.performUpdate("DELETE FROM Study WHERE registrationNo= '"+Integer.valueOf(regNum)+"'");
         con.closeConnection();
         con.closeStatement();
 
+        //delete from user tables
         changes+=con.performUpdate("DELETE FROM Users WHERE username= '"+username+"' ");
-        //close connection and statement
         con.closeConnection();
         con.closeStatement();
 
         changes+=con.performUpdate("DELETE FROM UserSalts WHERE username= '"+username+"' ");
-        //close connection and statement
         con.closeConnection();
         con.closeStatement();
 
         changes+=con.performUpdate("DELETE FROM UserAccounts WHERE username= '"+username+"' ");
-        //close connection and statement
         con.closeConnection();
         con.closeStatement();
         return changes>0;

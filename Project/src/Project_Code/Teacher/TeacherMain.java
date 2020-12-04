@@ -362,8 +362,15 @@ public class TeacherMain extends User {
         return null;
     }
     public Map<String,Integer> getModuleCredits() {
+
         return moduleCredits;
     }
+
+    public void getCredits(){
+
+    }
+
+
 
     public String getOutcome(String regNo,String periodLabel,String levelCode,String degreeCode,double meanGrade) {
         //check if it is 1-year MSc
@@ -371,6 +378,7 @@ public class TeacherMain extends User {
             //check if student failed dissertation but succeeded in all the other modules
             double disertationGrade=0;
             int studentTotalCredits=0;
+
             for (Map.Entry<String, Double> entry : recModules.entrySet()) {
                 int credit=moduleCredits.get(entry.getKey());
                 if (credit==60) {
