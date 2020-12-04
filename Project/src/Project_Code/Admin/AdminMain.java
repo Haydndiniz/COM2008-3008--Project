@@ -146,7 +146,7 @@ public class AdminMain extends User {
      */
     public DefaultTableModel viewAllModules (){
         ResultSet result = null;
-        DefaultTableModel t = new DefaultTableModel(new Object[][] {},new String[] {"Module Code", "Module Name", "Credits", "Department Code", "Period"});
+        DefaultTableModel t = new DefaultTableModel(new Object[][] {},new String[] {"Module Code", "Module Name", "Credits", "Period"});
 
         Object [] modules = new Object[5];
         try {
@@ -156,7 +156,6 @@ public class AdminMain extends User {
                 modules[1] = result.getString(2);
                 modules[2] = result.getString(3);
                 modules[3] = result.getString(4);
-                modules[4] = result.getString(5);
                 t.addRow(modules);
             }
             //close connection and statement

@@ -5,6 +5,7 @@ import Project_Code.DBController;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class RemoveDepartment extends JPanel implements ActionListener {
@@ -59,6 +60,60 @@ public class RemoveDepartment extends JPanel implements ActionListener {
         frame.setLocationRelativeTo(null);
     }
 
+    private boolean checkDeptCode(String deptCode) throws SQLException {
+
+        ResultSet result;
+
+        try {
+
+            String query = "SELECT COUNT(*) FROM Department WHERE deptCode ='"+deptCode+"'";
+            System.out.println(query);
+            result = con.performQuery(query);
+
+            int count = 0;
+            while(result.next()) {
+                System.out.println(result.getInt(1));
+                count = result.getInt(1);
+            }
+
+            if (count != 0) {
+                System.out.println("Department found.");
+                // DELETE
+                int changes;
+                changes=con.performUpdate("DELETE FROM Department WHERE deptCode = '"+deptCode+"' ");
+                con.closeConnection();
+                con.closeStatement();
+
+                JOptionPane.showMessageDialog(null,"Department deleted successfully");
+                setVisible(false);
+                frame.setContentPane(new AdminFrame(frame, admin.getUsername()));
+
+            } else {
+                System.out.println("Department does not exist.");
+                JOptionPane.showMessageDialog(null,"Department does not exist.",
+                        "ERROR", JOptionPane.ERROR_MESSAGE, null);
+                return false;
+            }
+
+            System.out.println(result);
+
+            con.closeConnection();
+            con.closeStatement();
+
+            return true;
+
+        }
+        catch(SQLException ex) {
+            //display error message and leave the application
+            JOptionPane.showMessageDialog(null,"There was an error, SQL.",
+                    "ERROR", JOptionPane.ERROR_MESSAGE, null);
+            ex.printStackTrace();
+            System.exit(0);
+        }
+
+        return false;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String buttonPressed=e.getActionCommand();
@@ -71,16 +126,11 @@ public class RemoveDepartment extends JPanel implements ActionListener {
                 if (departmentField.equals("")) {
                     JOptionPane.showMessageDialog(null,"Department code is a required field.");
                 } else {
-
                     try {
-                        int changes = 0;
-                        changes=con.performUpdate("DELETE FROM Department WHERE deptCode= '"+departmentField.getSelectedText().toString()+"' ");
-                        con.closeConnection();
-                        con.closeStatement();
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
+                        checkDeptCode(departmentField.getText());
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
                     }
-
                 }
 
         }

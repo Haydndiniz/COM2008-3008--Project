@@ -88,7 +88,7 @@ public class AddDepartment extends JPanel implements ActionListener {
         } else if (deptName.length() >= 90) {
             JOptionPane.showMessageDialog(null,"Department name is too long.");
             return false;
-        } else if (this.admin.getRole() != "Admin") {
+        } else if (this.admin.getRole() != "admin") {
             JOptionPane.showMessageDialog(null,"Access denied.");
             return false;
         } else {

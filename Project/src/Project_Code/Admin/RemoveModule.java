@@ -1,12 +1,18 @@
 package Project_Code.Admin;
 
 
+import Project_Code.DBController;
+
 import javax.swing.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class RemoveModule extends JPanel implements ActionListener {
     private JFrame frame;
     private AdminMain admin;
+    private JTextField courseField;
+    private static DBController con = new DBController("team037", "ee143bc0");
 
     /**
      * Parameterized constructor
@@ -32,9 +38,9 @@ public class RemoveModule extends JPanel implements ActionListener {
         add(roleLabel);
 
         // courseField
-        JTextField forenameField = new JTextField(20);
-        forenameField.setBounds(211, 87, 132, 25);
-        add(forenameField);
+        courseField = new JTextField(20);
+        courseField.setBounds(211, 87, 132, 25);
+        add(courseField);
 
         //Add button
         JButton btnRemoveUsr = new JButton("Remove");
@@ -54,6 +60,64 @@ public class RemoveModule extends JPanel implements ActionListener {
         frame.setLocationRelativeTo(null);
     }
 
+    private boolean deleteModule(String moduleCode) throws SQLException {
+
+        ResultSet result;
+
+        try {
+
+            String query = "SELECT COUNT(*) FROM Module WHERE moduleCode ='"+moduleCode+"'";
+            System.out.println(query);
+            result = con.performQuery(query);
+
+            int count = 0;
+            while(result.next()) {
+                System.out.println(result.getInt(1));
+                count = result.getInt(1);
+            }
+
+            if (count != 0) {
+                System.out.println("Module found.");
+                // DELETE
+                int changes;
+
+                changes=con.performUpdate("DELETE FROM ModuleApproval WHERE moduleCode = '"+moduleCode+"' ");
+                changes+=con.performUpdate("DELETE FROM Module WHERE moduleCode = '"+moduleCode+"' ");
+
+                con.closeConnection();
+                con.closeStatement();
+
+                JOptionPane.showMessageDialog(null,"Module deleted successfully");
+                setVisible(false);
+                frame.setContentPane(new AdminFrame(frame, admin.getUsername()));
+
+            } else {
+                System.out.println("Module does not exist.");
+                JOptionPane.showMessageDialog(null,"Module not found.",
+                        "ERROR", JOptionPane.ERROR_MESSAGE, null);
+                return false;
+            }
+
+            System.out.println(result);
+
+            con.closeConnection();
+            con.closeStatement();
+
+            return true;
+
+        }
+        catch(SQLException ex) {
+            //display error message and leave the application
+            JOptionPane.showMessageDialog(null,"There was an error, SQL.",
+                    "ERROR", JOptionPane.ERROR_MESSAGE, null);
+            ex.printStackTrace();
+            System.exit(0);
+        }
+
+        return false;
+
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String buttonPressed=e.getActionCommand();
@@ -62,7 +126,17 @@ public class RemoveModule extends JPanel implements ActionListener {
                 setVisible(false);
                 frame.setContentPane(new AdminFrame(frame, admin.getUsername()));
             case "Remove":
-                //setVisible(false);
+
+                if (courseField.equals("")) {
+                    JOptionPane.showMessageDialog(null,"Username is a required field.");
+                } else {
+                    try {
+                        deleteModule(courseField.getText());
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                }
+
         }
     }
 }

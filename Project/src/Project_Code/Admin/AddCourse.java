@@ -145,7 +145,7 @@ public class AddCourse extends JPanel implements ActionListener {
         } else if (courseName.length() >= 256) {
             JOptionPane.showMessageDialog(null,"Course name is too long.");
             return false;
-        } else if (this.admin.getRole() != "Admin") {
+        } else if (this.admin.getRole() != "admin") {
             JOptionPane.showMessageDialog(null,"Access denied.");
             return false;
         } else if (comboBox.getSelectedItem() == "") {
