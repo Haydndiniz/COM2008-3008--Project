@@ -318,9 +318,9 @@ public class TeacherMain extends User {
                     resitGrade = Double.parseDouble(i.get(1));
                 }
                 Double initGrade = Double.parseDouble(i.get(0));
-                int passMark = 40;
+                Double passMark = 39.5;
                 if (levelCode.equals("4")){
-                    passMark = 50;
+                    passMark = 49.5;
                 }
                 if (initGrade > resitGrade){
                     initSum += initGrade;
@@ -428,7 +428,7 @@ public class TeacherMain extends User {
             }
             Double sumGrade = 0.0;
             Double divisor = 0.0;
-            int passMark = 40;
+            Double passMark = 39.5;
             returnArr[1] = "pass";
             for (List<String> i : periods){
                 String level = getLevel(regNo, i.get(0));
@@ -456,7 +456,7 @@ public class TeacherMain extends User {
                 else{
                     //Year 3/4
                     if (level.equals("4")){
-                        passMark = 50;
+                        passMark = 49.5;
                     }
                     if (!resit){
                         sumGrade += 2 * Double.parseDouble(gradeArr[0]);

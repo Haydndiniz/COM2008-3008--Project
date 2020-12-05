@@ -230,12 +230,13 @@ public class DisplayStudent extends JPanel implements ActionListener {
         frame.setLocationRelativeTo(null);
     }
     public static boolean isNumeric(String strNum) {
-        if (strNum == null || strNum == "") {
+        if (strNum == null) {
             return false;
         }
         try {
             double d = Double.parseDouble(strNum);
-        } catch (NumberFormatException nfe) {
+        }
+        catch (NumberFormatException nfe) {
             return false;
         }
         return true;
@@ -285,47 +286,73 @@ public class DisplayStudent extends JPanel implements ActionListener {
                 boolean validInit = false; //Is the initial grade numeric?
                 boolean validReset = false; //Is the resit grade numeric?
                 boolean fitsRange = true; //For grades that are are non-null, are they less than or equal to 100?
-                if (isNumeric(initGrade.getText())){
-                    if (Double.parseDouble(initGrade.getText()) <= 100) {
-                        if (isNumeric(resitGrade.getText())){
-                            if(Double.parseDouble(resitGrade.getText()) <= 100){
-                                validInit = true;
+                String initText = initGrade.getText();
+                String resitText = resitGrade.getText();
+                if (isNumeric(initText)){
+                    if (Double.parseDouble(initText) <= 100 && Double.parseDouble(initText) >= 0) {
+                        validInit = true;
+                        if (isNumeric(resitText)){
+                            if(Double.parseDouble(resitText) <= 100 && Double.parseDouble(initText) >=0){
                                 validReset = true;
                             }
                             else{
                                 fitsRange = false;
+                                initGrade.setText("");
+                                resitGrade.setText("");
                             }
                         }
                         else{
-                            fitsRange = true;
-                            validInit = true;
+                            if (!resitText.equals("")){
+                                fitsRange = false;
+                                initGrade.setText("");
+                                resitGrade.setText("");
+                            }
                         }
                     }
                     else{
                         fitsRange = false;
+                        initGrade.setText("");
+                        resitGrade.setText("");
                     }
                 }
                 else{
-                    JOptionPane.showMessageDialog(null,"Please enter valid grades",
-                            "ERROR", JOptionPane.ERROR_MESSAGE, null);
+                    if (!initText.equals("") || !resitText.equals("")){
+                        fitsRange = false;
+                        initGrade.setText("");
+                        resitGrade.setText("");
+                    }
                 }
                 if (fitsRange){
                     String initValue;
                     String resitValue;
-                    if (validInit){
-                        initValue = initGrade.getText();
-                    }
-                    else{
-                        initValue = null;
-                    }
                     if (validReset){
                         resitValue = resitGrade.getText();
                     }
                     else{
                         resitValue = null;
                     }
-                    System.out.println(initValue);
-                    System.out.println(resitValue);
+                    if (validInit){
+                        initValue = initGrade.getText();
+                        if (validReset){
+                            Double initDoubleValue = Double.parseDouble(initValue);
+                            Double resitDoubleValue = Double.parseDouble(resitValue);
+                            Double passMark = 39.5;
+                            System.out.println(level);
+                            if (level.equals("4")){
+                                passMark = 49.5;
+                            }
+                            if (initDoubleValue >= passMark){
+                                resitValue = null;
+                            }
+                        }
+                    }
+                    else{
+                        initValue = null;
+                        resitValue = null;
+                    }
+                    if (resitValue == null){
+                        resitGrade.setText("");
+                    }
                     teacher.updateGrades(regNo, String.valueOf(modulesList.getSelectedItem()), String.valueOf(periodsList.getSelectedItem()), initValue, resitValue);
                     String[] gradeResults = teacher.getMeanGrade(regNo, String.valueOf(periodsList.getSelectedItem()), level);
                     Double meanGrade = null;
@@ -342,6 +369,10 @@ public class DisplayStudent extends JPanel implements ActionListener {
                     }
                     degreeClassLabel.setText(teacher.getOutcome(regNo, "X", upperLevel, studentDetails[1], overallGrade, overallGradeArr[1], true));
                     degreeGradeLabel.setText(String.valueOf(overallGrade));
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"Please enter valid grades",
+                            "ERROR", JOptionPane.ERROR_MESSAGE, null);
                 }
         }
     }
