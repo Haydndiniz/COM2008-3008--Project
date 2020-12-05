@@ -55,15 +55,9 @@ public class TeacherFrame extends JPanel implements ActionListener {
 
         //switch frame on button press
         switch (buttonPressed) {
-            case "Search by Degree":
-                setVisible(false);
-                break;
-            case "Search by Module":
-                setVisible(false);
-                break;
             case "Search by Student":
                 setVisible(false);
-                frame.setContentPane(new SearchByStudent(frame, teacher));
+                //frame.setContentPane(new SearchByStudent(frame, teacher));
                 break;
         }
     }

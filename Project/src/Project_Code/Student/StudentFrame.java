@@ -105,6 +105,10 @@ public class StudentFrame extends JPanel {
         label_14.setBounds(252, 290, 100, 40);
         add(label_14);
 
+        JLabel label_16 = new JLabel("Progression:");
+        label_16.setBounds(252, 330, 100, 40);
+        add(label_16);
+
         periodsList = new JComboBox(studentPeriods.toArray());
         periodsList.setBounds(112, 60, 100, 26);
         periodsList.setSelectedIndex(0);
@@ -168,7 +172,7 @@ public class StudentFrame extends JPanel {
         add(label_outcome);
         outcomeLabel = label_outcome;
 
-        String[] overallGradeArr = teacher.getOverallGrade(regNo, upperLevel);
+        String[] overallGradeArr = teacher.getOverallGrade(regNo, upperLevel, false);
         Double overallGrade = null;
         if (overallGradeArr[0] != null){
             overallGrade = Double.parseDouble(overallGradeArr[0]);
@@ -192,6 +196,10 @@ public class StudentFrame extends JPanel {
         label_resitGrade.setBounds(352, 137, 50, 26);
         add(label_resitGrade);
         resitGrade = label_resitGrade;
+
+        JLabel label_progression = new JLabel();
+        label_progression.setBounds(352, 330, 200, 40);
+        add(label_progression);
 
         frame=f;
         frame.setContentPane(this);

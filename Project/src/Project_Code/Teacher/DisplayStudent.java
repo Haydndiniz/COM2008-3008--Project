@@ -21,6 +21,7 @@ public class DisplayStudent extends JPanel implements ActionListener {
     private JLabel degreeGradeLabel;
     private JLabel outcomeLabel;
     private JLabel degreeClassLabel;
+    private JLabel progressionLabel;
     private String[] studentDetails;
     private String upperLevel;
 
@@ -123,6 +124,10 @@ public class DisplayStudent extends JPanel implements ActionListener {
         label_14.setBounds(252, 290, 100, 40);
         add(label_14);
 
+        JLabel label_16 = new JLabel("Progression:");
+        label_16.setBounds(252, 330, 100, 40);
+        add(label_16);
+
         periodsList = new JComboBox(studentPeriods.toArray());
         periodsList.setBounds(112, 60, 100, 26);
         periodsList.setSelectedIndex(0);
@@ -179,20 +184,27 @@ public class DisplayStudent extends JPanel implements ActionListener {
         add(label_meanGrade);
 
 
-        JLabel label_outcome = new JLabel(teacher.getOutcome(regNo, String.valueOf(periodsList.getSelectedItem()), level, studentDetails[1], meanGrade, checkPass, false));
+        String[] outcomeDetails = teacher.getOutcome(regNo, String.valueOf(periodsList.getSelectedItem()), level, studentDetails[1], meanGrade, checkPass, false);
+        JLabel label_outcome = new JLabel(outcomeDetails[0]);
         label_outcome.setBounds(352, 210, 100, 40);
         add(label_outcome);
         outcomeLabel = label_outcome;
 
-        String[] overallGradeArr = teacher.getOverallGrade(regNo, upperLevel);
+        String[] overallGradeArr = teacher.getOverallGrade(regNo, upperLevel, false);
         Double overallGrade = null;
         if (overallGradeArr[0] != null){
             overallGrade = Double.parseDouble(overallGradeArr[0]);
         }
-        JLabel label_degreeClass = new JLabel(teacher.getOutcome(regNo, "X", upperLevel, studentDetails[1], overallGrade, overallGradeArr[1], true));
+        String[] outcomeDetailsD = teacher.getOutcome(regNo, "X", level, studentDetails[1], overallGrade, overallGradeArr[1], true);
+        JLabel label_degreeClass = new JLabel(outcomeDetailsD[0]);
         label_degreeClass.setBounds(352, 290, 200, 40);
         add(label_degreeClass);
         degreeClassLabel = label_degreeClass;
+
+        JLabel label_progression = new JLabel(outcomeDetails[1]);
+        label_progression.setBounds(352, 330, 200, 40);
+        add(label_progression);
+        progressionLabel = label_progression;
 
         JLabel label_degreeGrade = new JLabel(String.valueOf(overallGrade));
         degreeGradeLabel = label_degreeGrade;
@@ -261,8 +273,13 @@ public class DisplayStudent extends JPanel implements ActionListener {
                         meanGrade = Double.parseDouble(gradeResults[0]);
                     }
                     String checkPass = gradeResults[1];
-                    outcomeLabel.setText(teacher.getOutcome(regNo, String.valueOf(periodsList.getSelectedItem()), level, studentDetails[1], meanGrade, checkPass, false));
+                    String[] outcomeDetails = teacher.getOutcome(regNo, String.valueOf(periodsList.getSelectedItem()), level, studentDetails[1], meanGrade, checkPass, false);
+                    outcomeLabel.setText(outcomeDetails[0]);
+                    progressionLabel.setText(outcomeDetails[1]);
                     meanGradeLabel.setText(String.valueOf(meanGrade));
+                    if (level.equals(upperLevel)){
+                        progressionLabel.setText(teacher.getOutcome(regNo, String.valueOf(periodsList.getSelectedItem()), level, studentDetails[1], meanGrade, checkPass, true)[1]);
+                    }
                 }
                 else{
                     //Module changed
@@ -280,7 +297,7 @@ public class DisplayStudent extends JPanel implements ActionListener {
         switch (buttonPressed) {
             case "Go Back":
                 setVisible(false);
-                frame.setContentPane(new TeacherFrame(frame, teacher.getUsername()));
+                frame.setContentPane(new SearchByStudent(frame, teacher.getUsername()));
                 break;
             case "Apply":
                 boolean validInit = false; //Is the initial grade numeric?
@@ -337,7 +354,6 @@ public class DisplayStudent extends JPanel implements ActionListener {
                             Double initDoubleValue = Double.parseDouble(initValue);
                             Double resitDoubleValue = Double.parseDouble(resitValue);
                             Double passMark = 39.5;
-                            System.out.println(level);
                             if (level.equals("4")){
                                 passMark = 49.5;
                             }
@@ -360,15 +376,23 @@ public class DisplayStudent extends JPanel implements ActionListener {
                         meanGrade = Double.parseDouble(gradeResults[0]);
                     }
                     String checkPass = gradeResults[1];
-                    outcomeLabel.setText(teacher.getOutcome(regNo, String.valueOf(periodsList.getSelectedItem()), level, studentDetails[1], meanGrade, checkPass, false));
+                    String[] outcomeDetails = teacher.getOutcome(regNo, String.valueOf(periodsList.getSelectedItem()), level, studentDetails[1], meanGrade, checkPass, false);
+                    outcomeLabel.setText(outcomeDetails[0]);
                     meanGradeLabel.setText(String.valueOf(meanGrade));
-                    String[] overallGradeArr = teacher.getOverallGrade(regNo, upperLevel);
+                    String[] overallGradeArr = teacher.getOverallGrade(regNo, upperLevel, false);
                     Double overallGrade = null;
                     if (overallGradeArr[0] != null){
                         overallGrade = Double.parseDouble(overallGradeArr[0]);
                     }
-                    degreeClassLabel.setText(teacher.getOutcome(regNo, "X", upperLevel, studentDetails[1], overallGrade, overallGradeArr[1], true));
+                    String[] outcomeDetailsD = teacher.getOutcome(regNo, "X", upperLevel, studentDetails[1], overallGrade, overallGradeArr[1], true);
+                    degreeClassLabel.setText(outcomeDetailsD[0]);
                     degreeGradeLabel.setText(String.valueOf(overallGrade));
+                    if (level.equals((upperLevel))){
+                        progressionLabel.setText(outcomeDetailsD[1]);
+                    }
+                    else{
+                        progressionLabel.setText(outcomeDetails[1]);
+                    }
                 }
                 else{
                     JOptionPane.showMessageDialog(null,"Please enter valid grades",

@@ -16,7 +16,6 @@ import javax.swing.*;
  */
 public class LoginController extends JPanel implements ActionListener {
 
-    private TeacherMain teacher;
     private JFrame frame;
     private JPasswordField passwordField;
     private JTextField usernameTextField;
@@ -185,8 +184,7 @@ public class LoginController extends JPanel implements ActionListener {
                         break;
                     case "teacher":
                         setVisible(false);
-                        teacher = new TeacherMain(username, "Teacher");
-                        frame.setContentPane(new TeacherFrame(frame, username));
+                        frame.setContentPane(new SearchByStudent(frame, username));
                         break;
                      case "student":
                          setVisible(false);
