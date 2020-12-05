@@ -102,7 +102,7 @@ public class LoginController extends JPanel implements ActionListener {
             while (result.next()) {
                 storedPass = result.getString(1);
             }
-
+//
             ResultSet salt = con.performQuery("SELECT salt FROM UserSalts WHERE username = '" + username + "'");
             while (salt.next()) {
                 saltRes = salt.getString(1);
