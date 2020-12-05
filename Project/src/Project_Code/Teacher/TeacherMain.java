@@ -611,7 +611,10 @@ public class TeacherMain extends User {
                         periodOutcome[1] = "repeat";
                     }
                 }
-                dac.performUpdate("UPDATE Period SET outcome='"+periodOutcome+"' WHERE registrationNo='"+regNo+"' AND periodLabel='"+periodLabel+"'");
+                if (super.getRole().equals("Teacher")){
+                    System.out.println(periodOutcome[0]);
+                    dac.performUpdate("UPDATE Period SET outcome='"+periodOutcome[0]+"' WHERE registrationNo='"+regNo+"' AND periodLabel='"+periodLabel+"'");
+                }
             }
             else{
                 //For degree classes (meanGrade would be adjusted to the correct value for all levels/weightings)
@@ -642,7 +645,10 @@ public class TeacherMain extends User {
                         }
                     }
                 }
-                dac.performUpdate("UPDATE Student SET degreeClass='"+periodOutcome+"' WHERE registrationNo='"+regNo+"'");
+                if (super.getRole().equals("Teacher")) {
+                    System.out.println(periodOutcome[0]);
+                    dac.performUpdate("UPDATE Student SET degreeClass='" + periodOutcome[0] + "' WHERE registrationNo='" + regNo + "'");
+                }
             }
             dac.closeConnection();
             dac.closeStatement();

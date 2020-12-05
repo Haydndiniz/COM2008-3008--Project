@@ -26,6 +26,7 @@ public class StudentFrame extends JPanel {
     private String outcome;
     private String meanGrade;
     private String[] periodDetails;
+    private JLabel progressionLabel;
 
     /**
      * Parameterized constructor
@@ -165,6 +166,14 @@ public class StudentFrame extends JPanel {
         label_meanGrade.setBounds(352, 170, 100, 40);
         add(label_meanGrade);
 
+        String[] gradeResults = teacher.getMeanGrade(regNo, String.valueOf(periodsList.getSelectedItem()), level);
+        String checkPass = gradeResults[1];
+        String[] outcomeDetails = teacher.getOutcome(regNo, String.valueOf(periodsList.getSelectedItem()), level, studentDetails[1], Double.parseDouble(meanGrade), checkPass, false);
+        JLabel label_progression = new JLabel(outcomeDetails[1]);
+        label_progression.setBounds(352, 330, 200, 40);
+        add(label_progression);
+        progressionLabel = label_progression;
+
 
         //JLabel label_outcome = new JLabel(teacher.getOutcome(regNo, String.valueOf(periodsList.getSelectedItem()), level, studentDetails[1], meanGrade, checkPass, false));
         JLabel label_outcome = new JLabel(outcome);
@@ -197,13 +206,9 @@ public class StudentFrame extends JPanel {
         add(label_resitGrade);
         resitGrade = label_resitGrade;
 
-        JLabel label_progression = new JLabel();
-        label_progression.setBounds(352, 330, 200, 40);
-        add(label_progression);
-
         frame=f;
         frame.setContentPane(this);
-        frame.setBounds(87, 13, 500, 420);
+        frame.setBounds(87, 13, 500, 480);
         frame.setLocationRelativeTo(null);
     }
     class ItemChangeListener implements ItemListener{
@@ -233,6 +238,16 @@ public class StudentFrame extends JPanel {
                     outcomeLabel.setText(outcome);
                     //meanGradeLabel.setText(String.valueOf(meanGrade));
                     meanGradeLabel.setText(meanGrade);
+                    String[] gradeResults = teacher.getMeanGrade(regNo, String.valueOf(periodsList.getSelectedItem()), level);
+                    String checkPass = gradeResults[1];
+                    String[] outcomeDetails = teacher.getOutcome(regNo, String.valueOf(periodsList.getSelectedItem()), level, studentDetails[1], Double.parseDouble(meanGrade), checkPass, false);
+                    String[] outcomeDetailsD = teacher.getOutcome(regNo, String.valueOf(periodsList.getSelectedItem()), level, studentDetails[1], Double.parseDouble(meanGrade), checkPass, true);
+                    if (level.equals((upperLevel))){
+                        progressionLabel.setText(outcomeDetailsD[1]);
+                    }
+                    else{
+                        progressionLabel.setText(outcomeDetails[1]);
+                    }
                 }
                 else{
                     //Module changed
