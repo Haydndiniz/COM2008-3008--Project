@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
@@ -245,6 +247,10 @@ public class AddNewStudent extends JPanel implements ActionListener {
                     JOptionPane.showMessageDialog(null,"There was an error when processing the data.",
                             "ERROR", JOptionPane.ERROR_MESSAGE, null);
                     System.exit(0);
+                } catch (InvalidKeySpecException invalidKeySpecException) {
+                    invalidKeySpecException.printStackTrace();
+                } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
+                    noSuchAlgorithmException.printStackTrace();
                 }
                 break;
         }

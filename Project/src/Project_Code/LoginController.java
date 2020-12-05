@@ -6,6 +6,8 @@ import Project_Code.Teacher.*;
 import Project_Code.Student.*;
 import com.mysql.cj.x.protobuf.MysqlxPrepare;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -94,14 +96,24 @@ public class LoginController extends JPanel implements ActionListener {
     private static boolean validatePassword(String username, String password) {
         ResultSet result = null;
         String storedPass = null;
+        String saltRes = null;
         try{
-            //collate is used for case sensitivity
+            //get stored password in hash format
             result = con.performQuery("SELECT password FROM UserAccounts WHERE username = '" + username + "'");
-            System.out.println(result);
-            while (result.next())
+            while (result.next()) {
                 storedPass = result.getString(1);
+            }
 
-            return (password.equals(storedPass));
+            ResultSet salt = con.performQuery("SELECT salt FROM UserSalts WHERE username = '" + username + "'");
+            while (salt.next()) {
+                saltRes = salt.getString(1);
+            }
+
+            String hashed = AddUser.createHash(password, AddUser.saltDecode(saltRes));
+            System.out.println(hashed);
+            return (hashed.equals(storedPass));
+
+
         }
         catch (SQLException ex) {
             //display error message and leave the application
@@ -114,6 +126,10 @@ public class LoginController extends JPanel implements ActionListener {
             JOptionPane.showMessageDialog(null,"There was an error when processing the data.2",
                     "ERROR", JOptionPane.ERROR_MESSAGE, null);
             System.exit(1);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
         }
 
         return (password.equals(storedPass));

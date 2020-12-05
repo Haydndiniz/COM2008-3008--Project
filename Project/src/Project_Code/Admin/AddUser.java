@@ -1,7 +1,6 @@
 package Project_Code.Admin;
 
 import Project_Code.DBController;
-import Project_Code.User;
 //import com.sun.xml.internal.rngom.parse.host.Base;
 
 import javax.crypto.SecretKeyFactory;
@@ -25,7 +24,6 @@ public class AddUser extends JPanel implements ActionListener {
     private JComboBox<String> roleDropdown;
     private JComboBox<String> titleDropdown;
     private static final Random RANDOM = new SecureRandom();
-    byte[] salt = new byte[16];
     private static DBController con = new DBController("team037", "ee143bc0");
 
 
@@ -142,6 +140,8 @@ public class AddUser extends JPanel implements ActionListener {
         return pword.toString();
     }
 
+
+
     private boolean validateFields(String forename, String surname) {
         //check if values have been given
         if (forename.equals("")) {
@@ -207,19 +207,35 @@ public class AddUser extends JPanel implements ActionListener {
         return "ERROR";
     }
 
-    private String createSalt() {
+    public static byte[] createSalt() {
+        byte[] salt = new byte[16];
         RANDOM.nextBytes(salt);
+
+        return salt;
+    }
+    public static String saltEncode(byte[] res){
+
         Base64.Encoder enc = Base64.getEncoder();
-        return enc.encodeToString(salt);
+        return enc.encodeToString(res);
     }
 
-    private String createHash(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public static byte[] saltDecode(String encodedSalt){
+
+        Base64.Decoder enc = Base64.getDecoder();
+        return enc.decode(encodedSalt);
+    }
+
+
+
+
+    public static String createHash(String password, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
         KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
         SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
         byte[] hash = f.generateSecret(spec).getEncoded();
         Base64.Encoder enc = Base64.getEncoder();
         return enc.encodeToString(hash);
     }
+
 
     private boolean addUser(String username, String role, String forename, String surname, String title, String email, String hash, String salt) throws SQLException {
 
@@ -281,18 +297,19 @@ public class AddUser extends JPanel implements ActionListener {
                     try {
                         username = createUsername(forename, surname);
 
-                        String salt = createSalt();
-                        String hash = createHash(passwordField.getPassword().toString());
+                        byte[] salt = createSalt();
+                        String encodedSalt = saltEncode(salt);
+
+                        String password = new String(passwordField.getPassword());
+                        String hash = createHash(password, salt);
                         String email = username+"@sheffield.ac.uk";
 
-                        if (addUser(username, roleDropdown.getSelectedItem().toString(), forename, surname, titleDropdown.getSelectedItem().toString(), email, hash, salt)) {
+                        if (addUser(username, roleDropdown.getSelectedItem().toString(), forename, surname, titleDropdown.getSelectedItem().toString(), email, hash, encodedSalt)) {
                             JOptionPane.showMessageDialog(null,"User Registered Successfully");
                             setVisible(false);
                             frame.setContentPane(new AdminFrame(frame, admin.getUsername()));
                         }
 
-                        System.out.println(salt);
-                        System.out.println(email);
 
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();

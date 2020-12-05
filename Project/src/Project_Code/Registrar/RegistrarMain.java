@@ -1,11 +1,14 @@
 package Project_Code.Registrar;
 
+import Project_Code.Admin.AddUser;
 import Project_Code.DBController;
 import Project_Code.User;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -28,7 +31,7 @@ public class RegistrarMain extends User {
     }
 
     public boolean addNewStudent(String title, String surname, String forename,
-                                 String level, String degreeCode, String tutor, String startDate, String endDate, String password) throws SQLException {
+                                 String level, String degreeCode, String tutor, String startDate, String endDate, String password) throws SQLException, InvalidKeySpecException, NoSuchAlgorithmException {
 
         // create student username
         int counter=0;
@@ -51,10 +54,17 @@ public class RegistrarMain extends User {
         startDate=startDate.substring(6, 10)+startDate.substring(3,5)+startDate.substring(0,2);
         endDate=endDate.substring(6, 10)+endDate.substring(3,5)+endDate.substring(0,2);
 
+        byte[] salt = AddUser.createSalt();
+        String encodeSalt = AddUser.saltEncode(salt);
+        String hash = AddUser.createHash(password, salt);
+
         int changes;
         //insert to UserAccounts
         changes = con.performUpdate("INSERT INTO UserAccounts (username, password)"
-                + " VALUES ('"+username+"','"+password+"')");
+                + " VALUES ('"+username+"','"+hash+"')");
+
+        changes += con.performUpdate("INSERT INTO UserSalts (username, salt)"
+                + " VALUES ('"+username+"','"+salt+"')");
 
         //insert to Users Table
         changes+=con.performUpdate("INSERT INTO Users (username,role,forename,surname, title, email)"
