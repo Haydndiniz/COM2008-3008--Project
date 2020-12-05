@@ -168,7 +168,10 @@ public class DisplayStudent extends JPanel implements ActionListener {
         levelLabel = label_level;
 
         String[] gradeResults = teacher.getMeanGrade(regNo, String.valueOf(periodsList.getSelectedItem()), level);
-        Double meanGrade = Double.parseDouble(gradeResults[0]);
+        Double meanGrade = null;
+        if (gradeResults[0] != null){
+            meanGrade = Double.parseDouble(gradeResults[0]);
+        }
         String checkPass = gradeResults[1];
         JLabel label_meanGrade = new JLabel(String.valueOf(meanGrade));
         meanGradeLabel = label_meanGrade;
@@ -302,6 +305,10 @@ public class DisplayStudent extends JPanel implements ActionListener {
                         fitsRange = false;
                     }
                 }
+                else{
+                    JOptionPane.showMessageDialog(null,"Please enter valid grades",
+                            "ERROR", JOptionPane.ERROR_MESSAGE, null);
+                }
                 if (fitsRange){
                     String initValue;
                     String resitValue;
@@ -317,6 +324,8 @@ public class DisplayStudent extends JPanel implements ActionListener {
                     else{
                         resitValue = null;
                     }
+                    System.out.println(initValue);
+                    System.out.println(resitValue);
                     teacher.updateGrades(regNo, String.valueOf(modulesList.getSelectedItem()), String.valueOf(periodsList.getSelectedItem()), initValue, resitValue);
                     String[] gradeResults = teacher.getMeanGrade(regNo, String.valueOf(periodsList.getSelectedItem()), level);
                     Double meanGrade = null;
@@ -333,11 +342,6 @@ public class DisplayStudent extends JPanel implements ActionListener {
                     }
                     degreeClassLabel.setText(teacher.getOutcome(regNo, "X", upperLevel, studentDetails[1], overallGrade, overallGradeArr[1], true));
                     degreeGradeLabel.setText(String.valueOf(overallGrade));
-                }
-                else{
-                    JOptionPane.showMessageDialog(null,"Please enter valid grades",
-                            "ERROR", JOptionPane.ERROR_MESSAGE, null);
-
                 }
         }
     }
