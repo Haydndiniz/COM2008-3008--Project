@@ -318,9 +318,9 @@ public class TeacherMain extends User {
                     resitGrade = Double.parseDouble(i.get(1));
                 }
                 Double initGrade = Double.parseDouble(i.get(0));
-                int passMark = 40;
+                Double passMark = 39.5;
                 if (levelCode.equals("4")){
-                    passMark = 50;
+                    passMark = 49.5;
                 }
                 if (initGrade > resitGrade){
                     initSum += initGrade;
@@ -368,9 +368,9 @@ public class TeacherMain extends User {
         ResultSet result = null;
         String highestLevel = null;
         try {
-            result = dac.performQuery("SELECT MAX(levelCode) FROM Period WHERE registrationNo='"+regNo+"' AND levelCode='1' OR levelCode='2' OR levelCode='3'");
+            result = dac.performQuery("SELECT MAX(levelCode) FROM Period WHERE registrationNo='"+regNo+"' AND levelCode='1' OR levelCode='2' OR levelCode='3' OR levelCode='4'");
             while (result.next()) {
-                highestLevel = result.getString("levelCode");
+                highestLevel = result.getString(1);
             }
             dac.closeConnection();
             dac.closeStatement();
@@ -384,7 +384,7 @@ public class TeacherMain extends User {
         }
         return null;
     }
-    public String[] getOverallGrade(String regNo, String upperLevel){
+    public String[] getOverallGrade(String regNo, String upperLevel, boolean skipFour){
         //Method assumes there is only one match
         ResultSet result1 = null;
         ResultSet result2 = null;
@@ -392,9 +392,15 @@ public class TeacherMain extends User {
         List<List<String>> periods = new ArrayList<>();
         try {
             result1 = dac.performQuery("SELECT COUNT(*) FROM Period WHERE registrationNo='"+regNo+"' AND levelCode='1'");
-            result2 = dac.performQuery("SELECT COUNT(*) FROM Period WHERE registrationNo='"+regNo+"' AND levelCode='2' UNION ALL " +
-                    "SELECT COUNT(*) FROM Period WHERE registrationNo='"+regNo+"' AND levelCode='3' UNION ALL " +
-                    "SELECT COUNT(*) FROM Period WHERE registrationNo='"+regNo+"' AND levelCode='4'");
+            if (!skipFour){
+                result2 = dac.performQuery("SELECT COUNT(*) FROM Period WHERE registrationNo='"+regNo+"' AND levelCode='2' UNION ALL " +
+                        "SELECT COUNT(*) FROM Period WHERE registrationNo='"+regNo+"' AND levelCode='3' UNION ALL " +
+                        "SELECT COUNT(*) FROM Period WHERE registrationNo='"+regNo+"' AND levelCode='4'");
+            }
+            else{
+                result2 = dac.performQuery("SELECT COUNT(*) FROM Period WHERE registrationNo='"+regNo+"' AND levelCode='2' UNION ALL " +
+                        "SELECT COUNT(*) FROM Period WHERE registrationNo='"+regNo+"' AND levelCode='3' UNION ALL ");
+            }
             String r1 = null;
             while (result1.next()){
                 r1 = result1.getString(1);
@@ -422,13 +428,13 @@ public class TeacherMain extends User {
                     periods.add(combinedPeriodResit);
                 }
             }
-            if (periods.toArray().length != Integer.parseInt(upperLevel) - 1){
+            if (Integer.parseInt(getStudentHighestLevel(regNo)) != Integer.parseInt(upperLevel)){
                 //Final year of course not reached
                 return new String[]{null, null};
             }
             Double sumGrade = 0.0;
             Double divisor = 0.0;
-            int passMark = 40;
+            Double passMark = 39.5;
             returnArr[1] = "pass";
             for (List<String> i : periods){
                 String level = getLevel(regNo, i.get(0));
@@ -456,7 +462,7 @@ public class TeacherMain extends User {
                 else{
                     //Year 3/4
                     if (level.equals("4")){
-                        passMark = 50;
+                        passMark = 49.5;
                     }
                     if (!resit){
                         sumGrade += 2 * Double.parseDouble(gradeArr[0]);
@@ -480,17 +486,41 @@ public class TeacherMain extends User {
         }
         return new String[]{null, null};
     }
-    public String getOutcome(String regNo, String periodLabel,String levelCode,String degreeCode,Double meanGrade, String checkPass, boolean degreeClass) {
+    public boolean checkRetake(String regNo, String levelCode){
+        //Method assumes there is only one match
+        ResultSet result = null;
+        boolean retake = false;
+        try {
+            result = dac.performQuery("SELECT COUNT(*) FROM Period WHERE registrationNo='"+regNo+"' AND levelCode='"+levelCode+"'");
+            while (result.next()) {
+                if (result.getInt(1) > 1){
+                    retake = true;
+                }
+            }
+            dac.closeConnection();
+            dac.closeStatement();
+            return retake;
+        }
+        catch(SQLException ex) {
+            //display error message and leave the application
+            JOptionPane.showMessageDialog(null,"There was an error when processing the data.",
+                    "ERROR", JOptionPane.ERROR_MESSAGE, null);
+            System.exit(0);
+        }
+        return false;
+    }
+    public String[] getOutcome(String regNo, String periodLabel,String levelCode,String degreeCode,Double meanGrade, String checkPass, boolean degreeClass) {
         //check if it is 1-year MSc
-        String periodOutcome;
+        String[] periodOutcome = new String[2];
+        boolean retake = checkRetake(regNo, levelCode);
         if (meanGrade == null){
             return null;
         }
         else if (checkPass.equals("fail")){
-            periodOutcome = "fail";
+            periodOutcome[0] = "fail";
         }
         else if (checkPass.equals("conceded")){
-            periodOutcome = "conceded pass";
+            periodOutcome[0] = "conceded pass";
         }
         else if (degreeCode.substring(3,4).equals("P")) {
             //check if student failed dissertation but succeeded in all the other modules
@@ -508,81 +538,121 @@ public class TeacherMain extends User {
             }
             //Special rule if student passes modules but fails dissertaion
             if ((studentTotalCredits==120) &&(disertationGrade<50)) { //pass mark is 50
-                periodOutcome = "PGDip";
+                periodOutcome[0] = "PGDip";
             }
             //Special rule if student passes 60 credits of modules
             if (studentTotalCredits==60) {
-                periodOutcome = "PGCert";
+                periodOutcome[0] = "PGCert";
             }
 
             if (meanGrade>=69.5) {
-                periodOutcome = "distinction";
+                periodOutcome[0] = "distinction";
             }
             else if (meanGrade>=59.5) {
-                periodOutcome = "merit";
+                periodOutcome[0] = "merit";
             }
             else if (meanGrade>=49.5) {
-                periodOutcome = "pass";
+                periodOutcome[0] = "pass";
             }
             else {
-                periodOutcome = "fail";
+                periodOutcome[0] = "fail";
             }
         }
         //check if BSc,BEng degree
         else if (levelCode.equals("3") || levelCode.equals("2") || levelCode.equals("1")) {
-            if (((int)periodLabel.charAt(0)-64)-Integer.parseInt(levelCode)>=2 && !degreeClass) {
-                return "pass (non-honours)";
-            }
             if (meanGrade>=69.5) {
-                periodOutcome = "first class";
+                periodOutcome[0] = "first class";
             }
             else if (meanGrade>=59.5) {
-                periodOutcome = "upper second";
+                periodOutcome[0] = "upper second";
             }
             else if (meanGrade>=49.5) {
-                periodOutcome = "lower second";
+                periodOutcome[0] = "lower second";
             }
             else if (meanGrade>=44.5){
-                periodOutcome = "third class";
+                periodOutcome[0] = "third class";
             }
             else if (meanGrade>=39.5){
-                periodOutcome = "pass (non-honours)";
+                periodOutcome[0] = "pass (non-honours)";
             }
             else{
-                periodOutcome = "fail";
+                periodOutcome[0] = "fail";
             }
         }
         //else MComp/MEng degree
         else {
             if (meanGrade>=69.5) {
-                periodOutcome = "first class";
+                periodOutcome[0] = "first class";
             }
             else if (meanGrade>=59.5) {
-                periodOutcome = "upper second";
+                periodOutcome[0] = "upper second";
             }
             else if (meanGrade>=49.5) {
-                periodOutcome = "lower second";
+                periodOutcome[0] = "lower second";
             }
             else {
-                periodOutcome = "fail";
+                periodOutcome[0] = "fail";
             }
         }
         try{
             if (!degreeClass){
                 //For period outcomes,
-                if (periodOutcome != "fail"){
-                    if (periodOutcome != "conceded pass"){
-                        periodOutcome = "pass";
+                if (!periodOutcome[0].equals("fail")){
+                    periodOutcome[1] = "pass";
+                    if (!periodOutcome[0].equals("conceded pass")){
+                        periodOutcome[0] = "pass";
                     }
                 }
-                dac.performUpdate("UPDATE Period SET outcome='"+periodOutcome+"' WHERE registrationNo='"+regNo+"' AND periodLabel='"+periodLabel+"'");
+                else{
+                    if (retake){
+                        periodOutcome[1] = "fail";
+                    }
+                    else{
+                        periodOutcome[1] = "repeat";
+                    }
+                }
+                if (super.getRole().equals("Teacher")){
+                    System.out.println(periodOutcome[0]);
+                    dac.performUpdate("UPDATE Period SET outcome='"+periodOutcome[0]+"' WHERE registrationNo='"+regNo+"' AND periodLabel='"+periodLabel+"'");
+                }
             }
             else{
                 //For degree classes (meanGrade would be adjusted to the correct value for all levels/weightings)
-                dac.performUpdate("UPDATE Student SET degreeClass='"+periodOutcome+"' WHERE registrationNo='"+regNo+"'");
+                if (!periodOutcome[0].equals("fail")){
+                    periodOutcome[1] = "graduate";
+                }
+                else{
+                    if (periodOutcome[0].equals("PGDip") || periodOutcome[0].equals("PGDip")){
+                        periodOutcome[1] = periodOutcome[0];
+                    }
+                    else{
+                        if (levelCode.equals("4")){
+                            if (degreeCode.substring(3,4).equals("P")){
+                                periodOutcome[1] = "fail";
+                            }
+                            else{
+                                String bachelorsOutcome = getOutcome(regNo, periodLabel,levelCode,degreeCode,Double.parseDouble(getOverallGrade(regNo, "3", true)[0]),checkPass,true)[1];
+                                periodOutcome[1] = "BSc " + bachelorsOutcome;
+                            }
+                        }
+                        else{
+                            if (retake){
+                                periodOutcome[1] = "fail";
+                            }
+                            else{
+                                periodOutcome[1] = "repeat";
+                            }
+                        }
+                    }
+                }
+                if (super.getRole().equals("Teacher")) {
+                    System.out.println(periodOutcome[0]);
+                    dac.performUpdate("UPDATE Student SET degreeClass='" + periodOutcome[0] + "' WHERE registrationNo='" + regNo + "'");
+                }
             }
             dac.closeConnection();
             dac.closeStatement();
+            return periodOutcome;
         }
         catch(SQLException ex) {
             //display error message and leave the application

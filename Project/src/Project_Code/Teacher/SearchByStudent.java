@@ -15,11 +15,10 @@ public class SearchByStudent extends JPanel implements ActionListener {
      * Parameterized constructor
      * Creates the frame containing the search student grades by username/registration no fields
      * @param f - the frame created
-     * @param teacher - object of type Teacher
+     * @param username - object of type Teacher
      */
-    public SearchByStudent(JFrame f, TeacherMain teacher) {
-        //bind the teacher object
-        this.teacher = teacher;
+    public SearchByStudent(JFrame f, String username) {
+        teacher = new TeacherMain(username, "Teacher");
 
         setBounds(87, 13, 450, 300);
         setLayout(null);
@@ -71,10 +70,10 @@ public class SearchByStudent extends JPanel implements ActionListener {
         add(textField2);
 
         //back button
-        JButton btnGoBack = new JButton("Go Back");
-        btnGoBack.setBounds(12, 213, 97, 25);
-        add(btnGoBack);
-        btnGoBack.addActionListener(this);
+        //JButton btnGoBack = new JButton("Go Back");
+        //btnGoBack.setBounds(12, 213, 97, 25);
+        //add(btnGoBack);
+        //btnGoBack.addActionListener(this);
 
         frame=f;
         frame.setContentPane(this);
