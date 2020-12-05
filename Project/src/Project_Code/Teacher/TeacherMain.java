@@ -15,11 +15,10 @@ import java.sql.SQLException;
  */
 public class TeacherMain extends User {
 
-
     private DBController dac = super.getDataAccessController();
 
-    public TeacherMain(String username) {
-        super(username, "Teacher");
+    public TeacherMain(String username, String role) {
+        super(username, role);
     }
     /**
      * searchByStudent
@@ -226,28 +225,30 @@ public class TeacherMain extends User {
         return null;
     }
     public boolean updateGrades(String regNo, String moduleCode, String periodLabel, String initGrade, String resitGrade){
-        //Method assumes there is only one match
-        try {
-            //Init grades are checked to be numeric beforehand (and max characters 5)
-            if (resitGrade != null){
-                resitGrade = "'" + resitGrade + "'";
+        if (super.getRole().equals("Teacher")){
+            //Method assumes there is only one match
+            try {
+                //Init grades are checked to be numeric beforehand (and max characters 5)
+                if (resitGrade != null){
+                    resitGrade = "'" + resitGrade + "'";
+                }
+                if (initGrade != null){
+                    initGrade = "'" + initGrade +  "'";
+                }
+                int changes = dac.performUpdate("UPDATE Study SET initialGrade="+initGrade+", resitGrade="+resitGrade+" WHERE registrationNo='"+regNo+"' AND moduleCode='"+moduleCode+"' AND periodLabel='"+periodLabel+"'");
+                if (changes>0) {
+                    dac.closeConnection();
+                    dac.closeStatement();
+                    return true;
+                }
+                return false;
             }
-            if (initGrade != null){
-                initGrade = "'" + initGrade +  "'";
+            catch(SQLException ex) {
+                //display error message and leave the application
+                JOptionPane.showMessageDialog(null,"There was an error when processing the data.",
+                        "ERROR", JOptionPane.ERROR_MESSAGE, null);
+                System.exit(0);
             }
-            int changes = dac.performUpdate("UPDATE Study SET initialGrade="+initGrade+", resitGrade="+resitGrade+" WHERE registrationNo='"+regNo+"' AND moduleCode='"+moduleCode+"' AND periodLabel='"+periodLabel+"'");
-            if (changes>0) {
-                dac.closeConnection();
-                dac.closeStatement();
-                return true;
-            }
-            return false;
-        }
-        catch(SQLException ex) {
-            //display error message and leave the application
-            JOptionPane.showMessageDialog(null,"There was an error when processing the data.",
-                    "ERROR", JOptionPane.ERROR_MESSAGE, null);
-            System.exit(0);
         }
         return false;
     }
@@ -347,7 +348,7 @@ public class TeacherMain extends User {
                 }
             }
             meanGrade = initSum / grades.toArray().length;
-            dac.performUpdate("UPDATE Period SET meanGrade='"+String.valueOf(meanGrade)+"' WHERE registrationNo='"+regNo+"' AND periodLabel='"+periodLabel+"'");
+            dac.performUpdate("UPDATE Period SET meanGrade='"+String.valueOf(round(meanGrade, 2))+"' WHERE registrationNo='"+regNo+"' AND periodLabel='"+periodLabel+"'");
             returnArr[0] = String.valueOf(round(meanGrade, 1));
             returnArr[1] = checkPass;
             dac.closeConnection();

@@ -185,7 +185,7 @@ public class LoginController extends JPanel implements ActionListener {
                         break;
                     case "teacher":
                         setVisible(false);
-                        teacher = new TeacherMain(username);
+                        teacher = new TeacherMain(username, "Teacher");
                         frame.setContentPane(new TeacherFrame(frame, username));
                         break;
                      case "student":

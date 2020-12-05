@@ -20,7 +20,7 @@ public class TeacherFrame extends JPanel implements ActionListener {
      */
     public TeacherFrame(JFrame f, String username) {
 
-        teacher = new TeacherMain(username);
+        teacher = new TeacherMain(username, "Teacher");
 
         //create a 4 row 1 column grid
         setLayout(new GridLayout(4, 1, 0, 0));

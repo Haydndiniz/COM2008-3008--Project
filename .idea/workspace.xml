@@ -22,15 +22,14 @@
     <list default="true" id="c9fe5b6b-8c40-4624-9d20-5c2d54015260" name="Default Changelist" comment="Updated Teacher">
       <change afterPath="$PROJECT_DIR$/Project/src/Project_Code/Student/StudentFrame.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Project/src/Project_Code/Student/StudentMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_04_12_2020__14_27__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_04_12_2020__14_27__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_04_12_2020__15_08__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_04_12_2020__15_08__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_04_12_2020__17_13__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_04_12_2020__17_13__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_05_12_2020__10_28__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_05_12_2020__10_28__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_11_2020__09_35__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_11_2020__09_35__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_11_2020__20_48__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_11_2020__20_48__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/DBController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/DBController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/Teacher/DisplayStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/Teacher/DisplayStudent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/Teacher/TeacherFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/Teacher/TeacherFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/Teacher/TeacherMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/Teacher/TeacherMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Project/Project_Code/DBController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project/Project_Code/DBController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project/Project_Code/Admin/AddUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project/Project_Code/Admin/AddUser.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Project/Project_Code/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project/Project_Code/LoginController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Project/Project_Code/Teacher/DisplayStudent$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project/Project_Code/Teacher/DisplayStudent$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Project/Project_Code/Teacher/DisplayStudent$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project/Project_Code/Teacher/DisplayStudent$2.class" afterDir="false" />
@@ -213,7 +212,7 @@
       <workItem from="1607011255536" duration="5137000" />
       <workItem from="1607037954128" duration="5566000" />
       <workItem from="1607069520935" duration="20720000" />
-      <workItem from="1607157527691" duration="8862000" />
+      <workItem from="1607157527691" duration="10915000" />
     </task>
     <task id="LOCAL-00001" summary="updated file structure">
       <created>1606135677092</created>
@@ -271,7 +270,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607126059067</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Updated teacher">
+      <created>1607166650939</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1607166650939</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -299,7 +305,8 @@
     <MESSAGE value="Added view users in admin package" />
     <MESSAGE value="Added teacher package" />
     <MESSAGE value="Updated Teacher" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated Teacher" />
+    <MESSAGE value="Updated teacher" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated teacher" />
   </component>
   <component name="WindowStateProjectService">
     <state x="445" y="293" key="#Notifications" timestamp="1606146438003">
@@ -351,7 +358,7 @@
       <screen x="64" y="0" width="1856" height="1080" />
     </state>
     <state x="207" y="224" width="1579" height="742" key="DiffContextDialog/64.0.1856.1080/1920.0.1366.768@64.0.1856.1080" timestamp="1607116068343" />
-    <state width="1719" height="164" key="GridCell.Tab.0.bottom" timestamp="1607165911354">
+    <state width="1719" height="164" key="GridCell.Tab.0.bottom" timestamp="1607168525317">
       <screen x="70" y="0" width="1850" height="1080" />
     </state>
     <state width="2518" height="261" key="GridCell.Tab.0.bottom/0.0.2560.1440/-2560.0.2560.1440@0.0.2560.1440" timestamp="1606338681435" />
@@ -363,8 +370,8 @@
     <state width="1719" height="121" key="GridCell.Tab.0.bottom/62.0.1858.1080/1920.0.1366.768@62.0.1858.1080" timestamp="1607088956270" />
     <state width="1559" height="151" key="GridCell.Tab.0.bottom/63.0.1857.1080/1920.0.1366.768@63.0.1857.1080" timestamp="1606938224490" />
     <state width="859" height="107" key="GridCell.Tab.0.bottom/64.0.1856.1080/1920.0.1366.768@64.0.1856.1080" timestamp="1607126038161" />
-    <state width="1719" height="164" key="GridCell.Tab.0.bottom/70.0.1850.1080/1920.0.1366.768@70.0.1850.1080" timestamp="1607165911354" />
-    <state width="1719" height="164" key="GridCell.Tab.0.center" timestamp="1607165911354">
+    <state width="1719" height="164" key="GridCell.Tab.0.bottom/70.0.1850.1080/1920.0.1366.768@70.0.1850.1080" timestamp="1607168525317" />
+    <state width="1719" height="164" key="GridCell.Tab.0.center" timestamp="1607168525317">
       <screen x="70" y="0" width="1850" height="1080" />
     </state>
     <state width="2518" height="261" key="GridCell.Tab.0.center/0.0.2560.1440/-2560.0.2560.1440@0.0.2560.1440" timestamp="1606338681433" />
@@ -376,8 +383,8 @@
     <state width="1719" height="121" key="GridCell.Tab.0.center/62.0.1858.1080/1920.0.1366.768@62.0.1858.1080" timestamp="1607088956270" />
     <state width="1559" height="151" key="GridCell.Tab.0.center/63.0.1857.1080/1920.0.1366.768@63.0.1857.1080" timestamp="1606938224490" />
     <state width="859" height="107" key="GridCell.Tab.0.center/64.0.1856.1080/1920.0.1366.768@64.0.1856.1080" timestamp="1607126038161" />
-    <state width="1719" height="164" key="GridCell.Tab.0.center/70.0.1850.1080/1920.0.1366.768@70.0.1850.1080" timestamp="1607165911354" />
-    <state width="1719" height="164" key="GridCell.Tab.0.left" timestamp="1607165911354">
+    <state width="1719" height="164" key="GridCell.Tab.0.center/70.0.1850.1080/1920.0.1366.768@70.0.1850.1080" timestamp="1607168525317" />
+    <state width="1719" height="164" key="GridCell.Tab.0.left" timestamp="1607168525317">
       <screen x="70" y="0" width="1850" height="1080" />
     </state>
     <state width="747" height="144" key="GridCell.Tab.0.left/0.0.1536.960@0.0.1536.960" timestamp="1606423790368" />
@@ -389,8 +396,8 @@
     <state width="1719" height="121" key="GridCell.Tab.0.left/62.0.1858.1080/1920.0.1366.768@62.0.1858.1080" timestamp="1607088956269" />
     <state width="1559" height="151" key="GridCell.Tab.0.left/63.0.1857.1080/1920.0.1366.768@63.0.1857.1080" timestamp="1606938224490" />
     <state width="859" height="107" key="GridCell.Tab.0.left/64.0.1856.1080/1920.0.1366.768@64.0.1856.1080" timestamp="1607126038161" />
-    <state width="1719" height="164" key="GridCell.Tab.0.left/70.0.1850.1080/1920.0.1366.768@70.0.1850.1080" timestamp="1607165911354" />
-    <state width="1719" height="164" key="GridCell.Tab.0.right" timestamp="1607165911354">
+    <state width="1719" height="164" key="GridCell.Tab.0.left/70.0.1850.1080/1920.0.1366.768@70.0.1850.1080" timestamp="1607168525317" />
+    <state width="1719" height="164" key="GridCell.Tab.0.right" timestamp="1607168525317">
       <screen x="70" y="0" width="1850" height="1080" />
     </state>
     <state width="2518" height="261" key="GridCell.Tab.0.right/0.0.2560.1440/-2560.0.2560.1440@0.0.2560.1440" timestamp="1606338681434" />
@@ -402,7 +409,7 @@
     <state width="1719" height="121" key="GridCell.Tab.0.right/62.0.1858.1080/1920.0.1366.768@62.0.1858.1080" timestamp="1607088956270" />
     <state width="1559" height="151" key="GridCell.Tab.0.right/63.0.1857.1080/1920.0.1366.768@63.0.1857.1080" timestamp="1606938224490" />
     <state width="859" height="107" key="GridCell.Tab.0.right/64.0.1856.1080/1920.0.1366.768@64.0.1856.1080" timestamp="1607126038161" />
-    <state width="1719" height="164" key="GridCell.Tab.0.right/70.0.1850.1080/1920.0.1366.768@70.0.1850.1080" timestamp="1607165911354" />
+    <state width="1719" height="164" key="GridCell.Tab.0.right/70.0.1850.1080/1920.0.1366.768@70.0.1850.1080" timestamp="1607168525317" />
     <state width="1719" height="305" key="GridCell.Tab.1.bottom" timestamp="1607087330675">
       <screen x="62" y="0" width="1858" height="1080" />
     </state>
@@ -448,8 +455,8 @@
     <state x="221" y="63" key="SettingsEditor/0.23.1440.877@0.23.1440.877" timestamp="1604955224661" />
     <state x="221" y="57" key="SettingsEditor/0.25.1440.875@0.25.1440.875" timestamp="1606147618189" />
     <state x="236" y="59" key="SettingsEditor/0.25.1536.935@0.25.1536.935" timestamp="1606436281206" />
-    <state x="476" y="212" key="Vcs.Push.Dialog.v2" timestamp="1607126063240">
-      <screen x="64" y="0" width="1856" height="1080" />
+    <state x="481" y="212" key="Vcs.Push.Dialog.v2" timestamp="1607166654661">
+      <screen x="70" y="0" width="1850" height="1080" />
     </state>
     <state x="320" y="177" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1606137861383" />
     <state x="569" y="283" key="Vcs.Push.Dialog.v2/0.0.2560.1440/-2560.0.2560.1440@0.0.2560.1440" timestamp="1606336400622" />
@@ -457,6 +464,7 @@
     <state x="341" y="209" key="Vcs.Push.Dialog.v2/0.25.1536.935@0.25.1536.935" timestamp="1606423849139" />
     <state x="398" y="240" key="Vcs.Push.Dialog.v2/0.25.1792.1095@0.25.1792.1095" timestamp="1606590926330" />
     <state x="476" y="212" key="Vcs.Push.Dialog.v2/64.0.1856.1080/1920.0.1366.768@64.0.1856.1080" timestamp="1607126063240" />
+    <state x="481" y="212" key="Vcs.Push.Dialog.v2/70.0.1850.1080/1920.0.1366.768@70.0.1850.1080" timestamp="1607166654661" />
     <state x="207" y="224" width="1579" height="742" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1607116401857">
       <screen x="64" y="0" width="1856" height="1080" />
     </state>
