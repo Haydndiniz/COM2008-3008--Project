@@ -52,7 +52,7 @@ public class AddUser extends JPanel implements ActionListener {
         roleLabel.setBounds(57, 112, 134, 25);
         add(roleLabel);
 
-        roleDropdown = new JComboBox<String>(new String[]{"Admin", "Registrar", "Teacher"});
+        roleDropdown = new JComboBox<String>(new String[]{"admin", "registrar", "teacher"});
         roleDropdown.setBounds(211, 112, 132, 25);
         add(roleDropdown);
 
