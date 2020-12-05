@@ -3,6 +3,8 @@ package Project_Code;
 import Project_Code.Admin.*;
 import Project_Code.Registrar.*;
 import Project_Code.Teacher.*;
+import Project_Code.Student.*;
+import com.mysql.cj.x.protobuf.MysqlxPrepare;
 
 import java.sql.*;
 import java.awt.event.*;
@@ -152,7 +154,6 @@ public class LoginController extends JPanel implements ActionListener {
                 //get the username
                 //removes punctuation from the input, for security
                 String username = usernameTextField.getText().replaceAll("\\p{Punct}", "");
-                System.out.println(username);
                 //get the password for that username
                 String password = new String(passwordField.getPassword());
                 if (validateCredentials(username, password)) { //validates the credentials
@@ -185,12 +186,12 @@ public class LoginController extends JPanel implements ActionListener {
                     case "teacher":
                         setVisible(false);
                         teacher = new TeacherMain(username);
-                        frame.setContentPane(new SearchByStudent(frame, teacher));
+                        frame.setContentPane(new TeacherFrame(frame, username));
                         break;
-//                     case "student":
-//                         setVisible(false);
-//                         frame.setContentPane(new StudentFrame(frame, username));
-//                         break;
+                     case "student":
+                         setVisible(false);
+                         frame.setContentPane(new StudentFrame(frame, username));
+                         break;
                 }
                 }
             }
