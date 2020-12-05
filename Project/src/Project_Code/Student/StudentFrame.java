@@ -184,12 +184,12 @@ public class StudentFrame extends JPanel {
 
         String[] studentGrades = teacher.getGrades(regNo, String.valueOf(modulesList.getSelectedItem()), String.valueOf(periodsList.getSelectedItem()));
         JLabel label_initialGrade = new JLabel(studentGrades[0]);
-        label_initialGrade.setBounds(352, 100, 50, 26);
+        label_initialGrade.setBounds(352, 97, 50, 26);
         add(label_initialGrade);
         initGrade = label_initialGrade;
 
         JLabel label_resitGrade = new JLabel(studentGrades[1]);
-        label_resitGrade.setBounds(352, 140, 50, 26);
+        label_resitGrade.setBounds(352, 137, 50, 26);
         add(label_resitGrade);
         resitGrade = label_resitGrade;
 
