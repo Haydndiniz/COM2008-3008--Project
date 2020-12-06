@@ -491,14 +491,14 @@ public class TeacherMain extends User {
         }
         return new String[]{null, null};
     }
-    public boolean checkRetake(String regNo, String levelCode){
+    public boolean checkRetake(String regNo, String levelCode, String periodLabel){
         //Method assumes there is only one match
         ResultSet result = null;
         boolean retake = false;
         try {
-            result = con.performQuery("SELECT COUNT(*) FROM Period WHERE registrationNo='"+regNo+"' AND levelCode='"+levelCode+"'");
+            result = con.performQuery("SELECT MAX(periodLabel) FROM Period WHERE registrationNo='"+regNo+"' AND levelCode='"+levelCode+"'");
             while (result.next()) {
-                if (result.getInt(1) > 1){
+                if (result.getString(1).equals(periodLabel)){
                     retake = true;
                 }
             }
@@ -538,7 +538,9 @@ public class TeacherMain extends User {
         List<String> resultString = new ArrayList<>();
         try {
             result = con.performQuery("SELECT * FROM Study WHERE registrationNo='"+regNo+"' AND periodLabel='"+periodLabel+"'");
+            System.out.println("SELECT * FROM Study WHERE registrationNo='"+regNo+"' AND periodLabel='"+periodLabel+"'");
             while (result.next()) {
+                resultString = new ArrayList<>();
                 resultString.add(result.getString("moduleCode"));
                 resultString.add(result.getString("initialGrade"));
                 resultString.add(result.getString("resitGrade"));
@@ -605,26 +607,36 @@ public class TeacherMain extends User {
                 updates = con.performUpdate("INSERT INTO Period (periodLabel,registrationNo,levelCode,startDate,endDate)"
                         + " VALUES ('"+nextPeriod+"','"+regNo+"','"+levelCode+"','"+newSDate+"','"+newEDate+"')");
                 //Add previously passed modules and their grades. Re-add failed modules with no grades.
-                List<List<String>> previousModulesGrades = getPreviousModulesGrades(degreeCode, levelCode);
+                List<List<String>> previousModulesGrades = getPreviousModulesGrades(regNo, periodLabel);
                 if (updates > 0){
                     for (List<String> i : previousModulesGrades){
+                        String initGrade = i.get(1);
+                        String resitGrade = i.get(2);
                         Double passMark = 39.5;
                         if (levelCode.equals("4")){
                             passMark = 49.5;
                         }
-                        if (Double.parseDouble(i.get(1)) >= passMark || Double.parseDouble(i.get(2)) >= passMark){
+                        if (Double.parseDouble(initGrade) >= passMark){
                             //Passed module
-                            String initGrade = i.get(1);
-                            String resitGrade = i.get(2);
                             if (resitGrade != null){
                                 resitGrade = "'" + resitGrade + "'";
                             }
                             con.performUpdate("INSERT INTO Study (registrationNo,initialGrade,resitGrade,moduleCode,periodLabel)"
                                     + " VALUES ('"+regNo+"','"+initGrade+"',"+resitGrade+",'"+i.get(0)+"','"+nextPeriod+"')");
                         }
+                        else if(resitGrade != null){
+                            if (Double.parseDouble(resitGrade) >= passMark){
+                                con.performUpdate("INSERT INTO Study (registrationNo,initialGrade,resitGrade,moduleCode,periodLabel)"
+                                        + " VALUES ('"+regNo+"','"+initGrade+"','"+resitGrade+"','"+i.get(0)+"','"+nextPeriod+"')");
+                            }
+                            else{
+                                con.performUpdate("INSERT INTO Study (registrationNo,initialGrade,resitGrade,moduleCode,periodLabel)"
+                                        + " VALUES ('"+regNo+"',"+null+","+null+",'"+i.get(0)+"','"+nextPeriod+"')");
+                            }
+                        }
                         else{
                             con.performUpdate("INSERT INTO Study (registrationNo,initialGrade,resitGrade,moduleCode,periodLabel)"
-                                    + " VALUES ('"+regNo+"','"+null+"',"+null+",'"+i.get(0)+"','"+nextPeriod+"')");
+                                    + " VALUES ('"+regNo+"',"+null+","+null+",'"+i.get(0)+"','"+nextPeriod+"')");
                         }
                     }
                 }
@@ -650,7 +662,7 @@ public class TeacherMain extends User {
     public String[] getOutcome(String regNo, String periodLabel,String levelCode,String degreeCode,String grade, String checkPass, boolean degreeClass) {
         //check if it is 1-year MSc
         String[] periodOutcome = new String[2];
-        boolean retake = checkRetake(regNo, levelCode);
+        boolean retake = checkRetake(regNo, levelCode, periodLabel);
         Double meanGrade;
         if (grade == null){
             return periodOutcome;
