@@ -173,9 +173,9 @@ public class DisplayStudent extends JPanel implements ActionListener {
         levelLabel = label_level;
 
         String[] gradeResults = teacher.getMeanGrade(regNo, String.valueOf(periodsList.getSelectedItem()), level);
-        Double meanGrade = null;
+        String meanGrade = null;
         if (gradeResults[0] != null){
-            meanGrade = Double.parseDouble(gradeResults[0]);
+            meanGrade = gradeResults[0];
         }
         String checkPass = gradeResults[1];
         JLabel label_meanGrade = new JLabel(String.valueOf(meanGrade));
@@ -191,9 +191,9 @@ public class DisplayStudent extends JPanel implements ActionListener {
         outcomeLabel = label_outcome;
 
         String[] overallGradeArr = teacher.getOverallGrade(regNo, upperLevel, false);
-        Double overallGrade = null;
+        String overallGrade = null;
         if (overallGradeArr[0] != null){
-            overallGrade = Double.parseDouble(overallGradeArr[0]);
+            overallGrade = overallGradeArr[0];
         }
         String[] outcomeDetailsD = teacher.getOutcome(regNo, "X", level, studentDetails[1], overallGrade, overallGradeArr[1], true);
         JLabel label_degreeClass = new JLabel(outcomeDetailsD[0]);
@@ -268,9 +268,9 @@ public class DisplayStudent extends JPanel implements ActionListener {
                     level = teacher.getLevel(regNo, String.valueOf(periodsList.getSelectedItem()));
                     levelLabel.setText(level);
                     String[] gradeResults = teacher.getMeanGrade(regNo, String.valueOf(periodsList.getSelectedItem()), level);
-                    Double meanGrade = null;
+                    String meanGrade = null;
                     if (gradeResults[0] != null){
-                        meanGrade = Double.parseDouble(gradeResults[0]);
+                        meanGrade = gradeResults[0];
                     }
                     String checkPass = gradeResults[1];
                     String[] outcomeDetails = teacher.getOutcome(regNo, String.valueOf(periodsList.getSelectedItem()), level, studentDetails[1], meanGrade, checkPass, false);
@@ -371,27 +371,29 @@ public class DisplayStudent extends JPanel implements ActionListener {
                     }
                     teacher.updateGrades(regNo, String.valueOf(modulesList.getSelectedItem()), String.valueOf(periodsList.getSelectedItem()), initValue, resitValue);
                     String[] gradeResults = teacher.getMeanGrade(regNo, String.valueOf(periodsList.getSelectedItem()), level);
-                    Double meanGrade = null;
+                    String meanGrade = null;
                     if (gradeResults[0] != null){
-                        meanGrade = Double.parseDouble(gradeResults[0]);
+                        meanGrade = gradeResults[0];
                     }
                     String checkPass = gradeResults[1];
                     String[] outcomeDetails = teacher.getOutcome(regNo, String.valueOf(periodsList.getSelectedItem()), level, studentDetails[1], meanGrade, checkPass, false);
                     outcomeLabel.setText(outcomeDetails[0]);
                     meanGradeLabel.setText(String.valueOf(meanGrade));
                     String[] overallGradeArr = teacher.getOverallGrade(regNo, upperLevel, false);
-                    Double overallGrade = null;
+                    String overallGrade = null;
                     if (overallGradeArr[0] != null){
-                        overallGrade = Double.parseDouble(overallGradeArr[0]);
+                        overallGrade = overallGradeArr[0];
                     }
                     String[] outcomeDetailsD = teacher.getOutcome(regNo, "X", upperLevel, studentDetails[1], overallGrade, overallGradeArr[1], true);
                     degreeClassLabel.setText(outcomeDetailsD[0]);
                     degreeGradeLabel.setText(String.valueOf(overallGrade));
                     if (level.equals((upperLevel))){
                         progressionLabel.setText(outcomeDetailsD[1]);
+                        teacher.progressStudent(regNo, level, outcomeDetailsD[1], String.valueOf(periodsList.getSelectedItem()), studentDetails[1]);
                     }
                     else{
                         progressionLabel.setText(outcomeDetails[1]);
+                        teacher.progressStudent(regNo, level, outcomeDetails[1], String.valueOf(periodsList.getSelectedItem()), studentDetails[1]);
                     }
                 }
                 else{

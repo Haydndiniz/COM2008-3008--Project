@@ -286,6 +286,7 @@ public class AddUser extends JPanel implements ActionListener {
             case "Go Back":
                 setVisible(false);
                 frame.setContentPane(new AdminFrame(frame, admin.getUsername()));
+                break;
             case "Add User":
                 //setVisible(false);
                 String forename = forenameField.getText().replaceAll("\\p{Punct}", "");
@@ -323,7 +324,6 @@ public class AddUser extends JPanel implements ActionListener {
                     System.out.println(username);
 
                 }
-
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + buttonPressed);

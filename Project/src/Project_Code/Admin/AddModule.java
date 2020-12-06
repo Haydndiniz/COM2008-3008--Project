@@ -265,6 +265,7 @@ public class AddModule extends JPanel implements ActionListener {
             case "Go Back":
                 setVisible(false);
                 frame.setContentPane(new AdminFrame(frame, admin.getUsername()));
+                break;
             case "Add":
                 String moduleCode = moduleCodeField.getText().replaceAll("\\p{Punct}", "");
                 String moduleName = moduleNameField.getText().replaceAll("\\p{Punct}", "");

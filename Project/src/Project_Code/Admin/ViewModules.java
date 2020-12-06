@@ -54,6 +54,7 @@ public class ViewModules extends JPanel implements ActionListener {
             case "Go Back":
                 setVisible(false);
                 frame.setContentPane(new AdminFrame(frame, admin.getUsername()));
+                break;
         }
     }
 }

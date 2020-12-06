@@ -175,6 +175,7 @@ public class AddDepartment extends JPanel implements ActionListener {
             case "Go Back":
                 setVisible(false);
                 frame.setContentPane(new AdminFrame(frame, admin.getUsername()));
+                break;
             case "Add":
                 String deptCode = departmentCodeField.getText().replaceAll("\\p{Punct}", "");
                 String deptName = departmentNameField.getText().replaceAll("\\p{Punct}", "");

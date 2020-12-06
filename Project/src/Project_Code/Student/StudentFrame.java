@@ -168,7 +168,7 @@ public class StudentFrame extends JPanel {
 
         String[] gradeResults = teacher.getMeanGrade(regNo, String.valueOf(periodsList.getSelectedItem()), level);
         String checkPass = gradeResults[1];
-        String[] outcomeDetails = teacher.getOutcome(regNo, String.valueOf(periodsList.getSelectedItem()), level, studentDetails[1], Double.parseDouble(meanGrade), checkPass, false);
+        String[] outcomeDetails = teacher.getOutcome(regNo, String.valueOf(periodsList.getSelectedItem()), level, studentDetails[1], meanGrade, checkPass, false);
         JLabel label_progression = new JLabel(outcomeDetails[1]);
         label_progression.setBounds(352, 330, 200, 40);
         add(label_progression);
@@ -240,8 +240,8 @@ public class StudentFrame extends JPanel {
                     meanGradeLabel.setText(meanGrade);
                     String[] gradeResults = teacher.getMeanGrade(regNo, String.valueOf(periodsList.getSelectedItem()), level);
                     String checkPass = gradeResults[1];
-                    String[] outcomeDetails = teacher.getOutcome(regNo, String.valueOf(periodsList.getSelectedItem()), level, studentDetails[1], Double.parseDouble(meanGrade), checkPass, false);
-                    String[] outcomeDetailsD = teacher.getOutcome(regNo, String.valueOf(periodsList.getSelectedItem()), level, studentDetails[1], Double.parseDouble(meanGrade), checkPass, true);
+                    String[] outcomeDetails = teacher.getOutcome(regNo, String.valueOf(periodsList.getSelectedItem()), level, studentDetails[1], meanGrade, checkPass, false);
+                    String[] outcomeDetailsD = teacher.getOutcome(regNo, String.valueOf(periodsList.getSelectedItem()), level, studentDetails[1], meanGrade, checkPass, true);
                     if (level.equals((upperLevel))){
                         progressionLabel.setText(outcomeDetailsD[1]);
                     }

@@ -2,6 +2,7 @@ package Project_Code.Teacher;
 
 import Project_Code.*;
 import Project_Code.DBController;
+import Project_Code.Registrar.AddNewStudent;
 import com.mysql.cj.x.protobuf.MysqlxPrepare;
 import com.sun.scenario.effect.impl.prism.PrReflectionPeer;
 
@@ -349,7 +350,7 @@ public class TeacherMain extends User {
                 }
             }
             meanGrade = initSum / grades.toArray().length;
-            con.performUpdate("UPDATE Period SET meanGrade='"+String.valueOf(round(meanGrade, 2))+"' WHERE registrationNo='"+regNo+"' AND periodLabel='"+periodLabel+"'");
+            con.performUpdate("UPDATE Period SET meanGrade='"+round(meanGrade, 2)+"' WHERE registrationNo='"+regNo+"' AND periodLabel='"+periodLabel+"'");
             returnArr[0] = String.valueOf(round(meanGrade, 1));
             returnArr[1] = checkPass;
             con.closeConnection();
@@ -369,7 +370,7 @@ public class TeacherMain extends User {
         ResultSet result = null;
         String highestLevel = null;
         try {
-            result = con.performQuery("SELECT MAX(levelCode) FROM Period WHERE registrationNo='"+regNo+"' AND levelCode='1' OR levelCode='2' OR levelCode='3' OR levelCode='4'");
+            result = con.performQuery("SELECT MAX(levelCode) FROM Period WHERE registrationNo='"+regNo+"' AND (levelCode='1' OR levelCode='2' OR levelCode='3' OR levelCode='4')");
             while (result.next()) {
                 highestLevel = result.getString(1);
             }
@@ -431,7 +432,7 @@ public class TeacherMain extends User {
             }
             if (Integer.parseInt(getStudentHighestLevel(regNo)) != Integer.parseInt(upperLevel)){
                 //Final year of course not reached
-                return new String[]{null, null};
+                return new String[2];
             }
             Double sumGrade = 0.0;
             Double divisor = 0.0;
@@ -447,6 +448,9 @@ public class TeacherMain extends User {
                     resit = true;
                 }
                 String[] gradeArr = getMeanGrade(regNo, i.get(0), level);
+                if (gradeArr[0] == null){
+                    return new String[2];
+                }
                 if (gradeArr[1].equals("fail")){
                     returnArr[1] = "fail";
                 }
@@ -510,14 +514,151 @@ public class TeacherMain extends User {
         }
         return false;
     }
-    public String[] getOutcome(String regNo, String periodLabel,String levelCode,String degreeCode,Double meanGrade, String checkPass, boolean degreeClass) {
+    public List<String> getCoreModules(String degreeCode, String levelCode){
+        ResultSet result = null;
+        List<String> returnString = new ArrayList<>();
+        try {
+            result = con.performQuery("SELECT * FROM ModuleApproval WHERE degreeCode='"+degreeCode+"' AND levelCode='"+levelCode+"' AND core='1'");
+            while (result.next()) {
+                returnString.add(result.getString("moduleCode"));
+            }
+            return returnString;
+        }
+        catch(SQLException ex) {
+            //display error message and leave the application
+            JOptionPane.showMessageDialog(null,"There was an error when processing the data.",
+                    "ERROR", JOptionPane.ERROR_MESSAGE, null);
+            System.exit(0);
+        }
+        return returnString;
+    }
+    public List<List<String>> getPreviousModulesGrades(String regNo, String periodLabel){
+        ResultSet result = null;
+        List<List<String>> returnString = new ArrayList<>();
+        List<String> resultString = new ArrayList<>();
+        try {
+            result = con.performQuery("SELECT * FROM Study WHERE registrationNo='"+regNo+"' AND periodLabel='"+periodLabel+"'");
+            while (result.next()) {
+                resultString.add(result.getString("moduleCode"));
+                resultString.add(result.getString("initialGrade"));
+                resultString.add(result.getString("resitGrade"));
+                returnString.add(resultString);
+            }
+            return returnString;
+        }
+        catch(SQLException ex) {
+            //display error message and leave the application
+            JOptionPane.showMessageDialog(null,"There was an error when processing the data.",
+                    "ERROR", JOptionPane.ERROR_MESSAGE, null);
+            System.exit(0);
+        }
+        return returnString;
+    }
+    public boolean progressStudent(String regNo, String levelCode, String outcome, String periodLabel, String degreeCode){
+        if (outcome == null){
+            return false;
+        }
+        Integer updates = null;
+        ResultSet result1 = null;
+        ResultSet result2 = null;
+        String startDate = null;
+        String endDate = null;
+        String newSDate = null;
+        String newEDate = null;
+        String startYear = null;
+        String endYear = null;
+        Character currentPeriod = periodLabel.charAt(0);
+        Character nextPeriod = currentPeriod;
+        nextPeriod++;
+        try {
+            result1 = con.performQuery("SELECT COUNT(*) FROM Period WHERE registrationNo='"+regNo+"' AND periodLabel='"+nextPeriod+"'");
+            while (result1.next()){
+                if (result1.getInt(1) > 0){
+                    //If the next period already exists, a new one shouldn't be registered
+                    return false;
+                }
+            }
+            result2 = con.performQuery("SELECT * FROM Period WHERE registrationNo='"+regNo+"' AND periodLabel='"+periodLabel+"'");
+            while (result2.next()) {
+                startDate = result2.getString("startDate");
+                endDate = result2.getString("endDate");
+                startYear = String.valueOf(Integer.parseInt(startDate.substring(0,4))+1);
+                newSDate = startYear + startDate.substring(4);
+                endYear = String.valueOf(Integer.parseInt(endDate.substring(0,4))+1);
+                newEDate = endYear + startDate.substring(4);
+            }
+            if (outcome.equals("pass")){
+                String newLevel = String.valueOf(Integer.parseInt(levelCode)+1);
+                updates = con.performUpdate("INSERT INTO Period (periodLabel,registrationNo,levelCode,startDate,endDate)"
+                        + " VALUES ('"+nextPeriod+"','"+regNo+"','"+newLevel+"','"+newSDate+"','"+newEDate+"')");
+                //Add next level's core modules, no grades.
+                List<String> coreModules = getCoreModules(degreeCode, newLevel);
+                if (updates > 0){
+                    for (String i : coreModules){
+                        con.performUpdate("INSERT INTO Study (registrationNo,initialGrade,resitGrade,moduleCode,periodLabel)"
+                                + " VALUES ('"+regNo+"',"+null+","+null+",'"+i+"','"+nextPeriod+"')");
+                    }
+                }
+                return false;
+            }
+            else if (outcome.equals("repeat")){
+                updates = con.performUpdate("INSERT INTO Period (periodLabel,registrationNo,levelCode,startDate,endDate)"
+                        + " VALUES ('"+nextPeriod+"','"+regNo+"','"+levelCode+"','"+newSDate+"','"+newEDate+"')");
+                //Add previously passed modules and their grades. Re-add failed modules with no grades.
+                List<List<String>> previousModulesGrades = getPreviousModulesGrades(degreeCode, levelCode);
+                if (updates > 0){
+                    for (List<String> i : previousModulesGrades){
+                        Double passMark = 39.5;
+                        if (levelCode.equals("4")){
+                            passMark = 49.5;
+                        }
+                        if (Double.parseDouble(i.get(1)) >= passMark || Double.parseDouble(i.get(2)) >= passMark){
+                            //Passed module
+                            String initGrade = i.get(1);
+                            String resitGrade = i.get(2);
+                            if (resitGrade != null){
+                                resitGrade = "'" + resitGrade + "'";
+                            }
+                            con.performUpdate("INSERT INTO Study (registrationNo,initialGrade,resitGrade,moduleCode,periodLabel)"
+                                    + " VALUES ('"+regNo+"','"+initGrade+"',"+resitGrade+",'"+i.get(0)+"','"+nextPeriod+"')");
+                        }
+                        else{
+                            con.performUpdate("INSERT INTO Study (registrationNo,initialGrade,resitGrade,moduleCode,periodLabel)"
+                                    + " VALUES ('"+regNo+"','"+null+"',"+null+",'"+i.get(0)+"','"+nextPeriod+"')");
+                        }
+                    }
+                }
+            }
+            else{
+                updates = 0;
+            }
+            con.closeConnection();
+            con.closeStatement();
+            if (updates > 1){
+                return true;
+            }
+            return false;
+        }
+        catch(SQLException ex) {
+            //display error message and leave the application
+            JOptionPane.showMessageDialog(null,"There was an error when processing the data.",
+                    "ERROR", JOptionPane.ERROR_MESSAGE, null);
+            System.exit(0);
+        }
+        return false;
+    }
+    public String[] getOutcome(String regNo, String periodLabel,String levelCode,String degreeCode,String grade, String checkPass, boolean degreeClass) {
         //check if it is 1-year MSc
         String[] periodOutcome = new String[2];
         boolean retake = checkRetake(regNo, levelCode);
-        if (meanGrade == null){
-            return null;
+        Double meanGrade;
+        if (grade == null){
+            return periodOutcome;
         }
-        else if (checkPass.equals("fail")){
+        else{
+            meanGrade = Double.valueOf(grade);
+        }
+        if (checkPass.equals("fail")){
             periodOutcome[0] = "fail";
         }
         else if (checkPass.equals("conceded")){
@@ -613,7 +754,6 @@ public class TeacherMain extends User {
                     }
                 }
                 if (super.getRole().equals("Teacher")){
-                    System.out.println(periodOutcome[0]);
                     con.performUpdate("UPDATE Period SET outcome='"+periodOutcome[0]+"' WHERE registrationNo='"+regNo+"' AND periodLabel='"+periodLabel+"'");
                 }
             }
@@ -632,7 +772,7 @@ public class TeacherMain extends User {
                                 periodOutcome[1] = "fail";
                             }
                             else{
-                                String bachelorsOutcome = getOutcome(regNo, periodLabel,levelCode,degreeCode,Double.parseDouble(getOverallGrade(regNo, "3", true)[0]),checkPass,true)[1];
+                                String bachelorsOutcome = getOutcome(regNo, periodLabel,levelCode,degreeCode,getOverallGrade(regNo, "3", true)[0],checkPass,true)[1];
                                 periodOutcome[1] = "BSc " + bachelorsOutcome;
                             }
                         }
@@ -647,7 +787,6 @@ public class TeacherMain extends User {
                     }
                 }
                 if (super.getRole().equals("Teacher")) {
-                    System.out.println(periodOutcome[0]);
                     con.performUpdate("UPDATE Student SET degreeClass='" + periodOutcome[0] + "' WHERE registrationNo='" + regNo + "'");
                 }
             }

@@ -109,7 +109,6 @@ public class LoginController extends JPanel implements ActionListener {
             }
 
             String hashed = AddUser.createHash(password, AddUser.saltDecode(saltRes));
-            System.out.println(hashed);
             return (hashed.equals(storedPass));
 
 

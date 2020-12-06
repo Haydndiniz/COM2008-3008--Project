@@ -251,6 +251,7 @@ public class AddCourse extends JPanel implements ActionListener {
             case "Go Back":
                 setVisible(false);
                 frame.setContentPane(new AdminFrame(frame, admin.getUsername()));
+                break;
             case "Add":
                 String courseCode = courseCodeField.getText().replaceAll("\\p{Punct}", "");
                 String courseName = courseNameField.getText().replaceAll("\\p{Punct}", "");

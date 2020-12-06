@@ -19,12 +19,38 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c9fe5b6b-8c40-4624-9d20-5c2d54015260" name="Default Changelist" comment="Finished teacher">
+    <list default="true" id="c9fe5b6b-8c40-4624-9d20-5c2d54015260" name="Default Changelist" comment="Finished teacher and fixed bugs on student">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_11_2020,_20_48_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_11_2020__20_48__Default_Changelist_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/Admin/AddCourse.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/Admin/AddCourse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/Admin/AddDepartment.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/Admin/AddDepartment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/Admin/AddModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/Admin/AddModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/Admin/AddUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/Admin/AddUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/Admin/RemoveCourse.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/Admin/RemoveCourse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/Admin/RemoveDepartment.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/Admin/RemoveDepartment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/Admin/RemoveModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/Admin/RemoveModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/Admin/RemoveUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/Admin/RemoveUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/Admin/ViewCourses.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/Admin/ViewCourses.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/Admin/ViewCoursesPerDepartment.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/Admin/ViewCoursesPerDepartment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/Admin/ViewDepartments.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/Admin/ViewDepartments.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/Admin/ViewModules.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/Admin/ViewModules.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/Admin/ViewUsers.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/Admin/ViewUsers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/Registrar/RegistrarMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/Registrar/RegistrarMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/Student/StudentFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/Student/StudentFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/Teacher/DisplayStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/Teacher/DisplayStudent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Project/src/Project_Code/Teacher/TeacherMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/Project/src/Project_Code/Teacher/TeacherMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project/Project_Code/Admin/AddUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project/Project_Code/Admin/AddUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project/Project_Code/Admin/info.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project/Project_Code/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project/Project_Code/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project/Project_Code/Registrar/AddNewStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project/Project_Code/Registrar/AddNewStudent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project/Project_Code/Registrar/RegistrarMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project/Project_Code/Registrar/RegistrarMain.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project/Project_Code/Student/studentTasks" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project/Project_Code/Teacher/DisplayStudent$ItemChangeListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project/Project_Code/Teacher/DisplayStudent$ItemChangeListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Project/Project_Code/Teacher/DisplayStudent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project/Project_Code/Teacher/DisplayStudent.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Project/Project_Code/Teacher/TeacherMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Project/Project_Code/Teacher/TeacherMain.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Project/Project_Code/Teacher/teacher info" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,17 +140,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="COM2008-3008--Project" />
       <option name="VM_PARAMETERS" />
@@ -201,7 +216,9 @@
       <workItem from="1607011255536" duration="5137000" />
       <workItem from="1607037954128" duration="5566000" />
       <workItem from="1607069520935" duration="20720000" />
-      <workItem from="1607157527691" duration="19698000" />
+      <workItem from="1607157527691" duration="20686000" />
+      <workItem from="1607190329912" duration="597000" />
+      <workItem from="1607248547561" duration="9203000" />
     </task>
     <task id="LOCAL-00001" summary="updated file structure">
       <created>1606135677092</created>
@@ -308,7 +325,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607176436071</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Finished teacher and fixed bugs on student">
+      <created>1607177428635</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1607177428635</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -342,7 +366,8 @@
     <MESSAGE value="Fixed Grades accepting non-numeric values" />
     <MESSAGE value="Fixed grade value checking fields" />
     <MESSAGE value="Finished teacher" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished teacher" />
+    <MESSAGE value="Finished teacher and fixed bugs on student" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished teacher and fixed bugs on student" />
   </component>
   <component name="WindowStateProjectService">
     <state x="445" y="293" key="#Notifications" timestamp="1606146438003">
@@ -394,7 +419,7 @@
       <screen x="64" y="0" width="1856" height="1080" />
     </state>
     <state x="207" y="224" width="1579" height="742" key="DiffContextDialog/64.0.1856.1080/1920.0.1366.768@64.0.1856.1080" timestamp="1607116068343" />
-    <state width="1719" height="160" key="GridCell.Tab.0.bottom" timestamp="1607177390173">
+    <state width="1719" height="160" key="GridCell.Tab.0.bottom" timestamp="1607257726820">
       <screen x="70" y="0" width="1850" height="1080" />
     </state>
     <state width="2518" height="261" key="GridCell.Tab.0.bottom/0.0.2560.1440/-2560.0.2560.1440@0.0.2560.1440" timestamp="1606338681435" />
@@ -406,8 +431,8 @@
     <state width="1719" height="121" key="GridCell.Tab.0.bottom/62.0.1858.1080/1920.0.1366.768@62.0.1858.1080" timestamp="1607088956270" />
     <state width="1559" height="151" key="GridCell.Tab.0.bottom/63.0.1857.1080/1920.0.1366.768@63.0.1857.1080" timestamp="1606938224490" />
     <state width="859" height="107" key="GridCell.Tab.0.bottom/64.0.1856.1080/1920.0.1366.768@64.0.1856.1080" timestamp="1607126038161" />
-    <state width="1719" height="160" key="GridCell.Tab.0.bottom/70.0.1850.1080/1920.0.1366.768@70.0.1850.1080" timestamp="1607177390173" />
-    <state width="1719" height="160" key="GridCell.Tab.0.center" timestamp="1607177390172">
+    <state width="1719" height="160" key="GridCell.Tab.0.bottom/70.0.1850.1080/1920.0.1366.768@70.0.1850.1080" timestamp="1607257726820" />
+    <state width="1719" height="160" key="GridCell.Tab.0.center" timestamp="1607257726820">
       <screen x="70" y="0" width="1850" height="1080" />
     </state>
     <state width="2518" height="261" key="GridCell.Tab.0.center/0.0.2560.1440/-2560.0.2560.1440@0.0.2560.1440" timestamp="1606338681433" />
@@ -419,8 +444,8 @@
     <state width="1719" height="121" key="GridCell.Tab.0.center/62.0.1858.1080/1920.0.1366.768@62.0.1858.1080" timestamp="1607088956270" />
     <state width="1559" height="151" key="GridCell.Tab.0.center/63.0.1857.1080/1920.0.1366.768@63.0.1857.1080" timestamp="1606938224490" />
     <state width="859" height="107" key="GridCell.Tab.0.center/64.0.1856.1080/1920.0.1366.768@64.0.1856.1080" timestamp="1607126038161" />
-    <state width="1719" height="160" key="GridCell.Tab.0.center/70.0.1850.1080/1920.0.1366.768@70.0.1850.1080" timestamp="1607177390172" />
-    <state width="1719" height="160" key="GridCell.Tab.0.left" timestamp="1607177390172">
+    <state width="1719" height="160" key="GridCell.Tab.0.center/70.0.1850.1080/1920.0.1366.768@70.0.1850.1080" timestamp="1607257726820" />
+    <state width="1719" height="160" key="GridCell.Tab.0.left" timestamp="1607257726820">
       <screen x="70" y="0" width="1850" height="1080" />
     </state>
     <state width="747" height="144" key="GridCell.Tab.0.left/0.0.1536.960@0.0.1536.960" timestamp="1606423790368" />
@@ -432,8 +457,8 @@
     <state width="1719" height="121" key="GridCell.Tab.0.left/62.0.1858.1080/1920.0.1366.768@62.0.1858.1080" timestamp="1607088956269" />
     <state width="1559" height="151" key="GridCell.Tab.0.left/63.0.1857.1080/1920.0.1366.768@63.0.1857.1080" timestamp="1606938224490" />
     <state width="859" height="107" key="GridCell.Tab.0.left/64.0.1856.1080/1920.0.1366.768@64.0.1856.1080" timestamp="1607126038161" />
-    <state width="1719" height="160" key="GridCell.Tab.0.left/70.0.1850.1080/1920.0.1366.768@70.0.1850.1080" timestamp="1607177390172" />
-    <state width="1719" height="160" key="GridCell.Tab.0.right" timestamp="1607177390173">
+    <state width="1719" height="160" key="GridCell.Tab.0.left/70.0.1850.1080/1920.0.1366.768@70.0.1850.1080" timestamp="1607257726820" />
+    <state width="1719" height="160" key="GridCell.Tab.0.right" timestamp="1607257726820">
       <screen x="70" y="0" width="1850" height="1080" />
     </state>
     <state width="2518" height="261" key="GridCell.Tab.0.right/0.0.2560.1440/-2560.0.2560.1440@0.0.2560.1440" timestamp="1606338681434" />
@@ -445,7 +470,7 @@
     <state width="1719" height="121" key="GridCell.Tab.0.right/62.0.1858.1080/1920.0.1366.768@62.0.1858.1080" timestamp="1607088956270" />
     <state width="1559" height="151" key="GridCell.Tab.0.right/63.0.1857.1080/1920.0.1366.768@63.0.1857.1080" timestamp="1606938224490" />
     <state width="859" height="107" key="GridCell.Tab.0.right/64.0.1856.1080/1920.0.1366.768@64.0.1856.1080" timestamp="1607126038161" />
-    <state width="1719" height="160" key="GridCell.Tab.0.right/70.0.1850.1080/1920.0.1366.768@70.0.1850.1080" timestamp="1607177390173" />
+    <state width="1719" height="160" key="GridCell.Tab.0.right/70.0.1850.1080/1920.0.1366.768@70.0.1850.1080" timestamp="1607257726820" />
     <state width="1719" height="305" key="GridCell.Tab.1.bottom" timestamp="1607087330675">
       <screen x="62" y="0" width="1858" height="1080" />
     </state>
@@ -491,7 +516,7 @@
     <state x="221" y="63" key="SettingsEditor/0.23.1440.877@0.23.1440.877" timestamp="1604955224661" />
     <state x="221" y="57" key="SettingsEditor/0.25.1440.875@0.25.1440.875" timestamp="1606147618189" />
     <state x="236" y="59" key="SettingsEditor/0.25.1536.935@0.25.1536.935" timestamp="1606436281206" />
-    <state x="481" y="212" key="Vcs.Push.Dialog.v2" timestamp="1607176437884">
+    <state x="481" y="212" key="Vcs.Push.Dialog.v2" timestamp="1607177429812">
       <screen x="70" y="0" width="1850" height="1080" />
     </state>
     <state x="320" y="177" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1606137861383" />
@@ -500,13 +525,13 @@
     <state x="341" y="209" key="Vcs.Push.Dialog.v2/0.25.1536.935@0.25.1536.935" timestamp="1606423849139" />
     <state x="398" y="240" key="Vcs.Push.Dialog.v2/0.25.1792.1095@0.25.1792.1095" timestamp="1606590926330" />
     <state x="476" y="212" key="Vcs.Push.Dialog.v2/64.0.1856.1080/1920.0.1366.768@64.0.1856.1080" timestamp="1607126063240" />
-    <state x="481" y="212" key="Vcs.Push.Dialog.v2/70.0.1850.1080/1920.0.1366.768@70.0.1850.1080" timestamp="1607176437884" />
+    <state x="481" y="212" key="Vcs.Push.Dialog.v2/70.0.1850.1080/1920.0.1366.768@70.0.1850.1080" timestamp="1607177429812" />
     <state x="207" y="224" width="1579" height="742" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1607116401857">
       <screen x="64" y="0" width="1856" height="1080" />
     </state>
     <state x="207" y="224" width="1579" height="742" key="com.intellij.history.integration.ui.views.FileHistoryDialog/64.0.1856.1080/1920.0.1366.768@64.0.1856.1080" timestamp="1607116401857" />
-    <state x="732" y="441" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607091786602">
-      <screen x="64" y="0" width="1856" height="1080" />
+    <state x="736" y="441" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607248567419">
+      <screen x="70" y="0" width="1850" height="1080" />
     </state>
     <state x="518" y="368" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1440.900@0.0.1440.900" timestamp="1606135644550" />
     <state x="921" y="589" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1440/-2560.0.2560.1440@0.0.2560.1440" timestamp="1606336460927" />
@@ -515,6 +540,7 @@
     <state x="731" y="441" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/62.0.1858.1080/1920.0.1366.768@62.0.1858.1080" timestamp="1607083020504" />
     <state x="732" y="441" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/63.0.1857.1080/1920.0.1366.768@63.0.1857.1080" timestamp="1606915234233" />
     <state x="732" y="441" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/64.0.1856.1080/1920.0.1366.768@64.0.1856.1080" timestamp="1607091786602" />
+    <state x="736" y="441" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/70.0.1850.1080/1920.0.1366.768@70.0.1850.1080" timestamp="1607248567419" />
     <state x="421" y="95" width="597" height="735" key="find.popup" timestamp="1606147550386">
       <screen x="0" y="25" width="1440" height="875" />
     </state>

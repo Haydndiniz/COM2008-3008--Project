@@ -64,7 +64,7 @@ public class RegistrarMain extends User {
                 + " VALUES ('"+username+"','"+hash+"')");
 
         changes += con.performUpdate("INSERT INTO UserSalts (username, salt)"
-                + " VALUES ('"+username+"','"+salt+"')");
+                + " VALUES ('"+username+"','"+encodeSalt+"')");
 
         //insert to Users Table
         changes+=con.performUpdate("INSERT INTO Users (username,role,forename,surname, title, email)"

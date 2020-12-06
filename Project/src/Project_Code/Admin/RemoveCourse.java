@@ -124,6 +124,7 @@ public class RemoveCourse extends JPanel implements ActionListener {
             case "Go Back":
                 setVisible(false);
                 frame.setContentPane(new AdminFrame(frame, admin.getUsername()));
+                break;
             case "Remove":
 
                 if (courseField.equals("")) {
